@@ -23,6 +23,7 @@ AliveMonitor/
 │                           GraphController, CommandController, CsvLoggerController
 ├── serial/                 ISerialPort + implementazioni Win32 e POSIX
 ├── resources/              Risorse incorporate (icone, guida HTML)
+├── installer/              Script Inno Setup per il setup.exe Windows
 ├── docs/                   Architecture.md, Protocol.md, UML/
 └── arduino/
     └── AliveMonitor/
@@ -222,6 +223,22 @@ build\Release\AliveMonitor.exe
 ```
 
 Il driver della porta COM di Arduino Uno viene installato automaticamente da Windows 10/11 (per i cloni con CH340 installare il driver del produttore).
+
+### Creare l'installer Windows (setup.exe)
+
+Per distribuire AliveMonitor a un utente finale senza fargli installare compilatore o wxWidgets, si può generare un installer autonomo con [Inno Setup](https://jrsoftware.org/isinfo.php) (gratuito, va installato solo sulla macchina che *crea* il setup, non su quella che lo *riceve*):
+
+```bat
+scripts\setup-wxwidgets.bat
+cmake -S . -B build-static -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
+cmake --build build-static -j8
+
+powershell -ExecutionPolicy Bypass -File scripts\package-windows.ps1
+```
+
+Il wrapper `package-windows.ps1` verifica che `build-static\AliveMonitor.exe` esista (serve la **build completamente statica**, senza DLL da cui dipendere: vedi sopra), ricava automaticamente la versione da `include/Version.h`, individua `ISCC.exe` (nel `PATH` o nelle cartelle di installazione predefinite di Inno Setup) e produce `dist\AliveMonitor-Setup-<versione>.exe` — icona, voce nel menu Avvio, collegamento sul desktop opzionale, licenza mostrata durante l'installazione, disinstallatore in "App e funzionalità".
+
+Lo script Inno Setup (`installer\AliveMonitor.iss`) impacchetta l'**eseguibile già compilato**, non i sorgenti (quelli restano nel repository GitHub): il file `dist\AliveMonitor-Setup-*.exe` prodotto NON va committato — è un artefatto di build (cartella `dist/` già in `.gitignore`), da distribuire a parte, ad esempio come allegato di una GitHub Release.
 
 ## Firmware Arduino
 

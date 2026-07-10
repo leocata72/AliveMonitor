@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Scarica, compila e installa wxWidgets (build statica) per AliveMonitor.
 

@@ -5,7 +5,7 @@
 # wxWidgets scaricata/compilata da scripts/setup-wxwidgets.ps1
 /third_party/
 
-# Bundle prodotto da scripts/package-linux.sh
+# Bundle/installer prodotti da scripts/package-linux.sh e scripts/package-windows.ps1
 /dist/
 
 # IDE
