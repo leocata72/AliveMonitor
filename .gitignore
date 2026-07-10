@@ -1,0 +1,15 @@
+# Build directories
+/build/
+/build-*/
+
+# wxWidgets scaricata/compilata da scripts/setup-wxwidgets.ps1
+/third_party/
+
+# Bundle prodotto da scripts/package-linux.sh
+/dist/
+
+# IDE
+.vs/
+.vscode/
+*.user
+CMakeUserPresets.json
