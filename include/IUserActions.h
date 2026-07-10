@@ -9,6 +9,8 @@
  */
 #pragma once
 
+#include <wx/string.h>
+
 namespace am {
 
 class IUserActions {
@@ -34,6 +36,18 @@ public:
     virtual void onAcquisitionPause() = 0;
     /// Nuova frequenza richiesta dall'utente [Hz]; valida anche in acquisizione.
     virtual void onSampleRateChanged(int rateHz) = 0;
+
+    // --- Calibrazione canali -------------------------------------------------
+    /// L'utente ha modificato la calibrazione (G = a*V + b, unità, descrizione)
+    /// di un canale A0..A5 nella griglia. Effetto immediato su legenda del
+    /// grafico (letta live) e sul titolo della scheda dedicata al canale
+    /// (aggiornato esplicitamente, vedi GraphPanel::setChannelTabTitle); per
+    /// il CSV vale solo la registrazione avviata DOPO questa modifica (il
+    /// file già aperto non cambia intestazione a metà).
+    /// @param label descrizione libera (es. "Temperatura"), può essere vuota.
+    virtual void onCalibrationChanged(int channel, double a, double b,
+                                      const wxString& unit,
+                                      const wxString& label) = 0;
 
     // --- Esportazione / impostazioni ----------------------------------------
     virtual void onExportPngRequested() = 0;

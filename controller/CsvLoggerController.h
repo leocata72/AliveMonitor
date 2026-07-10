@@ -24,6 +24,7 @@
 #include <wx/string.h>
 
 #include "Version.h"
+#include "model/ChannelCalibration.h"
 
 namespace am {
 
@@ -38,8 +39,11 @@ public:
     /// Apre il file (sovrascrivendolo se già esiste, l'utente conferma
     /// l'overwrite nel wxFileDialog a monte) e avvia il thread consumatore.
     /// Se una registrazione era già attiva la chiude prima (stop()).
+    /// @param calibrations copiata internamente (istantanea congelata
+    ///        all'avvio): modifiche successive nella griglia non alterano
+    ///        l'intestazione né le colonne già scritte in questa sessione.
     /// @return false se il file non può essere aperto in scrittura.
-    bool start(const wxString& path);
+    bool start(const wxString& path, const ChannelCalibrations& calibrations);
 
     /// Segnala la fine della registrazione, ATTENDE che il consumatore
     /// scriva tutte le righe ancora in coda, chiude il file. Bloccante ma
@@ -67,6 +71,7 @@ private:
 
     std::ofstream file_;
     wxString currentPath_;
+    ChannelCalibrations calibrations_;  ///< Istantanea congelata all'avvio di start().
 
     std::thread thread_;
     std::atomic<bool> active_{ false };

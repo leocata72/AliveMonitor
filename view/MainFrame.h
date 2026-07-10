@@ -13,11 +13,13 @@
 #include "IUserActions.h"
 #include "model/AnalogDataBuffer.h"
 #include "model/BoardState.h"
+#include "model/ChannelCalibration.h"
 #include "model/DigitalOutputState.h"
 
 namespace am {
 
 class AcquisitionPanel;
+class CalibrationPanel;
 class DigitalOutputPanel;
 class GraphPanel;
 class StatusPanel;
@@ -28,7 +30,8 @@ public:
     MainFrame(IUserActions& actions,
               BoardState& state,
               DigitalOutputState& outputs,
-              const AnalogDataBuffer& buffer);
+              const AnalogDataBuffer& buffer,
+              const ChannelCalibrations& calibrations);
 
     // Accessori per il MainController (puntatori non proprietari,
     // validi per tutta la vita del frame).
@@ -47,6 +50,7 @@ private:
     ToolbarPanel* toolbar_ = nullptr;
     DigitalOutputPanel* digital_ = nullptr;
     AcquisitionPanel* acquisition_ = nullptr;
+    CalibrationPanel* calibration_ = nullptr;
     GraphPanel* graph_ = nullptr;
     StatusPanel* status_ = nullptr;
 };

@@ -13,7 +13,8 @@ CsvLoggerController::~CsvLoggerController()
     stop();
 }
 
-bool CsvLoggerController::start(const wxString& path)
+bool CsvLoggerController::start(const wxString& path,
+                                const ChannelCalibrations& calibrations)
 {
     stop();  // chiude un'eventuale registrazione precedente ancora attiva
 
@@ -22,9 +23,18 @@ bool CsvLoggerController::start(const wxString& path)
         return false;
     }
 
+    calibrations_ = calibrations;  // istantanea: congelata per l'intera sessione
+
     file_ << "tempo_s";
     for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
         file_ << ",A" << ch << "_V";
+    }
+    for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
+        // Unità incorporata nel nome colonna (es. A0_conv[°C]): un CSV letto
+        // in un foglio elettronico resta autoesplicativo senza righe extra
+        // di intestazione da interpretare.
+        file_ << ",A" << ch << "_conv["
+              << calibrations_[static_cast<std::size_t>(ch)].unit << ']';
     }
     file_ << '\n';
 
@@ -101,10 +111,17 @@ void CsvLoggerController::writerMain()
 void CsvLoggerController::writeRow(const Row& row)
 {
     file_ << std::fixed << std::setprecision(6) << row.t;
+    std::array<double, kNumAnalogChannels> volts{};
     for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
-        const double v = static_cast<double>(row.raw[static_cast<std::size_t>(ch)])
-                        * kAdcReferenceVolt / kAdcMaxValue;
-        file_ << ',' << std::setprecision(4) << v;
+        const auto chIdx = static_cast<std::size_t>(ch);
+        volts[chIdx] = static_cast<double>(row.raw[chIdx])
+                      * kAdcReferenceVolt / kAdcMaxValue;
+        file_ << ',' << std::setprecision(4) << volts[chIdx];
+    }
+    for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
+        const auto chIdx = static_cast<std::size_t>(ch);
+        const double converted = calibrations_[chIdx].convert(volts[chIdx]);
+        file_ << ',' << std::setprecision(4) << converted;
     }
     file_ << '\n';
 }

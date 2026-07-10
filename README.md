@@ -2,7 +2,7 @@
 
 Applicazione desktop professionale (C++20, wxWidgets 3.2+, CMake, architettura MVC) per l'acquisizione in tempo reale delle tensioni analogiche A0–A5 e il controllo delle uscite digitali D2–D9 di una scheda **Arduino Uno** collegata via USB, con firmware dedicato incluso.
 
-Caratteristiche principali: rilevamento automatico della porta seriale (handshake `HELLO`/`ARDUINO_UNO`) con riconnessione automatica; grafico in tempo reale a sei curve con zoom, pan, autoscale, legenda, griglia, esportazione PNG; registrazione CSV continua allo Start (produttore/consumatore, vedi sotto); frequenza di acquisizione regolabile da 1 a 250 Hz anche durante l'acquisizione; ring buffer thread-safe da 60 secondi per canale (dimensionato già per 500 Hz); rendering disaccoppiato dall'acquisizione (10–60 FPS configurabili); barra di stato con FPS, pacchetti ricevuti/persi, errori CRC/seriali, tempo di connessione e CPU.
+Caratteristiche principali: rilevamento automatico della porta seriale (handshake `HELLO`/`ARDUINO_UNO`) con riconnessione automatica; grafico in tempo reale organizzato in 7 schede — una combinata a sei curve (zoom, pan, autoscale, legenda, griglia) più una scheda per canale con asse Y dedicato nella grandezza fisica convertita, vedi sotto — con esportazione PNG; calibrazione lineare per canale (V → grandezza fisica, vedi sotto); registrazione CSV continua allo Start (produttore/consumatore, vedi sotto); frequenza di acquisizione regolabile da 1 a 250 Hz anche durante l'acquisizione; ring buffer thread-safe da 60 secondi per canale (dimensionato già per 500 Hz); rendering disaccoppiato dall'acquisizione (10–60 FPS configurabili); barra di stato con FPS, pacchetti ricevuti/persi, errori CRC/seriali, tempo di connessione e CPU.
 
 ## Struttura del progetto
 
@@ -10,17 +10,19 @@ Caratteristiche principali: rilevamento automatico della porta seriale (handshak
 AliveMonitor/
 ├── CMakeLists.txt          Build system (Windows e Linux)
 ├── README.md               Questo file
+├── LICENSE                 Licenza MIT
 ├── include/                Header condivisi (Version, eventi, IUserActions, CpuMonitor)
 ├── src/                    main.cpp (wxApp), AppEvents, CpuMonitor
 ├── model/                  MODEL: BoardState, SerialModel, AnalogDataBuffer,
-│                           DigitalOutputState, CommunicationProtocol, RingBuffer
+│                           DigitalOutputState, CommunicationProtocol, RingBuffer,
+│                           ChannelCalibration
 ├── view/                   VIEW: MainFrame, ToolbarPanel, DigitalOutputPanel,
-│                           AcquisitionPanel, GraphPanel, StatusPanel,
-│                           SettingsDialog, LedIndicator, SplashScreen
+│                           AcquisitionPanel, CalibrationPanel, GraphPanel,
+│                           StatusPanel, SettingsDialog, LedIndicator, SplashScreen
 ├── controller/             CONTROLLER: MainController, SerialController,
 │                           GraphController, CommandController, CsvLoggerController
 ├── serial/                 ISerialPort + implementazioni Win32 e POSIX
-├── resources/              Risorse (icone, ecc.)
+├── resources/              Risorse incorporate (icone, guida HTML)
 ├── docs/                   Architecture.md, Protocol.md, UML/
 └── arduino/
     └── AliveMonitor/
@@ -259,10 +261,57 @@ attendendo che il consumatore abbia terminato di scrivere tutti i campioni
 già in coda, così nessun dato viene perso né all'arresto manuale né alla
 chiusura dell'applicazione.
 
+### Calibrazione canali (V → grandezza fisica)
+
+Sotto il pannello di acquisizione è presente una griglia (`CalibrationPanel`)
+con una riga per canale (A0..A5) e quattro colonne modificabili: coefficiente
+`a`, offset `b`, unità di misura e descrizione. Per ogni trasduttore
+collegato con legge lineare G = a·V + b (es. un sensore di temperatura 0–5 V
+→ 0–100 °C avrebbe a=20, b=0, unità "°C"), inserire i valori nella riga del
+canale corrispondente: l'effetto è immediato sulla legenda del grafico, che
+accanto al nome del canale mostra anche il valore convertito in tempo reale
+(es. "A0: 23.4 °C"). I canali non configurati restano all'identità (a=1,
+b=0, unità "V"), cioè mostrano semplicemente la tensione. La descrizione è
+un'etichetta libera (es. "Temperatura forno"): se compilata diventa il
+titolo della scheda dedicata a quel canale nel grafico (vedi sotto),
+altrimenti la scheda resta col nome del canale ("A0".."A5"). La calibrazione
+vale solo per la sessione corrente (non viene salvata su disco); se attiva
+una registrazione CSV, il file include — accanto alle sei colonne `A#_V` in
+Volt — sei colonne aggiuntive `A#_conv[unità]` con il valore già convertito,
+usando la calibrazione impostata al momento dello Start (una modifica fatta
+a registrazione già avviata non altera l'intestazione né le righe già
+scritte in quella sessione).
+
+### Grafico a 7 schede (assi indipendenti per canale)
+
+Il grafico è un `wxNotebook` con 7 schede. La prima, "Tutti", è il grafico
+combinato di sempre: le sei curve condividono un unico asse Y in Volt, con
+le checkbox per nascondere/mostrare i singoli canali e lo stato della
+registrazione CSV (LED + percorso file). Le altre sei schede (A0..A5)
+mostrano un solo canale ciascuna, con curva e asse Y nella grandezza *già
+convertita* secondo la sua calibrazione (o in Volt se non calibrato) — un
+modo semplice per avere in pratica "assi multipli" quando i canali misurano
+grandezze di natura e scala diverse, senza dover sovrapporre unità
+incompatibili sullo stesso asse. Il titolo di ciascuna di queste sei schede
+è la descrizione impostata nella griglia di calibrazione (colonna
+"descrizione"), o il nome del canale se non compilata; cambia in tempo
+reale a ogni modifica della griglia, senza bisogno di riavviare. Ogni
+scheda a canale singolo ha Auto Y
+attivo di default (dato che il range della grandezza convertita non è noto
+a priori) e i propri pulsanti Autoscala/Segui/Reset/PNG indipendenti dalle
+altre schede; l'esportazione PNG salva sempre la scheda attualmente
+visualizzata. La finestra temporale (impostazioni) si applica a tutte le
+schede insieme, mentre l'Auto Y continuo del pannello Impostazioni riguarda
+solo la scheda combinata — le sei schede per canale restano indipendenti.
+
 ## Documentazione
 
 La descrizione completa dell'architettura, delle scelte progettuali e dei suggerimenti di estensione è in `docs/Architecture.md`; la specifica del protocollo seriale in `docs/Protocol.md`; i diagrammi UML (classi e sequenza, PlantUML + Mermaid) in `docs/UML/`; la guida passo-passo per compilare con CMake GUI (wxWidgets statica inclusa) in `docs/CMakeGUI.md`.
 
+## Guida in-app
+
+Dal menu Aiuto &gt; Guida (o F1) si apre nel browser predefinito una guida rapida all'uso dell'applicazione, incorporata nell'eseguibile come le altre risorse (icona compresa): nessun file esterno da distribuire insieme al binario.
+
 ## Licenza
 
-Codice fornito come base progettuale riutilizzabile; definire la licenza secondo le esigenze del progetto.
+Distribuito sotto licenza **MIT**: uso, modifica e ridistribuzione liberi anche a scopo commerciale, fornito "così com'è" senza alcuna garanzia né responsabilità degli autori per eventuali danni derivanti dall'uso del software. Testo completo in [`LICENSE`](LICENSE).

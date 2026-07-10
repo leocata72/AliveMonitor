@@ -114,6 +114,7 @@ set(AM_COMMON_SOURCES
     controller/SerialController.cpp
 
     view/AcquisitionPanel.cpp
+    view/CalibrationPanel.cpp
     view/DigitalOutputPanel.cpp
     view/GraphPanel.cpp
     view/LedIndicator.cpp

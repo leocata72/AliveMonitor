@@ -25,6 +25,7 @@
 #include "controller/SerialController.h"
 #include "model/AnalogDataBuffer.h"
 #include "model/BoardState.h"
+#include "model/ChannelCalibration.h"
 #include "model/DigitalOutputState.h"
 #include "model/SerialModel.h"
 
@@ -59,6 +60,8 @@ public:
     void onAcquisitionStop() override;
     void onAcquisitionPause() override;
     void onSampleRateChanged(int rateHz) override;
+    void onCalibrationChanged(int channel, double a, double b,
+                              const wxString& unit, const wxString& label) override;
     void onExportPngRequested() override;
     void onSettingsRequested() override;
     void onShutdown() override;
@@ -87,6 +90,7 @@ private:
     SerialModel serialModel_;
     DigitalOutputState outputs_;
     AnalogDataBuffer buffer_;
+    ChannelCalibrations calibrations_;  ///< Identità (a=1,b=0,"V") finché non configurata.
 
     // --- CONTROLLER ------------------------------------------------------------
     // NOTA: dichiarati dopo i Model perché li ricevono per riferimento

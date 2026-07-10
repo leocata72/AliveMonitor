@@ -14,6 +14,7 @@
 #include <wx/dcbuffer.h>
 #include <wx/dcmemory.h>
 #include <wx/image.h>
+#include <wx/notebook.h>
 #include <wx/sizer.h>
 #include <wx/stattext.h>
 
@@ -42,15 +43,27 @@ constexpr double kMaxSpanY = 50.0;     // 50 V
 // PlotCanvas
 // ===========================================================================
 
-PlotCanvas::PlotCanvas(wxWindow* parent, const AnalogDataBuffer& buffer)
+PlotCanvas::PlotCanvas(wxWindow* parent, const AnalogDataBuffer& buffer,
+                       const ChannelCalibrations& calibrations,
+                       int soloChannel)
     : wxWindow(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize,
                wxFULL_REPAINT_ON_RESIZE)
     , buffer_(buffer)
+    , calibrations_(calibrations)
+    , soloChannel_(soloChannel)
 {
     SetBackgroundStyle(wxBG_STYLE_PAINT);
     SetMinSize(wxSize(400, 300));
 
-    visible_.fill(true);
+    if (soloChannel_ >= 0) {
+        // Scheda a canale singolo: solo quel canale è "visibile" (nessuna
+        // checkbox in questa modalità, il canale è fisso per tutta la vita
+        // della scheda).
+        visible_.fill(false);
+        visible_[static_cast<std::size_t>(soloChannel_)] = true;
+    } else {
+        visible_.fill(true);
+    }
     // Palette a contrasto elevato, distinguibile anche a colori sovrapposti.
     colours_ = { wxColour(31, 119, 180),   // A0 blu
                  wxColour(255, 127, 14),   // A1 arancio
@@ -126,16 +139,26 @@ void PlotCanvas::autoscaleYOnce()
             if (s.t < xMin_ || s.t > xMax_) {
                 continue;
             }
-            const double v = s.volts();
+            const double v = plottedValue(ch, s);
             lo = std::min(lo, v);
             hi = std::max(hi, v);
         }
     }
 
     if (lo > hi) {
-        // Nessun dato visibile: intervallo predefinito dell'ADC.
-        yMin_ = 0.0;
-        yMax_ = kAdcReferenceVolt;
+        // Nessun dato visibile: intervallo predefinito (identità se il
+        // canale non è calibrato, altrimenti 0..5V passati attraverso la
+        // calibrazione). NB: std::minmax() qui creerebbe reference pendenti
+        // sui temporanei restituiti da convert() (-Wdangling-reference);
+        // con variabili concrete non c'è ambiguità sulla lifetime.
+        const double defA = soloChannel_ >= 0
+            ? calibrations_[static_cast<std::size_t>(soloChannel_)].convert(0.0)
+            : 0.0;
+        const double defB = soloChannel_ >= 0
+            ? calibrations_[static_cast<std::size_t>(soloChannel_)].convert(kAdcReferenceVolt)
+            : kAdcReferenceVolt;
+        yMin_ = std::min(defA, defB);
+        yMax_ = std::max(defA, defB);
         return;
     }
     double pad = (hi - lo) * 0.08;
@@ -150,8 +173,20 @@ void PlotCanvas::autoscaleYOnce()
 void PlotCanvas::resetView()
 {
     window_ = static_cast<double>(kBufferSeconds);
-    yMin_ = 0.0;
-    yMax_ = kAdcReferenceVolt;
+    if (soloChannel_ >= 0) {
+        // Range di default 0..5V mappato attraverso la calibrazione (min/max
+        // perché a può essere negativo, invertendo l'ordine). Variabili
+        // concrete, non std::minmax(): evita reference pendenti sui
+        // temporanei restituiti da convert() (-Wdangling-reference).
+        const auto& cal = calibrations_[static_cast<std::size_t>(soloChannel_)];
+        const double a = cal.convert(0.0);
+        const double b = cal.convert(kAdcReferenceVolt);
+        yMin_ = std::min(a, b);
+        yMax_ = std::max(a, b);
+    } else {
+        yMin_ = 0.0;
+        yMax_ = kAdcReferenceVolt;
+    }
     follow_ = true;
     xMin_ = xMax_ - window_;
     Refresh(false);
@@ -281,6 +316,24 @@ double PlotCanvas::niceStep(double range, int targetTicks)
     return step * mag;
 }
 
+double PlotCanvas::plottedValue(int ch, const AnalogSample& s) const
+{
+    if (soloChannel_ >= 0) {
+        // Nelle schede a canale singolo l'unico canale visibile è
+        // soloChannel_ stesso: si traccia sempre il valore convertito.
+        return calibrations_[static_cast<std::size_t>(ch)].convert(s.volts());
+    }
+    return s.volts();  // scheda combinata: sempre Volt, canali con unità diverse
+}
+
+wxString PlotCanvas::yAxisUnit() const
+{
+    if (soloChannel_ >= 0) {
+        return wxString(calibrations_[static_cast<std::size_t>(soloChannel_)].unit);
+    }
+    return "V";
+}
+
 void PlotCanvas::render(wxDC& dc, const wxSize& size) const
 {
     // Sfondo generale e area di tracciamento.
@@ -329,7 +382,9 @@ void PlotCanvas::drawGrid(wxDC& dc, const wxRect& plot) const
         dc.DrawText(label, x - ext.x / 2, plot.GetBottom() + 4);
     }
 
-    // --- Griglia e etichette asse Y (tensione [V]) ----------------------------
+    // --- Griglia e etichette asse Y (Volt, o grandezza convertita nelle
+    //     schede a canale singolo) ------------------------------------------
+    const wxString unit = yAxisUnit();
     const double spanY = yMax_ - yMin_;
     const double stepY = niceStep(spanY, 6);
     const int decimalsY = stepY < 0.1 ? 2 : (stepY < 1.0 ? 1 : 0);
@@ -341,7 +396,7 @@ void PlotCanvas::drawGrid(wxDC& dc, const wxRect& plot) const
             continue;
         }
         dc.DrawLine(plot.x + 1, y, plot.GetRight() - 1, y);
-        const wxString label = wxString::Format("%.*f V", decimalsY, v);
+        const wxString label = wxString::Format("%.*f %s", decimalsY, v, unit);
         const wxSize ext = dc.GetTextExtent(label);
         dc.DrawText(label, plot.x - ext.x - 6, y - ext.y / 2);
     }
@@ -450,7 +505,7 @@ void PlotCanvas::drawCurves(wxDC& dc, const wxRect& plot) const
                     flushSegment();
                 }
                 const int col = static_cast<int>((s.t - xMin_) * sx);
-                const double v = s.volts();
+                const double v = plottedValue(ch, s);
                 if (col != currentCol) {
                     if (currentCol != INT_MIN) {
                         const int x = plot.x + currentCol;
@@ -478,7 +533,7 @@ void PlotCanvas::drawCurves(wxDC& dc, const wxRect& plot) const
                 if (isGap(s.t)) {
                     flushSegment();
                 }
-                scratchPoints_.emplace_back(toX(s.t), toY(s.volts()));
+                scratchPoints_.emplace_back(toX(s.t), toY(plottedValue(ch, s)));
             }
         }
 
@@ -499,8 +554,36 @@ void PlotCanvas::drawLegend(wxDC& dc, const wxRect& plot) const
         return;
     }
 
+    // Etichetta di ogni riga: "A0: 23.4 °C" (ultimo campione convertito con
+    // G = a*V + b) se ci sono dati in finestra, altrimenti solo "A0". Il
+    // valore è live: la legenda legge calibrations_ direttamente a ogni
+    // frame, senza copie né notifiche dal CalibrationPanel.
+    std::array<wxString, kNumAnalogChannels> labels;
+    for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
+        const auto chIdx = static_cast<std::size_t>(ch);
+        if (!visible_[chIdx]) {
+            continue;
+        }
+        wxString label = wxString::Format("A%d", ch);
+        if (!snapshot_[chIdx].empty()) {
+            const double volts = snapshot_[chIdx].back().volts();
+            const double converted = calibrations_[chIdx].convert(volts);
+            label += wxString::Format(": %.2f %s", converted,
+                                      wxString(calibrations_[chIdx].unit));
+        }
+        labels[chIdx] = label;
+    }
+
     const int rowH = 16;
-    const int boxW = 64;
+    int maxTextW = 0;
+    for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
+        const auto chIdx = static_cast<std::size_t>(ch);
+        if (!visible_[chIdx]) {
+            continue;
+        }
+        maxTextW = std::max(maxTextW, dc.GetTextExtent(labels[chIdx]).x);
+    }
+    const int boxW = 36 + maxTextW;
     const int boxH = 6 + visibleCount * rowH;
     const wxRect box(plot.x + 10, plot.y + 8, boxW, boxH);
 
@@ -518,7 +601,7 @@ void PlotCanvas::drawLegend(wxDC& dc, const wxRect& plot) const
         dc.SetPen(wxPen(colours_[chIdx], 2));
         dc.DrawLine(box.x + 6, y + 6, box.x + 24, y + 6);
         dc.SetTextForeground(wxColour(60, 60, 60));
-        dc.DrawText(wxString::Format("A%d", ch), box.x + 30, y);
+        dc.DrawText(labels[chIdx], box.x + 30, y);
         ++row;
     }
 }
@@ -539,108 +622,180 @@ bool PlotCanvas::exportPng(const wxString& path) const
 // ===========================================================================
 
 GraphPanel::GraphPanel(wxWindow* parent, IUserActions& actions,
-                       const AnalogDataBuffer& buffer)
+                       const AnalogDataBuffer& buffer,
+                       const ChannelCalibrations& calibrations)
     : wxPanel(parent)
     , actions_(actions)
+    , buffer_(buffer)
+    , calibrations_(calibrations)
 {
-    auto* sizer = new wxBoxSizer(wxVERTICAL);
+    notebook_ = new wxNotebook(this, wxID_ANY);
 
-    // --- Barra dei controlli del grafico -------------------------------------
-    auto* controls = new wxBoxSizer(wxHORIZONTAL);
-
-    canvas_ = new PlotCanvas(this, buffer);
-
+    canvases_[0] = buildTab("Tutti", -1);
     for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
-        auto* check = new wxCheckBox(this, wxID_ANY,
-                                     wxString::Format("A%d", ch));
-        check->SetValue(true);
-        check->Bind(wxEVT_CHECKBOX, [this, ch](wxCommandEvent& e) {
-            canvas_->setChannelVisible(ch, e.IsChecked());
-        });
-        channelChecks_[static_cast<std::size_t>(ch)] = check;
-        controls->Add(check, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
+        const auto& label = calibrations_[static_cast<std::size_t>(ch)].label;
+        const wxString title = label.empty() ? wxString::Format("A%d", ch) : wxString(label);
+        canvases_[static_cast<std::size_t>(ch + 1)] = buildTab(title, ch);
     }
 
-    controls->AddStretchSpacer(1);
+    notebook_->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, &GraphPanel::onPageChanged, this);
 
-    // Stato della registrazione CSV continua (LED + percorso file), centrato
-    // nello spazio libero tra i canali e i controlli di scala/esportazione:
-    // LED verde quando il consumatore sta scrivendo, rosso quando è fermo.
-    csvLed_ = new LedIndicator(this, wxColour(46, 204, 64), wxColour(200, 40, 40), 14);
-    controls->Add(csvLed_, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
+    auto* outer = new wxBoxSizer(wxVERTICAL);
+    outer->Add(notebook_, 1, wxEXPAND | wxALL, 4);
+    SetSizer(outer);
+}
 
-    csvPathText_ = new wxStaticText(this, wxID_ANY, "CSV: nessuna registrazione");
-    controls->Add(csvPathText_, 0, wxALIGN_CENTER_VERTICAL);
+PlotCanvas* GraphPanel::buildTab(const wxString& title, int soloChannel)
+{
+    auto* page = new wxPanel(notebook_);
+    auto* sizer = new wxBoxSizer(wxVERTICAL);
+    auto* controls = new wxBoxSizer(wxHORIZONTAL);
 
-    controls->AddStretchSpacer(1);
+    auto* canvas = new PlotCanvas(page, buffer_, calibrations_, soloChannel);
 
-    autoYCheck_ = new wxCheckBox(this, wxID_ANY, "Auto Y");
-    autoYCheck_->Bind(wxEVT_CHECKBOX, [this](wxCommandEvent& e) {
-        canvas_->setContinuousAutoscaleY(e.IsChecked());
+    if (soloChannel < 0) {
+        // --- Scheda combinata: checkbox di visibilità per canale + stato
+        //     della registrazione CSV (non ha senso ripeterlo nelle schede
+        //     a canale singolo: la registrazione è unica, non per-canale).
+        for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
+            auto* check = new wxCheckBox(page, wxID_ANY,
+                                         wxString::Format("A%d", ch));
+            check->SetValue(true);
+            check->Bind(wxEVT_CHECKBOX, [canvas, ch](wxCommandEvent& e) {
+                canvas->setChannelVisible(ch, e.IsChecked());
+            });
+            channelChecks_[static_cast<std::size_t>(ch)] = check;
+            controls->Add(check, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
+        }
+
+        controls->AddStretchSpacer(1);
+
+        // LED verde quando il consumatore sta scrivendo, rosso quando è fermo.
+        csvLed_ = new LedIndicator(page, wxColour(46, 204, 64), wxColour(200, 40, 40), 14);
+        controls->Add(csvLed_, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
+
+        csvPathText_ = new wxStaticText(page, wxID_ANY, "CSV: nessuna registrazione");
+        controls->Add(csvPathText_, 0, wxALIGN_CENTER_VERTICAL);
+
+        controls->AddStretchSpacer(1);
+    } else {
+        // --- Scheda a canale singolo: nessuna checkbox (il canale è fisso),
+        //     Auto Y attivo di default per adattarsi subito alla scala della
+        //     grandezza convertita, qualunque essa sia.
+        canvas->setContinuousAutoscaleY(true);
+        controls->AddStretchSpacer(1);
+    }
+
+    auto* autoYCheck = new wxCheckBox(page, wxID_ANY, "Auto Y");
+    autoYCheck->SetValue(canvas->continuousAutoscaleY());
+    autoYCheck->Bind(wxEVT_CHECKBOX, [canvas](wxCommandEvent& e) {
+        canvas->setContinuousAutoscaleY(e.IsChecked());
     });
-    controls->Add(autoYCheck_, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
+    autoYChecks_[static_cast<std::size_t>(soloChannel + 1)] = autoYCheck;
+    controls->Add(autoYCheck, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
 
-    auto* autoscaleBtn = new wxButton(this, wxID_ANY, "Autoscala",
+    auto* autoscaleBtn = new wxButton(page, wxID_ANY, "Autoscala",
                                       wxDefaultPosition, wxDefaultSize,
                                       wxBU_EXACTFIT);
     autoscaleBtn->Bind(wxEVT_BUTTON,
-                       [this](wxCommandEvent&) { canvas_->autoscaleYOnce(); });
+                       [canvas](wxCommandEvent&) { canvas->autoscaleYOnce(); });
     controls->Add(autoscaleBtn, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 4);
 
-    auto* followBtn = new wxButton(this, wxID_ANY, "Segui",
+    auto* followBtn = new wxButton(page, wxID_ANY, "Segui",
                                    wxDefaultPosition, wxDefaultSize,
                                    wxBU_EXACTFIT);
     followBtn->Bind(wxEVT_BUTTON,
-                    [this](wxCommandEvent&) { canvas_->followNow(); });
+                    [canvas](wxCommandEvent&) { canvas->followNow(); });
     controls->Add(followBtn, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 4);
 
-    auto* resetBtn = new wxButton(this, wxID_ANY, "Reset",
+    auto* resetBtn = new wxButton(page, wxID_ANY, "Reset",
                                   wxDefaultPosition, wxDefaultSize,
                                   wxBU_EXACTFIT);
     resetBtn->Bind(wxEVT_BUTTON,
-                   [this](wxCommandEvent&) { canvas_->resetView(); });
+                   [canvas](wxCommandEvent&) { canvas->resetView(); });
     controls->Add(resetBtn, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 8);
 
-    auto* pngBtn = new wxButton(this, wxID_ANY, "PNG",
+    auto* pngBtn = new wxButton(page, wxID_ANY, "PNG",
                                 wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
     pngBtn->Bind(wxEVT_BUTTON,
                  [this](wxCommandEvent&) { actions_.onExportPngRequested(); });
     controls->Add(pngBtn, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 4);
 
     sizer->Add(controls, 0, wxEXPAND | wxALL, 4);
-    sizer->Add(canvas_, 1, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 4);
-    SetSizer(sizer);
+    sizer->Add(canvas, 1, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 4);
+    page->SetSizer(sizer);
+
+    notebook_->AddPage(page, title);
+    return canvas;
+}
+
+void GraphPanel::onPageChanged(wxBookCtrlEvent& WXUNUSED(event))
+{
+    // Rinfresca subito la scheda appena diventata attiva con l'ultimo
+    // (now, following) noto: senza questo resterebbe con l'ultimo frame
+    // renderizzato quando era attiva l'ultima volta, fino al prossimo tick
+    // del GraphController (che potrebbe volerci fino a 100 ms a 10 FPS).
+    const int idx = notebook_->GetSelection();
+    if (idx >= 0 && idx < kTabCount) {
+        canvases_[static_cast<std::size_t>(idx)]->refreshData(lastNow_, lastFollowing_);
+    }
 }
 
 void GraphPanel::refreshData(double now, bool following)
 {
-    canvas_->refreshData(now, following);
+    lastNow_ = now;
+    lastFollowing_ = following;
+    const int idx = notebook_->GetSelection();
+    if (idx >= 0 && idx < kTabCount) {
+        // Solo la scheda attiva: copyWindow() costerebbe 7 volte tanto per
+        // dati che comunque non sono visibili sulle altre 6 schede.
+        canvases_[static_cast<std::size_t>(idx)]->refreshData(now, following);
+    }
 }
 
 bool GraphPanel::exportPng(const wxString& path) const
 {
-    return canvas_->exportPng(path);
+    const int idx = notebook_->GetSelection();
+    if (idx < 0 || idx >= kTabCount) {
+        return false;
+    }
+    return canvases_[static_cast<std::size_t>(idx)]->exportPng(path);
 }
 
 double GraphPanel::timeWindowSeconds() const
 {
-    return canvas_->timeWindow();
+    return canvases_[0]->timeWindow();
 }
 
 void GraphPanel::setTimeWindowSeconds(double seconds)
 {
-    canvas_->setTimeWindow(seconds);
+    for (auto* canvas : canvases_) {
+        canvas->setTimeWindow(seconds);
+    }
 }
 
 bool GraphPanel::continuousAutoscaleY() const
 {
-    return canvas_->continuousAutoscaleY();
+    return canvases_[0]->continuousAutoscaleY();
 }
 
 void GraphPanel::setContinuousAutoscaleY(bool enabled)
 {
-    canvas_->setContinuousAutoscaleY(enabled);
-    autoYCheck_->SetValue(enabled);
+    // Solo la scheda combinata: le schede a canale singolo restano
+    // indipendenti (Auto Y locale, attivo di default) e non devono essere
+    // resettate solo perché l'utente ha aperto/confermato il SettingsDialog
+    // senza toccare questa opzione.
+    canvases_[0]->setContinuousAutoscaleY(enabled);
+    autoYChecks_[0]->SetValue(enabled);
+}
+
+void GraphPanel::setChannelTabTitle(int channel, const wxString& label)
+{
+    if (channel < 0 || channel >= kNumAnalogChannels) {
+        return;
+    }
+    const wxString title = label.IsEmpty() ? wxString::Format("A%d", channel) : label;
+    notebook_->SetPageText(static_cast<std::size_t>(channel + 1), title);
 }
 
 void GraphPanel::setCsvPath(const wxString& path)

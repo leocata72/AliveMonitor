@@ -49,7 +49,7 @@ void MainController::initialize(wxSplashScreen* splash)
 
     // 1) Creazione della View. Il frame è posseduto da wxWidgets:
     //    verrà distrutto dal framework alla chiusura.
-    frame_ = new MainFrame(*this, state_, outputs_, buffer_);
+    frame_ = new MainFrame(*this, state_, outputs_, buffer_, calibrations_);
 
     // 2) Collegamento Controller <-> View.
     graph_.attachPanel(frame_->graphPanel());
@@ -129,7 +129,7 @@ void MainController::onAcquisitionStart()
         if (dialog.ShowModal() != wxID_OK) {
             return;  // annullato dall'utente: l'acquisizione non parte
         }
-        if (!csvLogger_.start(dialog.GetPath())) {
+        if (!csvLogger_.start(dialog.GetPath(), calibrations_)) {
             wxMessageBox("Impossibile aprire il file CSV per la scrittura.",
                          kAppName, wxICON_ERROR | wxOK, frame_);
             return;
@@ -159,6 +159,24 @@ void MainController::onAcquisitionPause()
 void MainController::onSampleRateChanged(int rateHz)
 {
     commands_.setSampleRate(rateHz);
+}
+
+void MainController::onCalibrationChanged(int channel, double a, double b,
+                                          const wxString& unit, const wxString& label)
+{
+    if (channel < 0 || channel >= kNumAnalogChannels) {
+        return;
+    }
+    calibrations_[static_cast<std::size_t>(channel)] =
+        ChannelCalibration{ a, b, unit.ToStdString(), label.ToStdString() };
+    // Nessun refreshStatusViews(): la legenda del grafico legge calibrations_
+    // direttamente (const&) ad ogni frame di rendering, già in corso a
+    // 10..60 FPS indipendentemente da questa modifica. Il titolo della
+    // scheda dedicata al canale, invece, NON è riletto a ogni frame (è
+    // testo statico del wxNotebook): va aggiornato esplicitamente qui.
+    if (frame_ != nullptr) {
+        frame_->graphPanel()->setChannelTabTitle(channel, label);
+    }
 }
 
 void MainController::onExportPngRequested()
