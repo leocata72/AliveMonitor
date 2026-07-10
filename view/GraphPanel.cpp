@@ -370,6 +370,10 @@ void PlotCanvas::drawCurves(wxDC& dc, const wxRect& plot) const
         return plot.y + plot.height - static_cast<int>((v - yMin_) * sy);
     };
 
+    // Soglia minima di "buco" in secondi anche ad alta frequenza (250 Hz):
+    // evita falsi positivi da normale jitter tra campioni consecutivi.
+    constexpr double kMinGapSeconds = 0.05;
+
     for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
         const auto chIdx = static_cast<std::size_t>(ch);
         if (!visible_[chIdx]) {
@@ -383,6 +387,48 @@ void PlotCanvas::drawCurves(wxDC& dc, const wxRect& plot) const
         dc.SetPen(wxPen(colours_[chIdx], 1));
         scratchPoints_.clear();
 
+        // Stato per il rilevamento dei "buchi" temporali (Pausa, o più
+        // raramente qualche pacchetto perso): la stima del periodo tipico
+        // (emaDt) è una media mobile aggiornata solo sugli intervalli
+        // "normali", così un cambio di frequenza dal vivo o una pausa non la
+        // corrompono — anzi, un buco vero fa adottare subito il nuovo
+        // periodo come riferimento, autocorreggendosi al campione successivo.
+        bool haveLast = false;
+        double lastT = 0.0;
+        double emaDt = -1.0;
+
+        // Disegna il segmento accumulato finora e prepara il prossimo:
+        // interrompere qui la polilinea è esattamente il "buco" visivo.
+        const auto flushSegment = [&]() {
+            if (scratchPoints_.size() >= 2) {
+                dc.DrawLines(static_cast<int>(scratchPoints_.size()),
+                             scratchPoints_.data());
+            }
+            scratchPoints_.clear();
+        };
+
+        // true se il campione a tempo t apre un nuovo segmento (buco rilevato
+        // rispetto all'ultimo campione processato); aggiorna anche lo stato.
+        const auto isGap = [&](double t) {
+            if (!haveLast) {
+                haveLast = true;
+                lastT = t;
+                return false;
+            }
+            const double dt = t - lastT;
+            lastT = t;
+            bool gap = false;
+            if (emaDt < 0.0) {
+                emaDt = dt;  // bootstrap sul primo intervallo osservato
+            } else if (dt > std::max(3.0 * emaDt, kMinGapSeconds)) {
+                gap = true;
+                emaDt = dt;  // adotta subito il nuovo periodo (fine pausa o cambio Hz)
+            } else {
+                emaDt = 0.9 * emaDt + 0.1 * dt;
+            }
+            return gap;
+        };
+
         if (data.size() > static_cast<std::size_t>(2 * plot.width)) {
             // ----- Decimazione min/max per colonna di pixel -----------------
             // Con 15000 punti in finestra sarebbe inutile (e lento) disegnare
@@ -393,6 +439,15 @@ void PlotCanvas::drawCurves(wxDC& dc, const wxRect& plot) const
             for (const auto& s : data) {
                 if (s.t < xMin_ || s.t > xMax_) {
                     continue;
+                }
+                if (isGap(s.t)) {
+                    if (currentCol != INT_MIN) {
+                        const int x = plot.x + currentCol;
+                        scratchPoints_.emplace_back(x, toY(colMax));
+                        scratchPoints_.emplace_back(x, toY(colMin));
+                        currentCol = INT_MIN;
+                    }
+                    flushSegment();
                 }
                 const int col = static_cast<int>((s.t - xMin_) * sx);
                 const double v = s.volts();
@@ -420,14 +475,14 @@ void PlotCanvas::drawCurves(wxDC& dc, const wxRect& plot) const
                 if (s.t < xMin_ || s.t > xMax_) {
                     continue;
                 }
+                if (isGap(s.t)) {
+                    flushSegment();
+                }
                 scratchPoints_.emplace_back(toX(s.t), toY(s.volts()));
             }
         }
 
-        if (scratchPoints_.size() >= 2) {
-            dc.DrawLines(static_cast<int>(scratchPoints_.size()),
-                         scratchPoints_.data());
-        }
+        flushSegment();
     }
 }
 

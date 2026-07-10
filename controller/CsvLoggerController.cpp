@@ -50,6 +50,18 @@ void CsvLoggerController::stop()
     }
     file_.close();
     currentPath_.clear();
+
+    // Scarta eventuali campioni accodati in race con questo stop(): push() legge
+    // active_ fuori dal lock per restare non bloccante, quindi in teoria un
+    // push() concorrente può accodare una riga DOPO che il consumatore è già
+    // uscito (join() sopra già completato). Senza questa pulizia quella riga
+    // "fantasma" (timestamp della sessione appena chiusa) resterebbe in coda e
+    // diventerebbe la prima riga scritta dalla PROSSIMA registrazione, con un
+    // tempo_s incoerente. Il campione perso qui è al più uno, esattamente nella
+    // finestra di poche istruzioni tra la chiusura e questo punto: accettabile,
+    // il contrario (farlo sopravvivere alla sessione successiva) non lo è.
+    const std::lock_guard lock(queueMutex_);
+    queue_.clear();
 }
 
 void CsvLoggerController::push(double t,
