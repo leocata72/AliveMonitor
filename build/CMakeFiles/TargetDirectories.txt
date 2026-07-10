@@ -1,7 +1,0 @@
-C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/AliveMonitor.dir
-C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/edit_cache.dir
-C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/rebuild_cache.dir
-C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/list_install_components.dir
-C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/install.dir
-C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/install/local.dir
-C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/install/strip.dir

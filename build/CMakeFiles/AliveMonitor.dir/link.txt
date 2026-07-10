@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\AliveMonitor.dir/objects.a
-C:\devTools\mingw64\bin\ar.exe qc CMakeFiles\AliveMonitor.dir/objects.a @CMakeFiles\AliveMonitor.dir\objects1.rsp
-C:\devTools\mingw64\bin\c++.exe -O3 -DNDEBUG -mwindows -static-libgcc -static-libstdc++ -static -Wl,--whole-archive CMakeFiles\AliveMonitor.dir/objects.a -Wl,--no-whole-archive -o AliveMonitor.exe -Wl,--out-implib,libAliveMonitor.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\AliveMonitor.dir\linkLibs.rsp
