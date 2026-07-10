@@ -1,0 +1,2865 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineSystem.cmake:218 (message)"
+      - "CMakeLists.txt:11 (project)"
+    message: |
+      The system is: Windows - 10.0.26200 - AMD64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeMinGWFindMake.cmake:5 (find_program)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_MAKE_PROGRAM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "mingw32-make.exe"
+    candidate_directories:
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+      - "/REGISTRY-NOTFOUND/bin/"
+      - "c:/MinGW/bin/"
+      - "/MinGW/bin/"
+      - "C:/Program Files/CodeBlocks/MinGW/bin/"
+    searched_directories:
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/mingw32-make.exe.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/mingw32-make.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/mingw32-make.exe.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/mingw32-make.exe"
+      - "C:/Windows/System32/mingw32-make.exe.com"
+      - "C:/Windows/System32/mingw32-make.exe"
+      - "C:/Windows/mingw32-make.exe.com"
+      - "C:/Windows/mingw32-make.exe"
+      - "C:/Windows/System32/wbem/mingw32-make.exe.com"
+      - "C:/Windows/System32/wbem/mingw32-make.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mingw32-make.exe.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mingw32-make.exe"
+      - "C:/Windows/System32/OpenSSH/mingw32-make.exe.com"
+      - "C:/Windows/System32/OpenSSH/mingw32-make.exe"
+      - "C:/Program Files/dotnet/mingw32-make.exe.com"
+      - "C:/Program Files/dotnet/mingw32-make.exe"
+      - "C:/Program Files/Calibre2/mingw32-make.exe.com"
+      - "C:/Program Files/Calibre2/mingw32-make.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/mingw32-make.exe.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/mingw32-make.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/mingw32-make.exe.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/mingw32-make.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/mingw32-make.exe.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/mingw32-make.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/mingw32-make.exe.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/mingw32-make.exe"
+      - "C:/Program Files/PuTTY/mingw32-make.exe.com"
+      - "C:/Program Files/PuTTY/mingw32-make.exe"
+      - "C:/Program Files/HP/HP One Agent/mingw32-make.exe.com"
+      - "C:/Program Files/HP/HP One Agent/mingw32-make.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/mingw32-make.exe.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/mingw32-make.exe"
+      - "C:/Program Files/CMake/bin/mingw32-make.exe.com"
+      - "C:/Program Files/CMake/bin/mingw32-make.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/mingw32-make.exe.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/mingw32-make.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/mingw32-make.exe.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/mingw32-make.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/mingw32-make.exe.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/mingw32-make.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/mingw32-make.exe.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/mingw32-make.exe"
+      - "C:/devTools/mingw64/mingw32-make.exe.com"
+      - "C:/devTools/mingw64/mingw32-make.exe"
+      - "C:/devTools/mingw64/bin/mingw32-make.exe.com"
+    found: "C:/devTools/mingw64/bin/mingw32-make.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompiler.cmake:63 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:69 (_cmake_find_compiler)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER"
+    description: "CXX compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "c++"
+      - "g++"
+      - "cl"
+      - "bcc"
+      - "icx"
+      - "clang++"
+    candidate_directories:
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/c++.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/c++.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/c++"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/g++.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/g++.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/g++"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/cl.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/cl.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/cl"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/bcc.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/bcc.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/bcc"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/icx.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/icx.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/icx"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/clang++.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/clang++.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/clang++"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/c++.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/c++.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/c++"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/g++.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/g++.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/g++"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/cl.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/cl.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/cl"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/bcc.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/bcc.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/bcc"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/icx.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/icx.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/icx"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/clang++.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/clang++.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/clang++"
+      - "C:/Windows/System32/c++.com"
+      - "C:/Windows/System32/c++.exe"
+      - "C:/Windows/System32/c++"
+      - "C:/Windows/System32/g++.com"
+      - "C:/Windows/System32/g++.exe"
+      - "C:/Windows/System32/g++"
+      - "C:/Windows/System32/cl.com"
+      - "C:/Windows/System32/cl.exe"
+      - "C:/Windows/System32/cl"
+      - "C:/Windows/System32/bcc.com"
+      - "C:/Windows/System32/bcc.exe"
+      - "C:/Windows/System32/bcc"
+      - "C:/Windows/System32/icx.com"
+      - "C:/Windows/System32/icx.exe"
+      - "C:/Windows/System32/icx"
+      - "C:/Windows/System32/clang++.com"
+      - "C:/Windows/System32/clang++.exe"
+      - "C:/Windows/System32/clang++"
+      - "C:/Windows/c++.com"
+      - "C:/Windows/c++.exe"
+      - "C:/Windows/c++"
+      - "C:/Windows/g++.com"
+      - "C:/Windows/g++.exe"
+      - "C:/Windows/g++"
+      - "C:/Windows/cl.com"
+      - "C:/Windows/cl.exe"
+      - "C:/Windows/cl"
+      - "C:/Windows/bcc.com"
+      - "C:/Windows/bcc.exe"
+      - "C:/Windows/bcc"
+      - "C:/Windows/icx.com"
+      - "C:/Windows/icx.exe"
+      - "C:/Windows/icx"
+      - "C:/Windows/clang++.com"
+      - "C:/Windows/clang++.exe"
+      - "C:/Windows/clang++"
+      - "C:/Windows/System32/wbem/c++.com"
+      - "C:/Windows/System32/wbem/c++.exe"
+      - "C:/Windows/System32/wbem/c++"
+      - "C:/Windows/System32/wbem/g++.com"
+      - "C:/Windows/System32/wbem/g++.exe"
+      - "C:/Windows/System32/wbem/g++"
+      - "C:/Windows/System32/wbem/cl.com"
+      - "C:/Windows/System32/wbem/cl.exe"
+      - "C:/Windows/System32/wbem/cl"
+      - "C:/Windows/System32/wbem/bcc.com"
+      - "C:/Windows/System32/wbem/bcc.exe"
+      - "C:/Windows/System32/wbem/bcc"
+      - "C:/Windows/System32/wbem/icx.com"
+      - "C:/Windows/System32/wbem/icx.exe"
+      - "C:/Windows/System32/wbem/icx"
+      - "C:/Windows/System32/wbem/clang++.com"
+      - "C:/Windows/System32/wbem/clang++.exe"
+      - "C:/Windows/System32/wbem/clang++"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/c++.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/c++.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/c++"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/g++.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/g++.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/g++"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/cl.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/cl.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/cl"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/bcc.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/bcc.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/bcc"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/icx.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/icx.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/icx"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang++.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang++.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/clang++"
+      - "C:/Windows/System32/OpenSSH/c++.com"
+      - "C:/Windows/System32/OpenSSH/c++.exe"
+      - "C:/Windows/System32/OpenSSH/c++"
+      - "C:/Windows/System32/OpenSSH/g++.com"
+      - "C:/Windows/System32/OpenSSH/g++.exe"
+      - "C:/Windows/System32/OpenSSH/g++"
+      - "C:/Windows/System32/OpenSSH/cl.com"
+      - "C:/Windows/System32/OpenSSH/cl.exe"
+      - "C:/Windows/System32/OpenSSH/cl"
+      - "C:/Windows/System32/OpenSSH/bcc.com"
+      - "C:/Windows/System32/OpenSSH/bcc.exe"
+      - "C:/Windows/System32/OpenSSH/bcc"
+      - "C:/Windows/System32/OpenSSH/icx.com"
+      - "C:/Windows/System32/OpenSSH/icx.exe"
+      - "C:/Windows/System32/OpenSSH/icx"
+      - "C:/Windows/System32/OpenSSH/clang++.com"
+      - "C:/Windows/System32/OpenSSH/clang++.exe"
+      - "C:/Windows/System32/OpenSSH/clang++"
+      - "C:/Program Files/dotnet/c++.com"
+      - "C:/Program Files/dotnet/c++.exe"
+      - "C:/Program Files/dotnet/c++"
+      - "C:/Program Files/dotnet/g++.com"
+      - "C:/Program Files/dotnet/g++.exe"
+      - "C:/Program Files/dotnet/g++"
+      - "C:/Program Files/dotnet/cl.com"
+      - "C:/Program Files/dotnet/cl.exe"
+      - "C:/Program Files/dotnet/cl"
+      - "C:/Program Files/dotnet/bcc.com"
+      - "C:/Program Files/dotnet/bcc.exe"
+      - "C:/Program Files/dotnet/bcc"
+      - "C:/Program Files/dotnet/icx.com"
+      - "C:/Program Files/dotnet/icx.exe"
+      - "C:/Program Files/dotnet/icx"
+      - "C:/Program Files/dotnet/clang++.com"
+      - "C:/Program Files/dotnet/clang++.exe"
+      - "C:/Program Files/dotnet/clang++"
+      - "C:/Program Files/Calibre2/c++.com"
+      - "C:/Program Files/Calibre2/c++.exe"
+      - "C:/Program Files/Calibre2/c++"
+      - "C:/Program Files/Calibre2/g++.com"
+      - "C:/Program Files/Calibre2/g++.exe"
+      - "C:/Program Files/Calibre2/g++"
+      - "C:/Program Files/Calibre2/cl.com"
+      - "C:/Program Files/Calibre2/cl.exe"
+      - "C:/Program Files/Calibre2/cl"
+      - "C:/Program Files/Calibre2/bcc.com"
+      - "C:/Program Files/Calibre2/bcc.exe"
+      - "C:/Program Files/Calibre2/bcc"
+      - "C:/Program Files/Calibre2/icx.com"
+      - "C:/Program Files/Calibre2/icx.exe"
+      - "C:/Program Files/Calibre2/icx"
+      - "C:/Program Files/Calibre2/clang++.com"
+      - "C:/Program Files/Calibre2/clang++.exe"
+      - "C:/Program Files/Calibre2/clang++"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/c++.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/c++.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/c++"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/g++.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/g++.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/g++"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/cl.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/cl.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/cl"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/bcc.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/bcc.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/bcc"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/icx.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/icx.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/icx"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/clang++.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/clang++.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/clang++"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/c++.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/c++.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/c++"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/g++.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/g++.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/g++"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/cl.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/cl.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/cl"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/bcc.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/bcc.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/bcc"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/icx.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/icx.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/icx"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/clang++.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/clang++.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/clang++"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/c++.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/c++.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/c++"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/g++.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/g++.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/g++"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/cl.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/cl.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/cl"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/bcc.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/bcc.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/bcc"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/icx.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/icx.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/icx"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/clang++.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/clang++.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/clang++"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/c++.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/c++.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/c++"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/g++.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/g++.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/g++"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/cl.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/cl.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/cl"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/bcc.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/bcc.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/bcc"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/icx.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/icx.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/icx"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/clang++.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/clang++.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/clang++"
+      - "C:/Program Files/PuTTY/c++.com"
+      - "C:/Program Files/PuTTY/c++.exe"
+      - "C:/Program Files/PuTTY/c++"
+      - "C:/Program Files/PuTTY/g++.com"
+      - "C:/Program Files/PuTTY/g++.exe"
+      - "C:/Program Files/PuTTY/g++"
+      - "C:/Program Files/PuTTY/cl.com"
+      - "C:/Program Files/PuTTY/cl.exe"
+      - "C:/Program Files/PuTTY/cl"
+      - "C:/Program Files/PuTTY/bcc.com"
+      - "C:/Program Files/PuTTY/bcc.exe"
+      - "C:/Program Files/PuTTY/bcc"
+      - "C:/Program Files/PuTTY/icx.com"
+      - "C:/Program Files/PuTTY/icx.exe"
+      - "C:/Program Files/PuTTY/icx"
+      - "C:/Program Files/PuTTY/clang++.com"
+      - "C:/Program Files/PuTTY/clang++.exe"
+      - "C:/Program Files/PuTTY/clang++"
+      - "C:/Program Files/HP/HP One Agent/c++.com"
+      - "C:/Program Files/HP/HP One Agent/c++.exe"
+      - "C:/Program Files/HP/HP One Agent/c++"
+      - "C:/Program Files/HP/HP One Agent/g++.com"
+      - "C:/Program Files/HP/HP One Agent/g++.exe"
+      - "C:/Program Files/HP/HP One Agent/g++"
+      - "C:/Program Files/HP/HP One Agent/cl.com"
+      - "C:/Program Files/HP/HP One Agent/cl.exe"
+      - "C:/Program Files/HP/HP One Agent/cl"
+      - "C:/Program Files/HP/HP One Agent/bcc.com"
+      - "C:/Program Files/HP/HP One Agent/bcc.exe"
+      - "C:/Program Files/HP/HP One Agent/bcc"
+      - "C:/Program Files/HP/HP One Agent/icx.com"
+      - "C:/Program Files/HP/HP One Agent/icx.exe"
+      - "C:/Program Files/HP/HP One Agent/icx"
+      - "C:/Program Files/HP/HP One Agent/clang++.com"
+      - "C:/Program Files/HP/HP One Agent/clang++.exe"
+      - "C:/Program Files/HP/HP One Agent/clang++"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/c++.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/c++.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/c++"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/g++.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/g++.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/g++"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/cl.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/cl.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/cl"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/bcc.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/bcc.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/bcc"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/icx.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/icx.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/icx"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/clang++.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/clang++.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/clang++"
+      - "C:/Program Files/CMake/bin/c++.com"
+      - "C:/Program Files/CMake/bin/c++.exe"
+      - "C:/Program Files/CMake/bin/c++"
+      - "C:/Program Files/CMake/bin/g++.com"
+      - "C:/Program Files/CMake/bin/g++.exe"
+      - "C:/Program Files/CMake/bin/g++"
+      - "C:/Program Files/CMake/bin/cl.com"
+      - "C:/Program Files/CMake/bin/cl.exe"
+      - "C:/Program Files/CMake/bin/cl"
+      - "C:/Program Files/CMake/bin/bcc.com"
+      - "C:/Program Files/CMake/bin/bcc.exe"
+      - "C:/Program Files/CMake/bin/bcc"
+      - "C:/Program Files/CMake/bin/icx.com"
+      - "C:/Program Files/CMake/bin/icx.exe"
+      - "C:/Program Files/CMake/bin/icx"
+      - "C:/Program Files/CMake/bin/clang++.com"
+      - "C:/Program Files/CMake/bin/clang++.exe"
+      - "C:/Program Files/CMake/bin/clang++"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/c++.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/c++.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/c++"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/g++.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/g++.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/g++"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/cl.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/cl.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/cl"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/bcc.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/bcc.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/bcc"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/icx.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/icx.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/icx"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/clang++.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/clang++.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/clang++"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/c++.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/c++.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/c++"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/g++.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/g++.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/g++"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/cl.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/cl.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/cl"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/bcc.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/bcc.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/bcc"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/icx.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/icx.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/icx"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/clang++.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/clang++.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/clang++"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/c++.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/c++.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/c++"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/g++.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/g++.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/g++"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/cl.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/cl.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/cl"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/bcc.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/bcc.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/bcc"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/icx.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/icx.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/icx"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/clang++.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/clang++.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/clang++"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/c++.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/c++.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/c++"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/g++.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/g++.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/g++"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/cl.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/cl.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/cl"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/bcc.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/bcc.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/bcc"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/icx.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/icx.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/icx"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/clang++.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/clang++.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/clang++"
+      - "C:/devTools/mingw64/c++.com"
+      - "C:/devTools/mingw64/c++.exe"
+      - "C:/devTools/mingw64/c++"
+      - "C:/devTools/mingw64/g++.com"
+      - "C:/devTools/mingw64/g++.exe"
+      - "C:/devTools/mingw64/g++"
+      - "C:/devTools/mingw64/cl.com"
+      - "C:/devTools/mingw64/cl.exe"
+      - "C:/devTools/mingw64/cl"
+      - "C:/devTools/mingw64/bcc.com"
+      - "C:/devTools/mingw64/bcc.exe"
+      - "C:/devTools/mingw64/bcc"
+      - "C:/devTools/mingw64/icx.com"
+      - "C:/devTools/mingw64/icx.exe"
+      - "C:/devTools/mingw64/icx"
+      - "C:/devTools/mingw64/clang++.com"
+      - "C:/devTools/mingw64/clang++.exe"
+      - "C:/devTools/mingw64/clang++"
+      - "C:/devTools/mingw64/bin/c++.com"
+    found: "C:/devTools/mingw64/bin/c++.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:501 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:538 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/"
+    found: "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:11 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: C:/devTools/mingw64/bin/c++.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
+      
+      The CXX compiler identification is GNU, found in:
+        C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/4.4.0/CompilerIdCXX/a.exe
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ar"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/ar.com"
+    found: "C:/devTools/mingw64/bin/ar.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_RANLIB"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ranlib"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/ranlib.com"
+    found: "C:/devTools/mingw64/bin/ranlib.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_STRIP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "strip"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/strip.com"
+    found: "C:/devTools/mingw64/bin/strip.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ld"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/ld.com"
+    found: "C:/devTools/mingw64/bin/ld.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "nm"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/nm.com"
+    found: "C:/devTools/mingw64/bin/nm.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objdump"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/objdump.com"
+    found: "C:/devTools/mingw64/bin/objdump.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objcopy"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/objcopy.com"
+    found: "C:/devTools/mingw64/bin/objcopy.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "readelf"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/readelf.com"
+    found: "C:/devTools/mingw64/bin/readelf.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "dlltool"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/dlltool.com"
+    found: "C:/devTools/mingw64/bin/dlltool.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "addr2line"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/addr2line.com"
+    found: "C:/devTools/mingw64/bin/addr2line.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "tapi"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/tapi.com"
+      - "C:/devTools/mingw64/bin/tapi.exe"
+      - "C:/devTools/mingw64/bin/tapi"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/tapi.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/tapi.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/tapi"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/tapi.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/tapi.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/tapi"
+      - "C:/Windows/System32/tapi.com"
+      - "C:/Windows/System32/tapi.exe"
+      - "C:/Windows/System32/tapi"
+      - "C:/Windows/tapi.com"
+      - "C:/Windows/tapi.exe"
+      - "C:/Windows/tapi"
+      - "C:/Windows/System32/wbem/tapi.com"
+      - "C:/Windows/System32/wbem/tapi.exe"
+      - "C:/Windows/System32/wbem/tapi"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/tapi.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/tapi.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/tapi"
+      - "C:/Windows/System32/OpenSSH/tapi.com"
+      - "C:/Windows/System32/OpenSSH/tapi.exe"
+      - "C:/Windows/System32/OpenSSH/tapi"
+      - "C:/Program Files/dotnet/tapi.com"
+      - "C:/Program Files/dotnet/tapi.exe"
+      - "C:/Program Files/dotnet/tapi"
+      - "C:/Program Files/Calibre2/tapi.com"
+      - "C:/Program Files/Calibre2/tapi.exe"
+      - "C:/Program Files/Calibre2/tapi"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/tapi.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/tapi.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/tapi"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/tapi.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/tapi.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/tapi"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/tapi.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/tapi.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/tapi"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/tapi.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/tapi.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/tapi"
+      - "C:/Program Files/PuTTY/tapi.com"
+      - "C:/Program Files/PuTTY/tapi.exe"
+      - "C:/Program Files/PuTTY/tapi"
+      - "C:/Program Files/HP/HP One Agent/tapi.com"
+      - "C:/Program Files/HP/HP One Agent/tapi.exe"
+      - "C:/Program Files/HP/HP One Agent/tapi"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/tapi.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/tapi.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/tapi"
+      - "C:/Program Files/CMake/bin/tapi.com"
+      - "C:/Program Files/CMake/bin/tapi.exe"
+      - "C:/Program Files/CMake/bin/tapi"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/tapi.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/tapi.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/tapi"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/tapi.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/tapi.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/tapi"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/tapi.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/tapi.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/tapi"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/tapi.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/tapi.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/tapi"
+      - "C:/devTools/mingw64/tapi.com"
+      - "C:/devTools/mingw64/tapi.exe"
+      - "C:/devTools/mingw64/tapi"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/tapi.com"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/tapi.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/tapi"
+      - "C:/Users/leona/Infineon/LauncherService/tapi.com"
+      - "C:/Users/leona/Infineon/LauncherService/tapi.exe"
+      - "C:/Users/leona/Infineon/LauncherService/tapi"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Compiler/GNU-FindBinUtils.cmake:18 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_AR"
+    description: "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ar-15.2"
+      - "gcc-ar-15"
+      - "gcc-ar15"
+      - "gcc-ar"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/gcc-ar-15.2.com"
+      - "C:/devTools/mingw64/bin/gcc-ar-15.2.exe"
+      - "C:/devTools/mingw64/bin/gcc-ar-15.2"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ar-15.2.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ar-15.2.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ar-15.2"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ar-15.2.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ar-15.2.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ar-15.2"
+      - "C:/Windows/System32/gcc-ar-15.2.com"
+      - "C:/Windows/System32/gcc-ar-15.2.exe"
+      - "C:/Windows/System32/gcc-ar-15.2"
+      - "C:/Windows/gcc-ar-15.2.com"
+      - "C:/Windows/gcc-ar-15.2.exe"
+      - "C:/Windows/gcc-ar-15.2"
+      - "C:/Windows/System32/wbem/gcc-ar-15.2.com"
+      - "C:/Windows/System32/wbem/gcc-ar-15.2.exe"
+      - "C:/Windows/System32/wbem/gcc-ar-15.2"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ar-15.2.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ar-15.2.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ar-15.2"
+      - "C:/Windows/System32/OpenSSH/gcc-ar-15.2.com"
+      - "C:/Windows/System32/OpenSSH/gcc-ar-15.2.exe"
+      - "C:/Windows/System32/OpenSSH/gcc-ar-15.2"
+      - "C:/Program Files/dotnet/gcc-ar-15.2.com"
+      - "C:/Program Files/dotnet/gcc-ar-15.2.exe"
+      - "C:/Program Files/dotnet/gcc-ar-15.2"
+      - "C:/Program Files/Calibre2/gcc-ar-15.2.com"
+      - "C:/Program Files/Calibre2/gcc-ar-15.2.exe"
+      - "C:/Program Files/Calibre2/gcc-ar-15.2"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ar-15.2.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ar-15.2.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ar-15.2"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ar-15.2.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ar-15.2.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ar-15.2"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ar-15.2.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ar-15.2.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ar-15.2"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ar-15.2.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ar-15.2.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ar-15.2"
+      - "C:/Program Files/PuTTY/gcc-ar-15.2.com"
+      - "C:/Program Files/PuTTY/gcc-ar-15.2.exe"
+      - "C:/Program Files/PuTTY/gcc-ar-15.2"
+      - "C:/Program Files/HP/HP One Agent/gcc-ar-15.2.com"
+      - "C:/Program Files/HP/HP One Agent/gcc-ar-15.2.exe"
+      - "C:/Program Files/HP/HP One Agent/gcc-ar-15.2"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.2.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.2.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.2"
+      - "C:/Program Files/CMake/bin/gcc-ar-15.2.com"
+      - "C:/Program Files/CMake/bin/gcc-ar-15.2.exe"
+      - "C:/Program Files/CMake/bin/gcc-ar-15.2"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ar-15.2.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ar-15.2.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ar-15.2"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ar-15.2.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ar-15.2.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ar-15.2"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ar-15.2.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ar-15.2.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ar-15.2"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ar-15.2.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ar-15.2.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ar-15.2"
+      - "C:/devTools/mingw64/gcc-ar-15.2.com"
+      - "C:/devTools/mingw64/gcc-ar-15.2.exe"
+      - "C:/devTools/mingw64/gcc-ar-15.2"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ar-15.2.com"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ar-15.2.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ar-15.2"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ar-15.2.com"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ar-15.2.exe"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ar-15.2"
+      - "C:/devTools/mingw64/bin/gcc-ar-15.com"
+      - "C:/devTools/mingw64/bin/gcc-ar-15.exe"
+      - "C:/devTools/mingw64/bin/gcc-ar-15"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ar-15.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ar-15.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ar-15"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ar-15.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ar-15.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ar-15"
+      - "C:/Windows/System32/gcc-ar-15.com"
+      - "C:/Windows/System32/gcc-ar-15.exe"
+      - "C:/Windows/System32/gcc-ar-15"
+      - "C:/Windows/gcc-ar-15.com"
+      - "C:/Windows/gcc-ar-15.exe"
+      - "C:/Windows/gcc-ar-15"
+      - "C:/Windows/System32/wbem/gcc-ar-15.com"
+      - "C:/Windows/System32/wbem/gcc-ar-15.exe"
+      - "C:/Windows/System32/wbem/gcc-ar-15"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ar-15.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ar-15.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ar-15"
+      - "C:/Windows/System32/OpenSSH/gcc-ar-15.com"
+      - "C:/Windows/System32/OpenSSH/gcc-ar-15.exe"
+      - "C:/Windows/System32/OpenSSH/gcc-ar-15"
+      - "C:/Program Files/dotnet/gcc-ar-15.com"
+      - "C:/Program Files/dotnet/gcc-ar-15.exe"
+      - "C:/Program Files/dotnet/gcc-ar-15"
+      - "C:/Program Files/Calibre2/gcc-ar-15.com"
+      - "C:/Program Files/Calibre2/gcc-ar-15.exe"
+      - "C:/Program Files/Calibre2/gcc-ar-15"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ar-15.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ar-15.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ar-15"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ar-15.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ar-15.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ar-15"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ar-15.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ar-15.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ar-15"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ar-15.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ar-15.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ar-15"
+      - "C:/Program Files/PuTTY/gcc-ar-15.com"
+      - "C:/Program Files/PuTTY/gcc-ar-15.exe"
+      - "C:/Program Files/PuTTY/gcc-ar-15"
+      - "C:/Program Files/HP/HP One Agent/gcc-ar-15.com"
+      - "C:/Program Files/HP/HP One Agent/gcc-ar-15.exe"
+      - "C:/Program Files/HP/HP One Agent/gcc-ar-15"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15"
+      - "C:/Program Files/CMake/bin/gcc-ar-15.com"
+      - "C:/Program Files/CMake/bin/gcc-ar-15.exe"
+      - "C:/Program Files/CMake/bin/gcc-ar-15"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ar-15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ar-15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ar-15"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ar-15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ar-15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ar-15"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ar-15.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ar-15.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ar-15"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ar-15.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ar-15.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ar-15"
+      - "C:/devTools/mingw64/gcc-ar-15.com"
+      - "C:/devTools/mingw64/gcc-ar-15.exe"
+      - "C:/devTools/mingw64/gcc-ar-15"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ar-15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ar-15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ar-15"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ar-15.com"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ar-15.exe"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ar-15"
+      - "C:/devTools/mingw64/bin/gcc-ar15.com"
+      - "C:/devTools/mingw64/bin/gcc-ar15.exe"
+      - "C:/devTools/mingw64/bin/gcc-ar15"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ar15.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ar15.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ar15"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ar15.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ar15.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ar15"
+      - "C:/Windows/System32/gcc-ar15.com"
+      - "C:/Windows/System32/gcc-ar15.exe"
+      - "C:/Windows/System32/gcc-ar15"
+      - "C:/Windows/gcc-ar15.com"
+      - "C:/Windows/gcc-ar15.exe"
+      - "C:/Windows/gcc-ar15"
+      - "C:/Windows/System32/wbem/gcc-ar15.com"
+      - "C:/Windows/System32/wbem/gcc-ar15.exe"
+      - "C:/Windows/System32/wbem/gcc-ar15"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ar15.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ar15.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ar15"
+      - "C:/Windows/System32/OpenSSH/gcc-ar15.com"
+      - "C:/Windows/System32/OpenSSH/gcc-ar15.exe"
+      - "C:/Windows/System32/OpenSSH/gcc-ar15"
+      - "C:/Program Files/dotnet/gcc-ar15.com"
+      - "C:/Program Files/dotnet/gcc-ar15.exe"
+      - "C:/Program Files/dotnet/gcc-ar15"
+      - "C:/Program Files/Calibre2/gcc-ar15.com"
+      - "C:/Program Files/Calibre2/gcc-ar15.exe"
+      - "C:/Program Files/Calibre2/gcc-ar15"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ar15.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ar15.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ar15"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ar15.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ar15.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ar15"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ar15.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ar15.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ar15"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ar15.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ar15.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ar15"
+      - "C:/Program Files/PuTTY/gcc-ar15.com"
+      - "C:/Program Files/PuTTY/gcc-ar15.exe"
+      - "C:/Program Files/PuTTY/gcc-ar15"
+      - "C:/Program Files/HP/HP One Agent/gcc-ar15.com"
+      - "C:/Program Files/HP/HP One Agent/gcc-ar15.exe"
+      - "C:/Program Files/HP/HP One Agent/gcc-ar15"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar15.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar15.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar15"
+      - "C:/Program Files/CMake/bin/gcc-ar15.com"
+      - "C:/Program Files/CMake/bin/gcc-ar15.exe"
+      - "C:/Program Files/CMake/bin/gcc-ar15"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ar15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ar15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ar15"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ar15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ar15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ar15"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ar15.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ar15.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ar15"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ar15.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ar15.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ar15"
+      - "C:/devTools/mingw64/gcc-ar15.com"
+      - "C:/devTools/mingw64/gcc-ar15.exe"
+      - "C:/devTools/mingw64/gcc-ar15"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ar15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ar15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ar15"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ar15.com"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ar15.exe"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ar15"
+      - "C:/devTools/mingw64/bin/gcc-ar.com"
+    found: "C:/devTools/mingw64/bin/gcc-ar.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Compiler/GNU-FindBinUtils.cmake:30 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_RANLIB"
+    description: "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ranlib-15.2"
+      - "gcc-ranlib-15"
+      - "gcc-ranlib15"
+      - "gcc-ranlib"
+    candidate_directories:
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+    searched_directories:
+      - "C:/devTools/mingw64/bin/gcc-ranlib-15.2.com"
+      - "C:/devTools/mingw64/bin/gcc-ranlib-15.2.exe"
+      - "C:/devTools/mingw64/bin/gcc-ranlib-15.2"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ranlib-15.2.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ranlib-15.2.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ranlib-15.2"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ranlib-15.2.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ranlib-15.2.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ranlib-15.2"
+      - "C:/Windows/System32/gcc-ranlib-15.2.com"
+      - "C:/Windows/System32/gcc-ranlib-15.2.exe"
+      - "C:/Windows/System32/gcc-ranlib-15.2"
+      - "C:/Windows/gcc-ranlib-15.2.com"
+      - "C:/Windows/gcc-ranlib-15.2.exe"
+      - "C:/Windows/gcc-ranlib-15.2"
+      - "C:/Windows/System32/wbem/gcc-ranlib-15.2.com"
+      - "C:/Windows/System32/wbem/gcc-ranlib-15.2.exe"
+      - "C:/Windows/System32/wbem/gcc-ranlib-15.2"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ranlib-15.2.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ranlib-15.2.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ranlib-15.2"
+      - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.2.com"
+      - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.2.exe"
+      - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.2"
+      - "C:/Program Files/dotnet/gcc-ranlib-15.2.com"
+      - "C:/Program Files/dotnet/gcc-ranlib-15.2.exe"
+      - "C:/Program Files/dotnet/gcc-ranlib-15.2"
+      - "C:/Program Files/Calibre2/gcc-ranlib-15.2.com"
+      - "C:/Program Files/Calibre2/gcc-ranlib-15.2.exe"
+      - "C:/Program Files/Calibre2/gcc-ranlib-15.2"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ranlib-15.2.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ranlib-15.2.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ranlib-15.2"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ranlib-15.2.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ranlib-15.2.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ranlib-15.2"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ranlib-15.2.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ranlib-15.2.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ranlib-15.2"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ranlib-15.2.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ranlib-15.2.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ranlib-15.2"
+      - "C:/Program Files/PuTTY/gcc-ranlib-15.2.com"
+      - "C:/Program Files/PuTTY/gcc-ranlib-15.2.exe"
+      - "C:/Program Files/PuTTY/gcc-ranlib-15.2"
+      - "C:/Program Files/HP/HP One Agent/gcc-ranlib-15.2.com"
+      - "C:/Program Files/HP/HP One Agent/gcc-ranlib-15.2.exe"
+      - "C:/Program Files/HP/HP One Agent/gcc-ranlib-15.2"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.2.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.2.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.2"
+      - "C:/Program Files/CMake/bin/gcc-ranlib-15.2.com"
+      - "C:/Program Files/CMake/bin/gcc-ranlib-15.2.exe"
+      - "C:/Program Files/CMake/bin/gcc-ranlib-15.2"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ranlib-15.2.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ranlib-15.2.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ranlib-15.2"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ranlib-15.2.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ranlib-15.2.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ranlib-15.2"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ranlib-15.2.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ranlib-15.2.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ranlib-15.2"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ranlib-15.2.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ranlib-15.2.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ranlib-15.2"
+      - "C:/devTools/mingw64/gcc-ranlib-15.2.com"
+      - "C:/devTools/mingw64/gcc-ranlib-15.2.exe"
+      - "C:/devTools/mingw64/gcc-ranlib-15.2"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ranlib-15.2.com"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ranlib-15.2.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ranlib-15.2"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ranlib-15.2.com"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ranlib-15.2.exe"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ranlib-15.2"
+      - "C:/devTools/mingw64/bin/gcc-ranlib-15.com"
+      - "C:/devTools/mingw64/bin/gcc-ranlib-15.exe"
+      - "C:/devTools/mingw64/bin/gcc-ranlib-15"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ranlib-15.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ranlib-15.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ranlib-15"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ranlib-15.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ranlib-15.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ranlib-15"
+      - "C:/Windows/System32/gcc-ranlib-15.com"
+      - "C:/Windows/System32/gcc-ranlib-15.exe"
+      - "C:/Windows/System32/gcc-ranlib-15"
+      - "C:/Windows/gcc-ranlib-15.com"
+      - "C:/Windows/gcc-ranlib-15.exe"
+      - "C:/Windows/gcc-ranlib-15"
+      - "C:/Windows/System32/wbem/gcc-ranlib-15.com"
+      - "C:/Windows/System32/wbem/gcc-ranlib-15.exe"
+      - "C:/Windows/System32/wbem/gcc-ranlib-15"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ranlib-15.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ranlib-15.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ranlib-15"
+      - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.com"
+      - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.exe"
+      - "C:/Windows/System32/OpenSSH/gcc-ranlib-15"
+      - "C:/Program Files/dotnet/gcc-ranlib-15.com"
+      - "C:/Program Files/dotnet/gcc-ranlib-15.exe"
+      - "C:/Program Files/dotnet/gcc-ranlib-15"
+      - "C:/Program Files/Calibre2/gcc-ranlib-15.com"
+      - "C:/Program Files/Calibre2/gcc-ranlib-15.exe"
+      - "C:/Program Files/Calibre2/gcc-ranlib-15"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ranlib-15.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ranlib-15.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ranlib-15"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ranlib-15.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ranlib-15.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ranlib-15"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ranlib-15.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ranlib-15.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ranlib-15"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ranlib-15.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ranlib-15.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ranlib-15"
+      - "C:/Program Files/PuTTY/gcc-ranlib-15.com"
+      - "C:/Program Files/PuTTY/gcc-ranlib-15.exe"
+      - "C:/Program Files/PuTTY/gcc-ranlib-15"
+      - "C:/Program Files/HP/HP One Agent/gcc-ranlib-15.com"
+      - "C:/Program Files/HP/HP One Agent/gcc-ranlib-15.exe"
+      - "C:/Program Files/HP/HP One Agent/gcc-ranlib-15"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15"
+      - "C:/Program Files/CMake/bin/gcc-ranlib-15.com"
+      - "C:/Program Files/CMake/bin/gcc-ranlib-15.exe"
+      - "C:/Program Files/CMake/bin/gcc-ranlib-15"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ranlib-15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ranlib-15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ranlib-15"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ranlib-15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ranlib-15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ranlib-15"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ranlib-15.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ranlib-15.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ranlib-15"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ranlib-15.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ranlib-15.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ranlib-15"
+      - "C:/devTools/mingw64/gcc-ranlib-15.com"
+      - "C:/devTools/mingw64/gcc-ranlib-15.exe"
+      - "C:/devTools/mingw64/gcc-ranlib-15"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ranlib-15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ranlib-15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ranlib-15"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ranlib-15.com"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ranlib-15.exe"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ranlib-15"
+      - "C:/devTools/mingw64/bin/gcc-ranlib15.com"
+      - "C:/devTools/mingw64/bin/gcc-ranlib15.exe"
+      - "C:/devTools/mingw64/bin/gcc-ranlib15"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ranlib15.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ranlib15.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/gcc-ranlib15"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ranlib15.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ranlib15.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/gcc-ranlib15"
+      - "C:/Windows/System32/gcc-ranlib15.com"
+      - "C:/Windows/System32/gcc-ranlib15.exe"
+      - "C:/Windows/System32/gcc-ranlib15"
+      - "C:/Windows/gcc-ranlib15.com"
+      - "C:/Windows/gcc-ranlib15.exe"
+      - "C:/Windows/gcc-ranlib15"
+      - "C:/Windows/System32/wbem/gcc-ranlib15.com"
+      - "C:/Windows/System32/wbem/gcc-ranlib15.exe"
+      - "C:/Windows/System32/wbem/gcc-ranlib15"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ranlib15.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ranlib15.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/gcc-ranlib15"
+      - "C:/Windows/System32/OpenSSH/gcc-ranlib15.com"
+      - "C:/Windows/System32/OpenSSH/gcc-ranlib15.exe"
+      - "C:/Windows/System32/OpenSSH/gcc-ranlib15"
+      - "C:/Program Files/dotnet/gcc-ranlib15.com"
+      - "C:/Program Files/dotnet/gcc-ranlib15.exe"
+      - "C:/Program Files/dotnet/gcc-ranlib15"
+      - "C:/Program Files/Calibre2/gcc-ranlib15.com"
+      - "C:/Program Files/Calibre2/gcc-ranlib15.exe"
+      - "C:/Program Files/Calibre2/gcc-ranlib15"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ranlib15.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ranlib15.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/gcc-ranlib15"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ranlib15.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ranlib15.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/gcc-ranlib15"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ranlib15.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ranlib15.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/gcc-ranlib15"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ranlib15.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ranlib15.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/gcc-ranlib15"
+      - "C:/Program Files/PuTTY/gcc-ranlib15.com"
+      - "C:/Program Files/PuTTY/gcc-ranlib15.exe"
+      - "C:/Program Files/PuTTY/gcc-ranlib15"
+      - "C:/Program Files/HP/HP One Agent/gcc-ranlib15.com"
+      - "C:/Program Files/HP/HP One Agent/gcc-ranlib15.exe"
+      - "C:/Program Files/HP/HP One Agent/gcc-ranlib15"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib15.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib15.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib15"
+      - "C:/Program Files/CMake/bin/gcc-ranlib15.com"
+      - "C:/Program Files/CMake/bin/gcc-ranlib15.exe"
+      - "C:/Program Files/CMake/bin/gcc-ranlib15"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ranlib15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ranlib15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/gcc-ranlib15"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ranlib15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ranlib15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/gcc-ranlib15"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ranlib15.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ranlib15.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/gcc-ranlib15"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ranlib15.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ranlib15.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/gcc-ranlib15"
+      - "C:/devTools/mingw64/gcc-ranlib15.com"
+      - "C:/devTools/mingw64/gcc-ranlib15.exe"
+      - "C:/devTools/mingw64/gcc-ranlib15"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ranlib15.com"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ranlib15.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/gcc-ranlib15"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ranlib15.com"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ranlib15.exe"
+      - "C:/Users/leona/Infineon/LauncherService/gcc-ranlib15"
+      - "C:/devTools/mingw64/bin/gcc-ranlib.com"
+    found: "C:/devTools/mingw64/bin/gcc-ranlib.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineRCCompiler.cmake:40 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU.cmake:167 (enable_language)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Platform/Windows-GNU-CXX.cmake:2 (__windows_compiler_gnu)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeCXXInformation.cmake:48 (include)"
+      - "CMakeLists.txt:11 (project)"
+    mode: "program"
+    variable: "CMAKE_RC_COMPILER"
+    description: "RC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "windres"
+      - "windres"
+    candidate_directories:
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Calibre2/"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/HP/HP One Agent/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/"
+      - "C:/devTools/mingw64/"
+      - "C:/devTools/mingw64/bin/"
+      - "C:/Users/leona/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/leona/Infineon/LauncherService/"
+      - "C:/Program Files/bin/"
+      - "C:/Program Files/sbin/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/bin/"
+      - "C:/Program Files (x86)/sbin/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/sbin/"
+      - "C:/Program Files/CMake/"
+      - "C:/Program Files (x86)/AliveMonitor/bin/"
+      - "C:/Program Files (x86)/AliveMonitor/sbin/"
+      - "C:/Program Files (x86)/AliveMonitor/"
+    searched_directories:
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/windres.com"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/windres.exe"
+      - "C:/Program Files/Eclipse Adoptium/jre-25.0.3.9-hotspot/bin/windres"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/windres.com"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/windres.exe"
+      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/windres"
+      - "C:/Windows/System32/windres.com"
+      - "C:/Windows/System32/windres.exe"
+      - "C:/Windows/System32/windres"
+      - "C:/Windows/windres.com"
+      - "C:/Windows/windres.exe"
+      - "C:/Windows/windres"
+      - "C:/Windows/System32/wbem/windres.com"
+      - "C:/Windows/System32/wbem/windres.exe"
+      - "C:/Windows/System32/wbem/windres"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/windres.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/windres.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/windres"
+      - "C:/Windows/System32/OpenSSH/windres.com"
+      - "C:/Windows/System32/OpenSSH/windres.exe"
+      - "C:/Windows/System32/OpenSSH/windres"
+      - "C:/Program Files/dotnet/windres.com"
+      - "C:/Program Files/dotnet/windres.exe"
+      - "C:/Program Files/dotnet/windres"
+      - "C:/Program Files/Calibre2/windres.com"
+      - "C:/Program Files/Calibre2/windres.exe"
+      - "C:/Program Files/Calibre2/windres"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/windres.com"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/windres.exe"
+      - "C:/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit/windres"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/windres.com"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/windres.exe"
+      - "C:/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/windres"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/windres.com"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/windres.exe"
+      - "C:/Program Files/IVI Foundation/VISA/Win64/Bin/windres"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/windres.com"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/windres.exe"
+      - "C:/Program Files (x86)/National Instruments/Shared/LabVIEW CLI/windres"
+      - "C:/Program Files/PuTTY/windres.com"
+      - "C:/Program Files/PuTTY/windres.exe"
+      - "C:/Program Files/PuTTY/windres"
+      - "C:/Program Files/HP/HP One Agent/windres.com"
+      - "C:/Program Files/HP/HP One Agent/windres.exe"
+      - "C:/Program Files/HP/HP One Agent/windres"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/windres.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/windres.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/windres"
+      - "C:/Program Files/CMake/bin/windres.com"
+      - "C:/Program Files/CMake/bin/windres.exe"
+      - "C:/Program Files/CMake/bin/windres"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/windres.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/windres.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/Scripts/windres"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/windres.com"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/windres.exe"
+      - "C:/Users/leona/AppData/Local/Programs/Python/Python313/windres"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/windres.com"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/windres.exe"
+      - "C:/Users/leona/AppData/Local/Microsoft/WindowsApps/windres"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/windres.com"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/windres.exe"
+      - "C:/Users/leona/AppData/Local/GitHubDesktop/bin/windres"
+      - "C:/devTools/mingw64/windres.com"
+      - "C:/devTools/mingw64/windres.exe"
+      - "C:/devTools/mingw64/windres"
+      - "C:/devTools/mingw64/bin/windres.com"
+    found: "C:/devTools/mingw64/bin/windres.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/AliveMonitor"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/AliveMonitor"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:123 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:11 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-c0r2yr"
+      binary: "C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-c0r2yr"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: false
+      stdout: |
+        Change Dir: 'C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-c0r2yr'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/devTools/mingw64/bin/mingw32-make.exe -f Makefile cmTC_cf629/fast
+        C:/devTools/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_cf629.dir\\build.make CMakeFiles/cmTC_cf629.dir/build
+        mingw32-make[1]: Entering directory 'C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-c0r2yr'
+        Building CXX object CMakeFiles/cmTC_cf629.dir/CMakeCXXCompilerABI.cpp.obj
+        C:\\devTools\\mingw64\\bin\\c++.exe   -v -o CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
+        Using built-in specs.
+        COLLECT_GCC=C:\\devTools\\mingw64\\bin\\c++.exe
+        OFFLOAD_TARGET_NAMES=nvptx-none
+        Target: x86_64-w64-mingw32
+        Configured with: ../configure --prefix=/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --enable-offload-targets=nvptx-none --with-pkgversion='MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1' --with-tune=generic --enable-checking=release --enable-threads=posix --disable-sjlj-exceptions --disable-libunwind-exceptions --disable-serial-configure --disable-bootstrap --enable-host-shared --enable-plugin --disable-default-ssp --disable-rpath --disable-libstdcxx-debug --disable-version-specific-runtime-libs --disable-symvers --enable-languages=c,c++,fortran,lto,objc,obj-c++ --disable-gold --disable-nls --disable-stage1-checking --disable-win32-registry --disable-multilib --enable-ld --enable-libquadmath --enable-libada --enable-libssp --enable-libstdcxx --enable-lto --enable-fully-dynamic-string --enable-libgomp --enable-graphite --enable-mingw-wildcard --enable-libstdcxx-time --enable-libstdcxx-pch --with-mpc=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-mpfr=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-gmp=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-isl=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --disable-libstdcxx-backtrace --enable-install-libiberty --enable-__cxa_atexit --without-included-gettext --with-diagnostics-color=auto --enable-clocale=generic --enable-libgdiagnostics --with-libiconv --with-system-zlib --with-build-sysroot=/R/winlibs_staging_msvcrt64/gcc-15.2.0/build_mingw/mingw-w64 CFLAGS='-I/c/Prog/winlibs_staging_msvcrt/custombuilt64/include/libdl-win32   -march=nocona -msahf -mtune=generic -O2 -Wno-error=format' CXXFLAGS='-Wno-int-conversion  -march=nocona -msahf -mtune=generic -O2' LDFLAGS='-pthread -Wl,--no-insert-timestamp -Wl,--dynamicbase -Wl,--high-entropy-va -Wl,--nxcompat -Wl,--tsaware' LD=/c/Prog/winlibs_staging_msvcrt/custombuilt64/share/binutils/bin/ld.exe
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_cf629.dir\\'
+         C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_cf629.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\leona\\AppData\\Local\\Temp\\ccrfJJc0.s
+        GNU C++17 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) version 15.2.0 (x86_64-w64-mingw32)
+        	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0"
+        ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32"
+        ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward"
+        ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include"
+        ignoring nonexistent directory "R:/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc/include"
+        ignoring nonexistent directory "/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc/include"
+        ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed"
+        ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include"
+        ignoring nonexistent directory "/mingw/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0
+         C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32
+         C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward
+         C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include
+         C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include
+         C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed
+         C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include
+        End of search list.
+        Compiler executable checksum: 43a2d58255b90554ada10a53fa1a7228
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_cf629.dir\\'
+         C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\leona\\AppData\\Local\\Temp\\ccrfJJc0.s
+        GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r1) 2.45
+        COMPILER_PATH=C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/devTools/mingw64/bin/../libexec/gcc/;C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
+        LIBRARY_PATH=C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/devTools/mingw64/bin/../lib/gcc/;C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_cf629.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_cf629.dir\\link.txt --verbose=1
+        Using built-in specs.
+        COLLECT_GCC=C:\\devTools\\mingw64\\bin\\c++.exe
+        COLLECT_LTO_WRAPPER=C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe
+        OFFLOAD_TARGET_NAMES=nvptx-none
+        Target: x86_64-w64-mingw32
+        Configured with: ../configure --prefix=/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --enable-offload-targets=nvptx-none --with-pkgversion='MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1' --with-tune=generic --enable-checking=release --enable-threads=posix --disable-sjlj-exceptions --disable-libunwind-exceptions --disable-serial-configure --disable-bootstrap --enable-host-shared --enable-plugin --disable-default-ssp --disable-rpath --disable-libstdcxx-debug --disable-version-specific-runtime-libs --disable-symvers --enable-languages=c,c++,fortran,lto,objc,obj-c++ --disable-gold --disable-nls --disable-stage1-checking --disable-win32-registry --disable-multilib --enable-ld --enable-libquadmath --enable-libada --enable-libssp --enable-libstdcxx --enable-lto --enable-fully-dynamic-string --enable-libgomp --enable-graphite --enable-mingw-wildcard --enable-libstdcxx-time --enable-libstdcxx-pch --with-mpc=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-mpfr=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-gmp=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-isl=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --disable-libstdcxx-backtrace --enable-install-libiberty --enable-__cxa_atexit --without-included-gettext --with-diagnostics-color=auto --enable-clocale=generic --enable-libgdiagnostics --with-libiconv --with-system-zlib --with-build-sysroot=/R/winlibs_staging_msvcrt64/gcc-15.2.0/build_mingw/mingw-w64 CFLAGS='-I/c/Prog/winlibs_staging_msvcrt/custombuilt64/include/libdl-win32   -march=nocona -msahf -mtune=generic -O2 -Wno-error=format' CXXFLAGS='-Wno-int-conversion  -march=nocona -msahf -mtune=generic -O2' LDFLAGS='-pthread -Wl,--no-insert-timestamp -Wl,--dynamicbase -Wl,--high-entropy-va -Wl,--nxcompat -Wl,--tsaware' LD=/c/Prog/winlibs_staging_msvcrt/custombuilt64/share/binutils/bin/ld.exe
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) 
+        COMPILER_PATH=C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/devTools/mingw64/bin/../libexec/gcc/;C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
+        LIBRARY_PATH=C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/devTools/mingw64/bin/../lib/gcc/;C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_cf629.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_cf629.'
+         C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\leona\\AppData\\Local\\Temp\\ccxYbzVc.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_cf629.exe C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/devTools/mingw64/bin/../lib/gcc -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_cf629.dir/objects.a --no-whole-archive --out-implib libcmTC_cf629.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        collect2 version 15.2.0
+        C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\leona\\AppData\\Local\\Temp\\ccxYbzVc.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_cf629.exe C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/devTools/mingw64/bin/../lib/gcc -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_cf629.dir/objects.a --no-whole-archive --out-implib libcmTC_cf629.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        GNU ld (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r1) 2.45
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_cf629.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_cf629.'
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_cf629.dir/objects.a
+        C:\\devTools\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_cf629.dir/objects.a @CMakeFiles\\cmTC_cf629.dir\\objects1.rsp
+        C:\\devTools\\mingw64\\bin\\c++.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_cf629.dir/objects.a -Wl,--no-whole-archive -o cmTC_cf629.exe -Wl,--out-implib,libcmTC_cf629.dll.a -Wl,--major-image-version,0,--minor-image-version,0
+        mingw32-make[1]: Leaving directory 'C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-c0r2yr'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:255 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:11 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0]
+          add: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32]
+          add: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward]
+          add: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include]
+          add: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include]
+          add: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed]
+          add: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include]
+        end of search list found
+        collapse include dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0] ==> [C:/devTools/mingw64/include/c++/15.2.0]
+        collapse include dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32] ==> [C:/devTools/mingw64/include/c++/15.2.0/x86_64-w64-mingw32]
+        collapse include dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward] ==> [C:/devTools/mingw64/include/c++/15.2.0/backward]
+        collapse include dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include] ==> [C:/devTools/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include]
+        collapse include dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include] ==> [C:/devTools/mingw64/include]
+        collapse include dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed] ==> [C:/devTools/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed]
+        collapse include dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include] ==> [C:/devTools/mingw64/x86_64-w64-mingw32/include]
+        implicit include dirs: [C:/devTools/mingw64/include/c++/15.2.0;C:/devTools/mingw64/include/c++/15.2.0/x86_64-w64-mingw32;C:/devTools/mingw64/include/c++/15.2.0/backward;C:/devTools/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include;C:/devTools/mingw64/include;C:/devTools/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed;C:/devTools/mingw64/x86_64-w64-mingw32/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:291 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:11 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild))("|,| |$)]
+        ignore line: [Change Dir: 'C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-c0r2yr']
+        ignore line: []
+        ignore line: [Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/devTools/mingw64/bin/mingw32-make.exe -f Makefile cmTC_cf629/fast]
+        ignore line: [C:/devTools/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_cf629.dir\\build.make CMakeFiles/cmTC_cf629.dir/build]
+        ignore line: [mingw32-make[1]: Entering directory 'C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-c0r2yr']
+        ignore line: [Building CXX object CMakeFiles/cmTC_cf629.dir/CMakeCXXCompilerABI.cpp.obj]
+        ignore line: [C:\\devTools\\mingw64\\bin\\c++.exe   -v -o CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\devTools\\mingw64\\bin\\c++.exe]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
+        ignore line: [Target: x86_64-w64-mingw32]
+        link line: [Configured with: ../configure --prefix=/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --enable-offload-targets=nvptx-none --with-pkgversion='MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1' --with-tune=generic --enable-checking=release --enable-threads=posix --disable-sjlj-exceptions --disable-libunwind-exceptions --disable-serial-configure --disable-bootstrap --enable-host-shared --enable-plugin --disable-default-ssp --disable-rpath --disable-libstdcxx-debug --disable-version-specific-runtime-libs --disable-symvers --enable-languages=c,c++,fortran,lto,objc,obj-c++ --disable-gold --disable-nls --disable-stage1-checking --disable-win32-registry --disable-multilib --enable-ld --enable-libquadmath --enable-libada --enable-libssp --enable-libstdcxx --enable-lto --enable-fully-dynamic-string --enable-libgomp --enable-graphite --enable-mingw-wildcard --enable-libstdcxx-time --enable-libstdcxx-pch --with-mpc=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-mpfr=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-gmp=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-isl=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --disable-libstdcxx-backtrace --enable-install-libiberty --enable-__cxa_atexit --without-included-gettext --with-diagnostics-color=auto --enable-clocale=generic --enable-libgdiagnostics --with-libiconv --with-system-zlib --with-build-sysroot=/R/winlibs_staging_msvcrt64/gcc-15.2.0/build_mingw/mingw-w64 CFLAGS='-I/c/Prog/winlibs_staging_msvcrt/custombuilt64/include/libdl-win32   -march=nocona -msahf -mtune=generic -O2 -Wno-error=format' CXXFLAGS='-Wno-int-conversion  -march=nocona -msahf -mtune=generic -O2' LDFLAGS='-pthread -Wl,--no-insert-timestamp -Wl,--dynamicbase -Wl,--high-entropy-va -Wl,--nxcompat -Wl,--tsaware' LD=/c/Prog/winlibs_staging_msvcrt/custombuilt64/share/binutils/bin/ld.exe] ==> linker [Configured with: ../configure --prefix=/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --enable-offload-targets=nvptx-none --with-pkgversion='MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1' --with-tune=generic --enable-checking=release --enable-threads=posix --disable-sjlj-exceptions --disable-libunwind-exceptions --disable-serial-configure --disable-bootstrap --enable-host-shared --enable-plugin --disable-default-ssp --disable-rpath --disable-libstdcxx-debug --disable-version-specific-runtime-libs --disable-symvers --enable-languages=c,c++,fortran,lto,objc,obj-c++ --disable-gold --disable-nls --disable-stage1-checking --disable-win32-registry --disable-multilib --enable-ld --enable-libquadmath --enable-libada --enable-libssp --enable-libstdcxx --enable-lto --enable-fully-dynamic-string --enable-libgomp --enable-graphite --enable-mingw-wildcard --enable-libstdcxx-time --enable-libstdcxx-pch --with-mpc=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-mpfr=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-gmp=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-isl=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --disable-libstdcxx-backtrace --enable-install-libiberty --enable-__cxa_atexit --without-included-gettext --with-diagnostics-color=auto --enable-clocale=generic --enable-libgdiagnostics --with-libiconv --with-system-zlib --with-build-sysroot=/R/winlibs_staging_msvcrt64/gcc-15.2.0/build_mingw/mingw-w64 CFLAGS='-I/c/Prog/winlibs_staging_msvcrt/custombuilt64/include/libdl-win32   -march=nocona -msahf -mtune=generic -O2 -Wno-error=format' CXXFLAGS='-Wno-int-conversion  -march=nocona -msahf -mtune=generic -O2' LDFLAGS='-pthread -Wl,--no-insert-timestamp -Wl,--dynamicbase -Wl,--high-entropy-va -Wl,--nxcompat -Wl,--tsaware' LD=/c/Prog/winlibs_staging_msvcrt/custombuilt64/share/binutils/bin/ld.exe]
+        ignore line: [Configured with: ../configure --prefix=/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --enable-offload-targets=nvptx-none --with-pkgversion='MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1' --with-tune=generic --enable-checking=release --enable-threads=posix --disable-sjlj-exceptions --disable-libunwind-exceptions --disable-serial-configure --disable-bootstrap --enable-host-shared --enable-plugin --disable-default-ssp --disable-rpath --disable-libstdcxx-debug --disable-version-specific-runtime-libs --disable-symvers --enable-languages=c,c++,fortran,lto,objc,obj-c++ --disable-gold --disable-nls --disable-stage1-checking --disable-win32-registry --disable-multilib --enable-ld --enable-libquadmath --enable-libada --enable-libssp --enable-libstdcxx --enable-lto --enable-fully-dynamic-string --enable-libgomp --enable-graphite --enable-mingw-wildcard --enable-libstdcxx-time --enable-libstdcxx-pch --with-mpc=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-mpfr=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-gmp=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-isl=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --disable-libstdcxx-backtrace --enable-install-libiberty --enable-__cxa_atexit --without-included-gettext --with-diagnostics-color=auto --enable-clocale=generic --enable-libgdiagnostics --with-libiconv --with-system-zlib --with-build-sysroot=/R/winlibs_staging_msvcrt64/gcc-15.2.0/build_mingw/mingw-w64 CFLAGS='-I/c/Prog/winlibs_staging_msvcrt/custombuilt64/include/libdl-win32   -march=nocona -msahf -mtune=generic -O2 -Wno-error=format' CXXFLAGS='-Wno-int-conversion  -march=nocona -msahf -mtune=generic -O2' LDFLAGS='-pthread -Wl,--no-insert-timestamp -Wl,--dynamicbase -Wl,--high-entropy-va -Wl,--nxcompat -Wl,--tsaware' LD=/c/Prog/winlibs_staging_msvcrt/custombuilt64/share/binutils/bin/ld.exe]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh  built by Brecht Sanders  r1) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_cf629.dir\\']
+        ignore line: [ C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_cf629.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\leona\\AppData\\Local\\Temp\\ccrfJJc0.s]
+        ignore line: [GNU C++17 (MinGW-W64 x86_64-msvcrt-posix-seh  built by Brecht Sanders  r1) version 15.2.0 (x86_64-w64-mingw32)]
+        ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0"]
+        ignore line: [ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32"]
+        ignore line: [ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward"]
+        ignore line: [ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include"]
+        ignore line: [ignoring nonexistent directory "R:/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc/include"]
+        ignore line: [ignoring nonexistent directory "/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc/include"]
+        ignore line: [ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed"]
+        ignore line: [ignoring duplicate directory "C:/devTools/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include"]
+        ignore line: [ignoring nonexistent directory "/mingw/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0]
+        ignore line: [ C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/x86_64-w64-mingw32]
+        ignore line: [ C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include/c++/15.2.0/backward]
+        ignore line: [ C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include]
+        ignore line: [ C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../include]
+        ignore line: [ C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/include-fixed]
+        ignore line: [ C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 43a2d58255b90554ada10a53fa1a7228]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_cf629.dir\\']
+        ignore line: [ C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\leona\\AppData\\Local\\Temp\\ccrfJJc0.s]
+        ignore line: [GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64  built by Brecht Sanders  r1) 2.45]
+        ignore line: [COMPILER_PATH=C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/devTools/mingw64/bin/../libexec/gcc/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/]
+        ignore line: [LIBRARY_PATH=C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles\\cmTC_cf629.dir\\CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_cf629.exe]
+        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_cf629.dir\\link.txt --verbose=1]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\devTools\\mingw64\\bin\\c++.exe]
+        ignore line: [COLLECT_LTO_WRAPPER=C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
+        ignore line: [Target: x86_64-w64-mingw32]
+        ignore line: [Configured with: ../configure --prefix=/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --enable-offload-targets=nvptx-none --with-pkgversion='MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1' --with-tune=generic --enable-checking=release --enable-threads=posix --disable-sjlj-exceptions --disable-libunwind-exceptions --disable-serial-configure --disable-bootstrap --enable-host-shared --enable-plugin --disable-default-ssp --disable-rpath --disable-libstdcxx-debug --disable-version-specific-runtime-libs --disable-symvers --enable-languages=c,c++,fortran,lto,objc,obj-c++ --disable-gold --disable-nls --disable-stage1-checking --disable-win32-registry --disable-multilib --enable-ld --enable-libquadmath --enable-libada --enable-libssp --enable-libstdcxx --enable-lto --enable-fully-dynamic-string --enable-libgomp --enable-graphite --enable-mingw-wildcard --enable-libstdcxx-time --enable-libstdcxx-pch --with-mpc=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-mpfr=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-gmp=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-isl=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --disable-libstdcxx-backtrace --enable-install-libiberty --enable-__cxa_atexit --without-included-gettext --with-diagnostics-color=auto --enable-clocale=generic --enable-libgdiagnostics --with-libiconv --with-system-zlib --with-build-sysroot=/R/winlibs_staging_msvcrt64/gcc-15.2.0/build_mingw/mingw-w64 CFLAGS='-I/c/Prog/winlibs_staging_msvcrt/custombuilt64/include/libdl-win32   -march=nocona -msahf -mtune=generic -O2 -Wno-error=format' CXXFLAGS='-Wno-int-conversion  -march=nocona -msahf -mtune=generic -O2' LDFLAGS='-pthread -Wl,--no-insert-timestamp -Wl,--dynamicbase -Wl,--high-entropy-va -Wl,--nxcompat -Wl,--tsaware' LD=/c/Prog/winlibs_staging_msvcrt/custombuilt64/share/binutils/bin/ld.exe]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh  built by Brecht Sanders  r1) ]
+        ignore line: [COMPILER_PATH=C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/devTools/mingw64/bin/../libexec/gcc/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/]
+        ignore line: [LIBRARY_PATH=C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
+        ignore line: [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_cf629.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_cf629.']
+        link line: [ C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\leona\\AppData\\Local\\Temp\\ccxYbzVc.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_cf629.exe C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/devTools/mingw64/bin/../lib/gcc -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_cf629.dir/objects.a --no-whole-archive --out-implib libcmTC_cf629.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o] ==> linker architecture flags [-m;i386pep]
+        link line: [ C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\leona\\AppData\\Local\\Temp\\ccxYbzVc.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_cf629.exe C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/devTools/mingw64/bin/../lib/gcc -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_cf629.dir/objects.a --no-whole-archive --out-implib libcmTC_cf629.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+          arg [C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll] ==> ignore
+          arg [-plugin-opt=C:/devTools/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\leona\\AppData\\Local\\Temp\\ccxYbzVc.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-ladvapi32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lshell32] ==> ignore
+          arg [-plugin-opt=-pass-through=-luser32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
+          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
+          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
+          arg [-m] ==> ignore
+          arg [i386pep] ==> ignore
+          arg [-Bdynamic] ==> search dynamic
+          arg [-o] ==> ignore
+          arg [cmTC_cf629.exe] ==> ignore
+          arg [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
+          arg [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o] ==> obj [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o]
+          arg [-LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0] ==> dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0]
+          arg [-LC:/devTools/mingw64/bin/../lib/gcc] ==> dir [C:/devTools/mingw64/bin/../lib/gcc]
+          arg [-LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib]
+          arg [-LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib] ==> dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib]
+          arg [-LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib]
+          arg [-LC:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..] ==> dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..]
+          arg [-v] ==> ignore
+          arg [--whole-archive] ==> ignore
+          arg [CMakeFiles\\cmTC_cf629.dir/objects.a] ==> ignore
+          arg [--no-whole-archive] ==> ignore
+          arg [--out-implib] ==> ignore
+          arg [libcmTC_cf629.dll.a] ==> ignore
+          arg [--major-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [--minor-image-version] ==> ignore
+          arg [0] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-lpthread] ==> lib [pthread]
+          arg [-ladvapi32] ==> lib [advapi32]
+          arg [-lshell32] ==> lib [shell32]
+          arg [-luser32] ==> lib [user32]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [-lmingw32] ==> lib [mingw32]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lmingwex] ==> lib [mingwex]
+          arg [-lmsvcrt] ==> lib [msvcrt]
+          arg [-lkernel32] ==> lib [kernel32]
+          arg [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o] ==> obj [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        linker tool for 'CXX': Configured with: ../configure --prefix=/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --enable-offload-targets=nvptx-none --with-pkgversion='MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1' --with-tune=generic --enable-checking=release --enable-threads=posix --disable-sjlj-exceptions --disable-libunwind-exceptions --disable-serial-configure --disable-bootstrap --enable-host-shared --enable-plugin --disable-default-ssp --disable-rpath --disable-libstdcxx-debug --disable-version-specific-runtime-libs --disable-symvers --enable-languages=c,c++,fortran,lto,objc,obj-c++ --disable-gold --disable-nls --disable-stage1-checking --disable-win32-registry --disable-multilib --enable-ld --enable-libquadmath --enable-libada --enable-libssp --enable-libstdcxx --enable-lto --enable-fully-dynamic-string --enable-libgomp --enable-graphite --enable-mingw-wildcard --enable-libstdcxx-time --enable-libstdcxx-pch --with-mpc=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-mpfr=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-gmp=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-isl=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --disable-libstdcxx-backtrace --enable-install-libiberty --enable-__cxa_atexit --without-included-gettext --with-diagnostics-color=auto --enable-clocale=generic --enable-libgdiagnostics --with-libiconv --with-system-zlib --with-build-sysroot=/R/winlibs_staging_msvcrt64/gcc-15.2.0/build_mingw/mingw-w64 CFLAGS='-I/c/Prog/winlibs_staging_msvcrt/custombuilt64/include/libdl-win32   -march=nocona -msahf -mtune=generic -O2 -Wno-error=format' CXXFLAGS='-Wno-int-conversion  -march=nocona -msahf -mtune=generic -O2' LDFLAGS='-pthread -Wl,--no-insert-timestamp -Wl,--dynamicbase -Wl,--high-entropy-va -Wl,--nxcompat -Wl,--tsaware' LD=/c/Prog/winlibs_staging_msvcrt/custombuilt64/share/binutils/bin/ld.exe -m;i386pep
+        remove lib [msvcrt]
+        remove lib [msvcrt]
+        collapse obj [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> [C:/devTools/mingw64/x86_64-w64-mingw32/lib/crt2.o]
+        collapse obj [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o] ==> [C:/devTools/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o]
+        collapse obj [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o] ==> [C:/devTools/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        collapse library dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0] ==> [C:/devTools/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0]
+        collapse library dir [C:/devTools/mingw64/bin/../lib/gcc] ==> [C:/devTools/mingw64/lib/gcc]
+        collapse library dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> [C:/devTools/mingw64/x86_64-w64-mingw32/lib]
+        collapse library dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib] ==> [C:/devTools/mingw64/lib]
+        collapse library dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib] ==> [C:/devTools/mingw64/x86_64-w64-mingw32/lib]
+        collapse library dir [C:/devTools/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..] ==> [C:/devTools/mingw64/lib]
+        implicit libs: [stdc++;mingw32;gcc_s;gcc;mingwex;kernel32;pthread;advapi32;shell32;user32;kernel32;mingw32;gcc_s;gcc;mingwex;kernel32]
+        implicit objs: [C:/devTools/mingw64/x86_64-w64-mingw32/lib/crt2.o;C:/devTools/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o;C:/devTools/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        implicit dirs: [C:/devTools/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0;C:/devTools/mingw64/lib/gcc;C:/devTools/mingw64/x86_64-w64-mingw32/lib;C:/devTools/mingw64/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:11 (project)"
+    message: |
+      Running the CXX compiler's linker: "Configured with: ../configure --prefix=/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --enable-offload-targets=nvptx-none --with-pkgversion='MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1' --with-tune=generic --enable-checking=release --enable-threads=posix --disable-sjlj-exceptions --disable-libunwind-exceptions --disable-serial-configure --disable-bootstrap --enable-host-shared --enable-plugin --disable-default-ssp --disable-rpath --disable-libstdcxx-debug --disable-version-specific-runtime-libs --disable-symvers --enable-languages=c,c++,fortran,lto,objc,obj-c++ --disable-gold --disable-nls --disable-stage1-checking --disable-win32-registry --disable-multilib --enable-ld --enable-libquadmath --enable-libada --enable-libssp --enable-libstdcxx --enable-lto --enable-fully-dynamic-string --enable-libgomp --enable-graphite --enable-mingw-wildcard --enable-libstdcxx-time --enable-libstdcxx-pch --with-mpc=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-mpfr=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-gmp=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-isl=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --disable-libstdcxx-backtrace --enable-install-libiberty --enable-__cxa_atexit --without-included-gettext --with-diagnostics-color=auto --enable-clocale=generic --enable-libgdiagnostics --with-libiconv --with-system-zlib --with-build-sysroot=/R/winlibs_staging_msvcrt64/gcc-15.2.0/build_mingw/mingw-w64 CFLAGS='-I/c/Prog/winlibs_staging_msvcrt/custombuilt64/include/libdl-win32   -march=nocona -msahf -mtune=generic -O2 -Wno-error=format' CXXFLAGS='-Wno-int-conversion  -march=nocona -msahf -mtune=generic -O2' LDFLAGS='-pthread -Wl,--no-insert-timestamp -Wl,--dynamicbase -Wl,--high-entropy-va -Wl,--nxcompat -Wl,--tsaware' LD=/c/Prog/winlibs_staging_msvcrt/custombuilt64/share/binutils/bin/ld.exe" "-v"
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:11 (project)"
+    message: |
+      Running the CXX compiler's linker: "Configured with: ../configure --prefix=/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --enable-offload-targets=nvptx-none --with-pkgversion='MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1' --with-tune=generic --enable-checking=release --enable-threads=posix --disable-sjlj-exceptions --disable-libunwind-exceptions --disable-serial-configure --disable-bootstrap --enable-host-shared --enable-plugin --disable-default-ssp --disable-rpath --disable-libstdcxx-debug --disable-version-specific-runtime-libs --disable-symvers --enable-languages=c,c++,fortran,lto,objc,obj-c++ --disable-gold --disable-nls --disable-stage1-checking --disable-win32-registry --disable-multilib --enable-ld --enable-libquadmath --enable-libada --enable-libssp --enable-libstdcxx --enable-lto --enable-fully-dynamic-string --enable-libgomp --enable-graphite --enable-mingw-wildcard --enable-libstdcxx-time --enable-libstdcxx-pch --with-mpc=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-mpfr=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-gmp=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-isl=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --disable-libstdcxx-backtrace --enable-install-libiberty --enable-__cxa_atexit --without-included-gettext --with-diagnostics-color=auto --enable-clocale=generic --enable-libgdiagnostics --with-libiconv --with-system-zlib --with-build-sysroot=/R/winlibs_staging_msvcrt64/gcc-15.2.0/build_mingw/mingw-w64 CFLAGS='-I/c/Prog/winlibs_staging_msvcrt/custombuilt64/include/libdl-win32   -march=nocona -msahf -mtune=generic -O2 -Wno-error=format' CXXFLAGS='-Wno-int-conversion  -march=nocona -msahf -mtune=generic -O2' LDFLAGS='-pthread -Wl,--no-insert-timestamp -Wl,--dynamicbase -Wl,--high-entropy-va -Wl,--nxcompat -Wl,--tsaware' LD=/c/Prog/winlibs_staging_msvcrt/custombuilt64/share/binutils/bin/ld.exe" "-V"
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:11 (project)"
+    message: |
+      Running the CXX compiler's linker: "Configured with: ../configure --prefix=/R/winlibs_staging_msvcrt64/inst_gcc-15.2.0/share/gcc --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --enable-offload-targets=nvptx-none --with-pkgversion='MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1' --with-tune=generic --enable-checking=release --enable-threads=posix --disable-sjlj-exceptions --disable-libunwind-exceptions --disable-serial-configure --disable-bootstrap --enable-host-shared --enable-plugin --disable-default-ssp --disable-rpath --disable-libstdcxx-debug --disable-version-specific-runtime-libs --disable-symvers --enable-languages=c,c++,fortran,lto,objc,obj-c++ --disable-gold --disable-nls --disable-stage1-checking --disable-win32-registry --disable-multilib --enable-ld --enable-libquadmath --enable-libada --enable-libssp --enable-libstdcxx --enable-lto --enable-fully-dynamic-string --enable-libgomp --enable-graphite --enable-mingw-wildcard --enable-libstdcxx-time --enable-libstdcxx-pch --with-mpc=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-mpfr=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-gmp=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --with-isl=/c/Prog/winlibs_staging_msvcrt/custombuilt64 --disable-libstdcxx-backtrace --enable-install-libiberty --enable-__cxa_atexit --without-included-gettext --with-diagnostics-color=auto --enable-clocale=generic --enable-libgdiagnostics --with-libiconv --with-system-zlib --with-build-sysroot=/R/winlibs_staging_msvcrt64/gcc-15.2.0/build_mingw/mingw-w64 CFLAGS='-I/c/Prog/winlibs_staging_msvcrt/custombuilt64/include/libdl-win32   -march=nocona -msahf -mtune=generic -O2 -Wno-error=format' CXXFLAGS='-Wno-int-conversion  -march=nocona -msahf -mtune=generic -O2' LDFLAGS='-pthread -Wl,--no-insert-timestamp -Wl,--dynamicbase -Wl,--high-entropy-va -Wl,--nxcompat -Wl,--tsaware' LD=/c/Prog/winlibs_staging_msvcrt/custombuilt64/share/binutils/bin/ld.exe" "--version"
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/Internal/CheckSourceCompiles.cmake:138 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/CheckCXXSourceCompiles.cmake:103 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/FindThreads.cmake:162 (check_cxx_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.4/Modules/FindThreads.cmake:226 (_threads_check_libc)"
+      - "CMakeLists.txt:42 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-27kfo5"
+      binary: "C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-27kfo5"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-27kfo5'
+        
+        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/devTools/mingw64/bin/mingw32-make.exe -f Makefile cmTC_80b25/fast
+        C:/devTools/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_80b25.dir\\build.make CMakeFiles/cmTC_80b25.dir/build
+        mingw32-make[1]: Entering directory 'C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-27kfo5'
+        Building CXX object CMakeFiles/cmTC_80b25.dir/src.cxx.obj
+        C:\\devTools\\mingw64\\bin\\c++.exe -DCMAKE_HAVE_LIBC_PTHREAD  -std=c++20 -o CMakeFiles\\cmTC_80b25.dir\\src.cxx.obj -c C:\\Users\\leona\\Documents\\c++\\AliveMonitor\\build\\CMakeFiles\\CMakeScratch\\TryCompile-27kfo5\\src.cxx
+        Linking CXX executable cmTC_80b25.exe
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_80b25.dir\\link.txt --verbose=1
+        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_80b25.dir/objects.a
+        C:\\devTools\\mingw64\\bin\\ar.exe qc CMakeFiles\\cmTC_80b25.dir/objects.a @CMakeFiles\\cmTC_80b25.dir\\objects1.rsp
+        C:\\devTools\\mingw64\\bin\\c++.exe -Wl,--whole-archive CMakeFiles\\cmTC_80b25.dir/objects.a -Wl,--no-whole-archive -o cmTC_80b25.exe -Wl,--out-implib,libcmTC_80b25.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_80b25.dir\\linkLibs.rsp
+        mingw32-make[1]: Leaving directory 'C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/CMakeScratch/TryCompile-27kfo5'
+        
+      exitCode: 0
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:75 (find_package)"
+    name: "wxWidgets"
+    components:
+      -
+        name: "core"
+        required: true
+        found: true
+      -
+        name: "base"
+        required: true
+        found: true
+    configs:
+      -
+        filename: "wxWidgets.cps"
+        kind: "cps"
+      -
+        filename: "wxwidgets.cps"
+        kind: "cps"
+      -
+        filename: "wxWidgetsConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "wxwidgets-config.cmake"
+        kind: "cmake"
+    version_request:
+      version: "3.2"
+      version_complete: "3.2"
+      exact: false
+    settings:
+      required: "optional"
+      quiet: true
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "wxWidgets"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/pkgRedirects/wxWidgetsConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/pkgRedirects/wxwidgets-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/pkgRedirects/lib/cps/wxWidgets.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/pkgRedirects/lib/cps/wxwidgets.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/pkgRedirects/share/cps/wxWidgets.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "C:/Users/leona/Documents/c++/AliveMonitor/build/CMakeFiles/pkgRedirects/share/cps/wxwidgets.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "C:/Users/leona/AppData/Local/AliveMonitor/wxWidgets/wx-install-static-3.2.11/wxWidgetsConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/leona/AppData/Local/AliveMonitor/wxWidgets/wx-install-static-3.2.11/wxwidgets-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/leona/AppData/Local/AliveMonitor/wxWidgets/wx-install-static-3.2.11/lib/cps/wxWidgets.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "C:/Users/leona/AppData/Local/AliveMonitor/wxWidgets/wx-install-static-3.2.11/lib/cps/wxwidgets.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "C:/Users/leona/AppData/Local/AliveMonitor/wxWidgets/wx-install-static-3.2.11/share/cps/wxWidgets.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "C:/Users/leona/AppData/Local/AliveMonitor/wxWidgets/wx-install-static-3.2.11/share/cps/wxwidgets.cps"
+        mode: "cps"
+        reason: "no_exist"
+    found:
+      path: "C:/Users/leona/AppData/Local/AliveMonitor/wxWidgets/wx-install-static-3.2.11/lib/cmake/wxWidgets-3.2/wxWidgetsConfig.cmake"
+      mode: "config"
+      version: "3.2.11"
+    search_context:
+      CMAKE_PREFIX_PATH:
+        - "C:\\Users\\leona\\AppData\\Local/AliveMonitor/wxWidgets/wx-install-static-3.2.11"
+      ENV{PATH}:
+        - "C:\\Program Files\\Eclipse Adoptium\\jre-25.0.3.9-hotspot\\bin"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin\\"
+        - "C:\\Program Files\\IVI Foundation\\VISA\\Win64\\Bin\\"
+        - "C:\\Program Files (x86)\\National Instruments\\Shared\\LabVIEW CLI"
+        - "C:\\Program Files (x86)\\IVI Foundation\\VISA\\WinNT\\Bin"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\HP\\HP One Agent"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\leona\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\leona\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\devTools\\mingw64"
+        - "C:\\devTools\\mingw64\\bin"
+        - "C:\\Users\\leona\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\leona\\Infineon\\LauncherService"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/AliveMonitor"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/AliveMonitor"
+...

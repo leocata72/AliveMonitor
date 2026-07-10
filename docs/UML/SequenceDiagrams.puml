@@ -1,0 +1,107 @@
+@startuml SequenceConnect
+' Sequenza: rilevamento automatico e connessione
+title Rilevamento automatico di Arduino
+
+participant "Thread Seriale\n(SerialController)" as SC
+participant "ISerialPort" as SP
+participant "Arduino" as A
+participant "Model" as M
+participant "GUI (main thread)" as GUI
+
+loop per ogni porta candidata (preferita per prima)
+    SC -> SP : open(porta, 115200)
+    note right : DTR asserito -> la Uno si resetta
+    SC -> SC : attesa bootloader (~1,8 s, interrompibile)
+    SC -> SP : write("HELLO\n")
+    SP -> A : HELLO
+    alt la scheda risponde
+        A --> SP : ARDUINO_UNO
+        SC -> M : setConnected(porta, baud)
+        SC -> GUI : wxQueueEvent(EVT_CONNECTION_CHANGED)
+        SC -> A : VER
+        A --> SC : VERSION 1.0.0
+        SC -> A : SET D2..D9 (stato desiderato)
+        A --> SC : OK Dx=v (per ognuno)
+        SC -> A : RATE <hz corrente>
+        A --> SC : OK RATE=<hz>
+        opt acquisizione era Running
+            SC -> A : STREAM 1
+            A --> SC : OK STREAM=1
+        end
+    else timeout
+        SC -> SP : close()
+        note right of SC : prova la porta successiva
+    end
+end
+@enduml
+
+@startuml SequenceStreaming
+' Sequenza: acquisizione in streaming e rendering disaccoppiato
+title Streaming a 250 Hz con rendering indipendente
+
+participant "Utente" as U
+participant "AcquisitionPanel" as V
+participant "MainController\n(IUserActions)" as MC
+participant "CommandController" as CC
+participant "Thread Seriale" as SC
+participant "Arduino" as A
+participant "AnalogDataBuffer" as B
+participant "GraphController\n(wxTimer 30 FPS)" as GC
+participant "PlotCanvas" as P
+
+U -> V : click "Start"
+V -> MC : onAcquisitionStart()
+MC -> CC : startAcquisition()
+CC -> SC : enqueueCommand("RATE 250")
+CC -> SC : enqueueCommand("STREAM 1")
+SC -> A : RATE 250
+A --> SC : OK RATE=250
+SC -> A : STREAM 1
+A --> SC : OK STREAM=1
+
+loop 250 volte al secondo (temporizzato da micros() sulla scheda)
+    A --> SC : ADC,v0,...,v5*CS
+    SC -> SC : parseLine + verifica checksum
+    SC -> B : push(t, valori)
+end
+
+loop 30 volte al secondo (indipendente)
+    GC -> B : copyWindow(tMin)
+    GC -> P : refreshData(now)
+    P -> P : decimazione min/max + paint
+end
+
+U -> V : slider a 100 Hz (durante l'acquisizione)
+V -> MC : onSampleRateChanged(100)  [debounce 250 ms]
+MC -> CC : setSampleRate(100)
+CC -> SC : enqueueCommand("RATE 100")
+SC -> A : RATE 100
+A --> SC : OK RATE=100
+note over A : lo streaming prosegue\nsenza interruzioni a 100 Hz
+@enduml
+
+@startuml SequenceDisconnect
+' Sequenza: scollegamento e riconnessione automatica
+title Scollegamento improvviso e riconnessione
+
+participant "Thread Seriale" as SC
+participant "Arduino" as A
+participant "Model" as M
+participant "GUI" as GUI
+
+A --> SC : (USB scollegato)
+SC -> SC : read() -> errore I/O\noppure silenzio > 4 s
+SC -> M : setScanning(), clearActual()
+SC -> GUI : EVT_CONNECTION_CHANGED\n("Errore I/O sulla porta seriale")
+note over GUI : LED rosso, "Ricerca..."
+
+loop scansione automatica (ogni ~1 s)
+    SC -> SC : enumeratePorts() + HELLO
+end
+
+A --> SC : ARDUINO_UNO (ricollegato)
+SC -> M : setConnected(...)
+SC -> GUI : EVT_CONNECTION_CHANGED
+SC -> A : VER, SET D2..D9, RATE, [STREAM 1]
+note over A : uscite e streaming\nripristinati automaticamente
+@enduml

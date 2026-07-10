@@ -1,0 +1,7 @@
+// AliveMonitor.rc
+// Risorsa Windows: associa appicon.ico all'eseguibile (icona mostrata da
+// Esplora risorse, taskbar in assenza di SetIcon(), proprietà del file).
+// Percorso relativo a questo file (risolto dal compilatore risorse,
+// windres su MinGW o rc.exe su MSVC).
+
+IDI_APPICON ICON "appicon.ico"

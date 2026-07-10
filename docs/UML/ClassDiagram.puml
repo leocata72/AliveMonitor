@@ -1,0 +1,208 @@
+@startuml ClassDiagram
+' Diagramma UML delle classi di AliveMonitor (PlantUML)
+' Rendering: plantuml ClassDiagram.puml  oppure  https://www.plantuml.com
+
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+hide empty members
+
+package "MODEL" {
+    enum ConnectionState {
+        Disconnected
+        Scanning
+        Connected
+    }
+    enum AcquisitionState {
+        Stopped
+        Running
+        Paused
+    }
+
+    class BoardState {
+        -mutex mutex_
+        -ConnectionState connection_
+        -AcquisitionState acquisition_
+        -Statistics stats_
+        -int requestedRateHz_
+        -int confirmedRateHz_
+        -double measuredRateHz_
+        +setConnected(port, baud)
+        +setScanning()
+        +setDisconnected()
+        +setAcquisition(s)
+        +restartAcquisitionClock()
+        +acquisitionElapsed() : double
+        +snapshot() : Snapshot
+    }
+
+    class SerialModel {
+        -unsigned baudRate_
+        -vector<string> availablePorts_
+        -string preferredPort_
+        +prioritized(ports) : vector<string>
+    }
+
+    class "RingBuffer<T>" as RingBuffer {
+        -vector<T> storage_
+        -size_t head_
+        -size_t count_
+        +push(v)
+        +operator[](i) : T
+        +clear()
+    }
+
+    class AnalogDataBuffer {
+        -mutex mutex_
+        -array<RingBuffer,6> channels_
+        +push(t, values)
+        +copyWindow(tMin, out)
+        +exportCsv(os) : bool
+        +clear()
+    }
+
+    class DigitalOutputState {
+        -array<bool,8> desired_
+        -array<bool,8> actual_
+        +setDesired(pin, on)
+        +setActual(pin, on)
+        +desiredAll() : PinArray
+    }
+
+    class CommunicationProtocol <<static>> {
+        +{static} buildHello() : string
+        +{static} buildSetOutput(pin, on) : string
+        +{static} buildRate(hz) : string
+        +{static} buildStream(on) : string
+        +{static} parseLine(line) : optional<ParsedResponse>
+        +{static} computeXor(payload) : uint8_t
+    }
+}
+
+package "SERIAL" {
+    interface ISerialPort {
+        +open(name, baud) : bool
+        +close()
+        +read(buf, max, timeout) : optional<size_t>
+        +write(data, size) : bool
+        +flushInput()
+        +{static} create() : unique_ptr<ISerialPort>
+        +{static} enumeratePorts() : vector<string>
+    }
+    class SerialPortWindows
+    class SerialPortPosix
+    ISerialPort <|.. SerialPortWindows
+    ISerialPort <|.. SerialPortPosix
+}
+
+package "CONTROLLER" {
+    interface IUserActions {
+        +onConnectRequested()
+        +onDisconnectRequested()
+        +onDigitalOutputToggled(pin, on)
+        +onAcquisitionStart()
+        +onAcquisitionStop()
+        +onAcquisitionPause()
+        +onSampleRateChanged(hz)
+        +onExportPngRequested()
+        +onExportCsvRequested()
+        +onSettingsRequested()
+        +onShutdown()
+    }
+
+    class MainController {
+        -wxTimer uiTimer_
+        +initialize()
+        +shutdown()
+    }
+
+    class SerialController {
+        -thread thread_
+        -atomic<bool> running_
+        -atomic<bool> autoConnect_
+        -deque<string> commandQueue_
+        +start()
+        +stop()
+        +enqueueCommand(cmd)
+        +setAutoConnect(on)
+        -threadMain()
+        -tryHandshake(port, baud) : bool
+        -processLine(line)
+    }
+
+    class CommandController {
+        +setDigitalOutput(pin, on)
+        +setSampleRate(hz)
+        +startAcquisition()
+        +pauseAcquisition()
+        +stopAcquisition()
+    }
+
+    class GraphController {
+        -wxTimer timer_
+        -int fps_
+        +startRendering()
+        +stopRendering()
+        +setRenderFps(fps)
+        +exportPng(path) : bool
+        +exportCsv(path) : bool
+    }
+}
+
+package "VIEW" {
+    class MainFrame
+    class ToolbarPanel
+    class DigitalOutputPanel
+    class AcquisitionPanel
+    class GraphPanel
+    class PlotCanvas
+    class StatusPanel
+    class SettingsDialog
+    class LedIndicator
+}
+
+' ----- Relazioni principali -----
+IUserActions <|.. MainController
+
+MainController *-- BoardState
+MainController *-- SerialModel
+MainController *-- DigitalOutputState
+MainController *-- AnalogDataBuffer
+MainController *-- SerialController
+MainController *-- CommandController
+MainController *-- GraphController
+MainController ..> MainFrame : crea / aggiorna
+
+SerialController o-- ISerialPort
+SerialController ..> CommunicationProtocol : usa
+SerialController --> BoardState : aggiorna
+SerialController --> AnalogDataBuffer : push()
+SerialController --> DigitalOutputState : setActual()
+SerialController --> SerialModel
+
+CommandController --> SerialController : enqueueCommand()
+CommandController ..> CommunicationProtocol
+CommandController --> BoardState
+CommandController --> AnalogDataBuffer : clear()
+
+GraphController --> AnalogDataBuffer : copyWindow()
+GraphController --> GraphPanel : refreshData()
+
+AnalogDataBuffer "1" *-- "6" RingBuffer
+
+MainFrame *-- ToolbarPanel
+MainFrame *-- DigitalOutputPanel
+MainFrame *-- AcquisitionPanel
+MainFrame *-- GraphPanel
+MainFrame *-- StatusPanel
+GraphPanel *-- PlotCanvas
+ToolbarPanel *-- LedIndicator
+DigitalOutputPanel *-- "8" LedIndicator
+
+ToolbarPanel --> IUserActions
+DigitalOutputPanel --> IUserActions
+AcquisitionPanel --> IUserActions
+GraphPanel --> IUserActions
+MainFrame --> IUserActions
+MainFrame ..> SettingsDialog
+
+@enduml
