@@ -49,12 +49,15 @@ dedicato incluso.</p>
 
 <h2>1. Prima di tutto: carica il firmware sulla scheda</h2>
 <p>Prima di collegare la scheda all'applicazione, va caricato lo sketch
-<code>arduino/AliveMonitor/AliveMonitor.ino</code> con Arduino IDE o
-<code>arduino-cli</code>. Senza firmware la scheda non risponde
-all'handshake e l'applicazione non la troverà mai, per quanto sia collegata
-correttamente via USB.</p>
-<pre><code>arduino-cli compile --fqbn arduino:avr:uno arduino/AliveMonitor/AliveMonitor.ino
-arduino-cli upload  --fqbn arduino:avr:uno -p /dev/ttyACM0 arduino/AliveMonitor/AliveMonitor.ino</code></pre>
+<code>AliveMonitor.ino</code> con Arduino IDE o <code>arduino-cli</code>.
+Si trova nella cartella <code>arduino\AliveMonitor\</code>: accanto
+all'eseguibile se hai installato AliveMonitor con il setup (raggiungibile
+anche dal menu Avvio, voce "Cartella firmware Arduino"), oppure nella
+cartella del repository se hai compilato AliveMonitor dai sorgenti. Senza
+firmware la scheda non risponde all'handshake e l'applicazione non la
+troverà mai, per quanto sia collegata correttamente via USB.</p>
+<pre><code>arduino-cli compile --fqbn arduino:avr:uno AliveMonitor.ino
+arduino-cli upload  --fqbn arduino:avr:uno -p /dev/ttyACM0 AliveMonitor.ino</code></pre>
 <p>Fatto questo passo una sola volta (il firmware resta sulla scheda anche
 spegnendola), si può passare alla connessione.</p>
 

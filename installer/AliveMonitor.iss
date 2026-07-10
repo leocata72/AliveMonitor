@@ -7,8 +7,10 @@
 ;
 ; Presuppone una build COMPLETAMENTE STATICA (vedi README.md, sezione "Build
 ; completamente statica"): un solo file AliveMonitor.exe senza DLL di terze
-; parti da cui dipendere, quindi [Files] deve copiare solo quello (più
-; README/LICENSE come promemoria, non necessari a runtime).
+; parti da cui dipendere. Oltre all'eseguibile, [Files] copia anche lo
+; sketch del firmware Arduino: chi installa da questo setup.exe (senza aver
+; clonato il repository sorgenti) deve comunque poterlo trovare, dato che è
+; il primo passo obbligatorio della Guida in-app (menu Aiuto > Guida).
 ;
 ; Non va lanciato a mano con ISCC.exe: usa il wrapper
 ;     powershell -ExecutionPolicy Bypass -File scripts\package-windows.ps1
@@ -71,9 +73,14 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "{#SourceExe}"; DestDir: "{app}"; DestName: "AliveMonitor.exe"; Flags: ignoreversion
 Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
+; Firmware Arduino: senza questo, chi installa solo il setup.exe (senza
+; clonare il repository) non avrebbe modo di caricare lo sketch sulla
+; scheda, che è il primo passo richiesto prima di poter usare l'app.
+Source: "..\arduino\AliveMonitor\AliveMonitor.ino"; DestDir: "{app}\arduino\AliveMonitor"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\AliveMonitor.exe"
+Name: "{group}\Cartella firmware Arduino"; Filename: "{app}\arduino\AliveMonitor"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\AliveMonitor.exe"; Tasks: desktopicon
 

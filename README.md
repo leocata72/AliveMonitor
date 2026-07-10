@@ -1,7 +1,7 @@
 # AliveMonitor
 
-Applicazione desktop professionale (C++20, wxWidgets 3.2+, CMake, architettura MVC) per l'acquisizione in tempo reale delle tensioni analogiche A0–A5 e il controllo delle uscite digitali D2–D9 di una scheda **Arduino Uno** collegata via USB, con firmware dedicato incluso.
-
+Applicazione desktop (C++20, wxWidgets 3.2+, CMake, architettura MVC) per l'acquisizione in tempo reale delle tensioni analogiche A0–A5 e il controllo delle uscite digitali D2–D9 di una scheda **Arduino Uno** collegata via USB, con firmware dedicato incluso.
+AVVISO: CARICARE PRIMA IL FIRMWARE SU ARDUINO!!
 Caratteristiche principali: rilevamento automatico della porta seriale (handshake `HELLO`/`ARDUINO_UNO`) con riconnessione automatica; grafico in tempo reale organizzato in 7 schede — una combinata a sei curve (zoom, pan, autoscale, legenda, griglia) più una scheda per canale con asse Y dedicato nella grandezza fisica convertita, vedi sotto — con esportazione PNG; calibrazione lineare per canale (V → grandezza fisica, vedi sotto); registrazione CSV continua allo Start (produttore/consumatore, vedi sotto); frequenza di acquisizione regolabile da 1 a 250 Hz anche durante l'acquisizione; ring buffer thread-safe da 60 secondi per canale (dimensionato già per 500 Hz); rendering disaccoppiato dall'acquisizione (10–60 FPS configurabili); barra di stato con FPS, pacchetti ricevuti/persi, errori CRC/seriali, tempo di connessione e CPU.
 
 ## Struttura del progetto
@@ -236,7 +236,7 @@ cmake --build build-static -j8
 powershell -ExecutionPolicy Bypass -File scripts\package-windows.ps1
 ```
 
-Il wrapper `package-windows.ps1` verifica che `build-static\AliveMonitor.exe` esista (serve la **build completamente statica**, senza DLL da cui dipendere: vedi sopra), ricava automaticamente la versione da `include/Version.h`, individua `ISCC.exe` (nel `PATH` o nelle cartelle di installazione predefinite di Inno Setup) e produce `dist\AliveMonitor-Setup-<versione>.exe` — icona, voce nel menu Avvio, collegamento sul desktop opzionale, licenza mostrata durante l'installazione, disinstallatore in "App e funzionalità".
+Il wrapper `package-windows.ps1` verifica che `build-static\AliveMonitor.exe` esista (serve la **build completamente statica**, senza DLL da cui dipendere: vedi sopra), ricava automaticamente la versione da `include/Version.h`, individua `ISCC.exe` (nel `PATH` o nelle cartelle di installazione predefinite di Inno Setup) e produce `dist\AliveMonitor-Setup-<versione>.exe` — icona, voce nel menu Avvio, collegamento sul desktop opzionale, licenza mostrata durante l'installazione, disinstallatore in "App e funzionalità". Oltre all'eseguibile, l'installer copia anche lo sketch `AliveMonitor.ino` (cartella `arduino\AliveMonitor\`, raggiungibile anche dal menu Avvio): chi installa da questo setup.exe, senza aver clonato il repository, deve comunque poter caricare il firmware sulla scheda.
 
 Lo script Inno Setup (`installer\AliveMonitor.iss`) impacchetta l'**eseguibile già compilato**, non i sorgenti (quelli restano nel repository GitHub): il file `dist\AliveMonitor-Setup-*.exe` prodotto NON va committato — è un artefatto di build (cartella `dist/` già in `.gitignore`), da distribuire a parte, ad esempio come allegato di una GitHub Release.
 
