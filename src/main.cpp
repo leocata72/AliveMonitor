@@ -12,6 +12,7 @@
 #include <wx/app.h>
 #include <wx/image.h>
 
+#include "Version.h"
 #include "controller/MainController.h"
 #include "view/SplashScreen.h"
 
@@ -21,11 +22,29 @@ class AliveMonitorApp : public wxApp {
 public:
     bool OnInit() override
     {
+        // Nome applicazione: determina la cartella usata da
+        // wxStandardPaths::GetUserDataDir() per AppSettings (persistenza
+        // della lingua). Va impostato prima di ogni uso di wxStandardPaths,
+        // quindi come prima istruzione di OnInit.
+        SetAppName(kAppName);
+
         if (!wxApp::OnInit()) {
             return false;
         }
         // Handler immagini: necessario per l'esportazione PNG del grafico.
         wxInitAllImageHandlers();
+
+        controller_ = std::make_unique<MainController>();
+
+        // Lingua PRIMA della splash screen, non dopo: la splash usa
+        // wxSTAY_ON_TOP (resta sempre in primo piano), quindi un eventuale
+        // dialogo di scelta lingua mostrato a splash già visibile finirebbe
+        // coperto e invisibile all'utente (bug osservato: "non mi ha chiesto
+        // la lingua al primo avvio" — in realtà glielo chiedeva, ma dietro
+        // la splash). A questo punto non c'è ancora nessuna finestra sullo
+        // schermo, quindi ShowModal() del dialogo (se serve) è perfettamente
+        // visibile.
+        controller_->ensureLanguage();
 
         // Splash screen: resta visibile finché MainController non la chiude
         // (prima connessione riuscita al firmware), con un timeout di
@@ -34,7 +53,6 @@ public:
         wxSplashScreen* splash = showSplashScreen();
         wxYield();
 
-        controller_ = std::make_unique<MainController>();
         controller_->initialize(splash);
         return true;
     }

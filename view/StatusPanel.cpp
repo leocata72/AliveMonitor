@@ -7,6 +7,8 @@
 #include <wx/sizer.h>
 #include <wx/stattext.h>
 
+#include "i18n/Strings.h"
+
 namespace am {
 
 StatusPanel::StatusPanel(wxWindow* parent)
@@ -14,14 +16,15 @@ StatusPanel::StatusPanel(wxWindow* parent)
 {
     auto* sizer = new wxBoxSizer(wxHORIZONTAL);
 
+    // FPS/RX/CRC: sigle tecniche universali, non tradotte (vedi Strings.h).
     fpsText_       = addField(sizer, "FPS: -");
-    rateText_      = addField(sizer, "Acq: - Hz");
+    rateText_      = addField(sizer, wxEmptyString);  // sovrascritto da update() subito dopo
     receivedText_  = addField(sizer, "RX: 0");
-    lostText_      = addField(sizer, "Persi: 0");
+    lostText_      = addField(sizer, wxEmptyString);
     crcText_       = addField(sizer, "CRC: 0");
-    serialErrText_ = addField(sizer, "Err: 0");
-    connTimeText_  = addField(sizer, "Conn: --:--:--");
-    cpuText_       = addField(sizer, "CPU: n/d");
+    serialErrText_ = addField(sizer, wxEmptyString);
+    connTimeText_  = addField(sizer, wxEmptyString);
+    cpuText_       = addField(sizer, tr(StringId::StCpuNone));
 
     SetSizer(sizer);
 }
@@ -43,35 +46,36 @@ void StatusPanel::update(const BoardState::Snapshot& snapshot,
 
     rateText_->SetLabel(
         snapshot.measuredRateHz > 0.0
-            ? wxString::Format("Acq: %d Hz (eff. %.1f)",
+            ? wxString::Format(tr(StringId::StAcqFmt),
                                snapshot.requestedRateHz, snapshot.measuredRateHz)
-            : wxString::Format("Acq: %d Hz", snapshot.requestedRateHz));
+            : wxString::Format(tr(StringId::StAcqFmtNoEff), snapshot.requestedRateHz));
 
     receivedText_->SetLabel(
         wxString::Format("RX: %llu",
                          static_cast<unsigned long long>(snapshot.stats.packetsReceived)));
     lostText_->SetLabel(
-        wxString::Format("Persi: %llu",
+        wxString::Format(tr(StringId::StLostFmt),
                          static_cast<unsigned long long>(snapshot.stats.packetsLost)));
     crcText_->SetLabel(
         wxString::Format("CRC: %llu",
                          static_cast<unsigned long long>(snapshot.stats.crcErrors)));
     serialErrText_->SetLabel(
-        wxString::Format("Err: %llu",
+        wxString::Format(tr(StringId::StErrFmt),
                          static_cast<unsigned long long>(snapshot.stats.serialErrors)));
 
     if (snapshot.connection == ConnectionState::Connected) {
         const auto total = static_cast<long long>(snapshot.connectedSeconds);
         connTimeText_->SetLabel(
-            wxString::Format("Conn: %02lld:%02lld:%02lld",
-                             total / 3600, (total / 60) % 60, total % 60));
+            tr(StringId::StConnPrefix)
+            + wxString::Format("%02lld:%02lld:%02lld",
+                               total / 3600, (total / 60) % 60, total % 60));
     } else {
-        connTimeText_->SetLabel("Conn: --:--:--");
+        connTimeText_->SetLabel(tr(StringId::StConnPrefix) + "--:--:--");
     }
 
     cpuText_->SetLabel(cpuUsage.has_value()
-                           ? wxString::Format("CPU: %.1f%%", *cpuUsage)
-                           : wxString("CPU: n/d"));
+                           ? wxString::Format(tr(StringId::StCpuFmt), *cpuUsage)
+                           : tr(StringId::StCpuNone));
     Layout();
 }
 

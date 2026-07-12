@@ -17,6 +17,7 @@
 #include <wx/utils.h>
 
 #include "Version.h"
+#include "i18n/Strings.h"
 #include "view/AcquisitionPanel.h"
 #include "view/CalibrationPanel.h"
 #include "view/DigitalOutputPanel.h"
@@ -97,23 +98,23 @@ MainFrame::MainFrame(IUserActions& actions,
 void MainFrame::buildMenuBar()
 {
     auto* fileMenu = new wxMenu();
-    fileMenu->Append(kMenuExportPng, "Esporta grafico &PNG...\tCtrl+P",
-                     "Salva il grafico corrente come immagine PNG");
+    fileMenu->Append(kMenuExportPng, tr(StringId::MfMenuExportPng),
+                     tr(StringId::MfMenuExportPngHelp));
     fileMenu->AppendSeparator();
-    fileMenu->Append(wxID_EXIT, "&Esci\tAlt+F4");
+    fileMenu->Append(wxID_EXIT, tr(StringId::MfMenuExit));
 
     auto* toolsMenu = new wxMenu();
-    toolsMenu->Append(wxID_PREFERENCES, "&Impostazioni...\tCtrl+,");
+    toolsMenu->Append(wxID_PREFERENCES, tr(StringId::MfMenuSettings));
 
     auto* helpMenu = new wxMenu();
-    helpMenu->Append(kMenuHelp, "&Guida...\tF1");
+    helpMenu->Append(kMenuHelp, tr(StringId::MfMenuGuide));
     helpMenu->AppendSeparator();
-    helpMenu->Append(wxID_ABOUT, "&Informazioni...");
+    helpMenu->Append(wxID_ABOUT, tr(StringId::MfMenuAbout));
 
     auto* bar = new wxMenuBar();
-    bar->Append(fileMenu, "&File");
-    bar->Append(toolsMenu, "&Strumenti");
-    bar->Append(helpMenu, "&Aiuto");
+    bar->Append(fileMenu, tr(StringId::MfMenuFile));
+    bar->Append(toolsMenu, tr(StringId::MfMenuTools));
+    bar->Append(helpMenu, tr(StringId::MfMenuHelp));
     SetMenuBar(bar);
 
     Bind(wxEVT_MENU, [this](wxCommandEvent&) {
@@ -126,14 +127,19 @@ void MainFrame::buildMenuBar()
         Close(false);
     }, wxID_EXIT);
     Bind(wxEVT_MENU, [this](wxCommandEvent&) {
-        // La guida (kHelpHtml, resources/HelpContent.h) è incorporata
-        // nell'eseguibile come stringa: nessun file da distribuire a parte.
-        // Va comunque scritta su disco una volta, in una posizione
-        // temporanea, perché il browser di sistema possa aprirla.
+        // La guida (helpHtmlFor(), resources/HelpContent.h) è incorporata
+        // nell'eseguibile come stringa, una variante per lingua: nessun file
+        // da distribuire a parte. Va comunque scritta su disco una volta, in
+        // una posizione temporanea, perché il browser di sistema possa
+        // aprirla. currentLanguage() riflette la lingua attiva in questa
+        // sessione (quella con cui l'interfaccia è stata costruita
+        // all'avvio, non necessariamente quella salvata più di recente in
+        // Impostazioni se non ancora applicata con un riavvio).
+        const char* html = helpHtmlFor(currentLanguage());
         const wxString path = wxFileName(wxStandardPaths::Get().GetTempDir(),
                                          "AliveMonitor_Guida.html").GetFullPath();
         wxFile file;
-        const std::size_t htmlLen = std::strlen(kHelpHtml);
+        const std::size_t htmlLen = std::strlen(html);
         // NB: wxFile::Write(const void*, size_t) ritorna il numero di byte
         // EFFETTIVAMENTE scritti (size_t), non un bool: un confronto diretto
         // con la lunghezza attesa è l'unico modo per accorgersi di una
@@ -141,9 +147,9 @@ void MainFrame::buildMenuBar()
         // conversione implicita size_t->bool (non zero = true) lascerebbe
         // passare inosservata.
         const bool ok = file.Create(path, true /* sovrascrivi se esiste */)
-            && file.Write(kHelpHtml, htmlLen) == htmlLen;
+            && file.Write(html, htmlLen) == htmlLen;
         if (!ok) {
-            wxMessageBox("Impossibile scrivere il file temporaneo della guida.",
+            wxMessageBox(tr(StringId::MfGuideWriteError),
                          kAppName, wxICON_ERROR | wxOK, this);
             return;
         }
@@ -155,15 +161,9 @@ void MainFrame::buildMenuBar()
         info.SetName(kAppName);
         info.SetVersion(kAppVersion);
         info.SetIcon(wxIcon(AliveMonitor_xpm));
-        info.SetDescription(
-            "Acquisizione dati analogici e controllo uscite digitali\n"
-            "di Arduino Uno (o compatibile) via porta seriale.\n\n"
-            "wxWidgets");
+        info.SetDescription(tr(StringId::MfAboutDescription));
         info.SetCopyright(wxString::FromUTF8("© 2026 Leonardo Catalano"));
-        info.SetLicence(
-            "Licenza MIT: uso, modifica e ridistribuzione libera anche "
-            "commerciale, fornito \"così com'è\" senza alcuna garanzia né "
-            "responsabilità degli autori. Testo completo nel file LICENSE.");
+        info.SetLicence(tr(StringId::MfAboutLicence));
         info.SetWebSite("https://github.com/leocata72/AliveMonitor");
         info.AddDeveloper("Leonardo Catalano");
         info.AddDeveloper("Claude (Anthropic)");

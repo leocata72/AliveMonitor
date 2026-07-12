@@ -8,6 +8,7 @@
 
 #include "AppEvents.h"
 #include "controller/CsvLoggerController.h"
+#include "i18n/Strings.h"
 #include "model/CommunicationProtocol.h"
 
 namespace am {
@@ -119,7 +120,7 @@ void SerialController::threadMain()
                 outputs_.clearActual();
                 state_.setDisconnected();
                 postEvent(events::EVT_CONNECTION_CHANGED, 0, 0,
-                          "Disconnesso dall'utente");
+                          tr(StringId::ScDisconnectedByUser));
             }
             interruptibleSleep(std::chrono::milliseconds(200));
             continue;
@@ -137,7 +138,7 @@ void SerialController::scanAndConnect()
 {
     if (state_.connection() != ConnectionState::Scanning) {
         state_.setScanning();
-        postEvent(events::EVT_CONNECTION_CHANGED, 0, 0, "Ricerca di Arduino...");
+        postEvent(events::EVT_CONNECTION_CHANGED, 0, 0, tr(StringId::ScSearching));
     }
 
     auto ports = ISerialPort::enumeratePorts();
@@ -252,7 +253,7 @@ void SerialController::serviceConnection()
     const auto n = port_->read(buf, sizeof(buf), kServiceReadTimeout);
     if (!n) {
         state_.incSerialErrors();
-        handleDisconnection("Errore I/O sulla porta seriale");
+        handleDisconnection(tr(StringId::ScIoError).ToStdString());
         return;
     }
     if (*n > 0) {
@@ -270,7 +271,7 @@ void SerialController::serviceConnection()
         sendLine(CommunicationProtocol::buildHello());
     }
     if (now - lastRxTime_ > kLinkTimeout) {
-        handleDisconnection("Nessuna risposta da Arduino (timeout)");
+        handleDisconnection(tr(StringId::ScTimeout).ToStdString());
         return;
     }
 
@@ -403,7 +404,7 @@ bool SerialController::sendLine(const std::string& command)
     const std::string wire = command + "\n";
     if (!port_->write(wire.data(), wire.size())) {
         state_.incSerialErrors();
-        handleDisconnection("Errore di scrittura sulla porta seriale");
+        handleDisconnection(tr(StringId::ScWriteError).ToStdString());
         return false;
     }
     return true;

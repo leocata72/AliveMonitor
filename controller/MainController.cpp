@@ -11,9 +11,12 @@
 
 #include "AppEvents.h"
 #include "Version.h"
+#include "i18n/Strings.h"
+#include "model/AppSettings.h"
 #include "view/AcquisitionPanel.h"
 #include "view/DigitalOutputPanel.h"
 #include "view/GraphPanel.h"
+#include "view/LanguageSelectDialog.h"
 #include "view/MainFrame.h"
 #include "view/SettingsDialog.h"
 #include "view/StatusPanel.h"
@@ -33,6 +36,26 @@ MainController::MainController()
 MainController::~MainController()
 {
     shutdown();
+}
+
+void MainController::ensureLanguage()
+{
+    // Al primissimo avvio (nessuna preferenza ancora salvata su file) si
+    // chiede esplicitamente all'utente con LanguageSelectDialog, invece di
+    // limitarsi silenziosamente al default italiano: la scelta viene salvata
+    // subito, così non ricomparirà ai prossimi avvii. Chiamata da main.cpp
+    // PRIMA della splash screen (vedi commento nell'header): se questo
+    // dialogo venisse mostrato a splash già creata, la splash — che usa
+    // wxSTAY_ON_TOP — resterebbe sempre sopra, coprendolo.
+    if (AppSettings::hasSavedLanguage()) {
+        setLanguage(AppSettings::loadLanguage());
+    } else {
+        LanguageSelectDialog languageDialog(nullptr);
+        languageDialog.ShowModal();
+        const Language chosen = languageDialog.selectedLanguage();
+        setLanguage(chosen);
+        AppSettings::saveLanguage(chosen);
+    }
 }
 
 void MainController::initialize(wxSplashScreen* splash)
@@ -123,14 +146,14 @@ void MainController::onAcquisitionStart()
         const wxString defaultName = wxString::Format(
             "acquisizione_%s.csv",
             wxDateTime::Now().Format("%Y-%m-%d_%H-%M-%S"));
-        wxFileDialog dialog(frame_, "Salva registrazione CSV", wxString(),
-                            defaultName, "File CSV (*.csv)|*.csv",
+        wxFileDialog dialog(frame_, tr(StringId::McSaveCsvDialogTitle), wxString(),
+                            defaultName, tr(StringId::McCsvFilter),
                             wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
         if (dialog.ShowModal() != wxID_OK) {
             return;  // annullato dall'utente: l'acquisizione non parte
         }
         if (!csvLogger_.start(dialog.GetPath(), calibrations_)) {
-            wxMessageBox("Impossibile aprire il file CSV per la scrittura.",
+            wxMessageBox(tr(StringId::McCsvOpenError),
                          kAppName, wxICON_ERROR | wxOK, frame_);
             return;
         }
@@ -184,14 +207,14 @@ void MainController::onExportPngRequested()
     if (frame_ == nullptr) {
         return;
     }
-    wxFileDialog dialog(frame_, "Esporta grafico come PNG", wxString(),
-                        "grafico.png", "Immagine PNG (*.png)|*.png",
+    wxFileDialog dialog(frame_, tr(StringId::McExportPngDialogTitle), wxString(),
+                        "grafico.png", tr(StringId::McPngFilter),
                         wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
     if (dialog.ShowModal() != wxID_OK) {
         return;
     }
     if (!graph_.exportPng(dialog.GetPath())) {
-        wxMessageBox("Esportazione PNG non riuscita.", kAppName,
+        wxMessageBox(tr(StringId::McExportPngError), kAppName,
                      wxICON_ERROR | wxOK, frame_);
     }
 }
@@ -211,6 +234,15 @@ void MainController::onSettingsRequested()
     graph_.setRenderFps(dialog.renderFps());
     frame_->graphPanel()->setTimeWindowSeconds(dialog.timeWindowSeconds());
     frame_->graphPanel()->setContinuousAutoscaleY(dialog.continuousAutoscaleY());
+
+    // Lingua: solo persistita su file, NON applicata a caldo (setLanguage()
+    // non viene chiamata qui). I widget già costruiti (menu, etichette,
+    // titoli dei box) restano nella lingua con cui sono nati: applicarla
+    // subito produrrebbe un'interfaccia tradotta a metà. SettingsDialog
+    // mostra già un avviso di riavvio quando la selezione cambia.
+    if (dialog.selectedLanguage() != currentLanguage()) {
+        AppSettings::saveLanguage(dialog.selectedLanguage());
+    }
 }
 
 void MainController::onShutdown()
@@ -273,7 +305,7 @@ void MainController::onRateConfirmed(wxThreadEvent& WXUNUSED(event))
 
 void MainController::onProtocolError(wxThreadEvent& event)
 {
-    lastMessage_ = "ERR: " + event.GetString();
+    lastMessage_ = tr(StringId::McErrPrefix) + event.GetString();
     refreshStatusViews();
 }
 

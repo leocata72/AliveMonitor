@@ -18,6 +18,7 @@
 #include <wx/sizer.h>
 #include <wx/stattext.h>
 
+#include "i18n/Strings.h"
 #include "view/LedIndicator.h"
 
 namespace am {
@@ -402,7 +403,7 @@ void PlotCanvas::drawGrid(wxDC& dc, const wxRect& plot) const
     }
 
     // Titolo asse X.
-    const wxString xTitle = "Tempo [s]";
+    const wxString xTitle = tr(StringId::GpAxisTime);
     const wxSize ext = dc.GetTextExtent(xTitle);
     dc.DrawText(xTitle, plot.x + (plot.width - ext.x) / 2,
                 plot.GetBottom() + 16);
@@ -631,7 +632,7 @@ GraphPanel::GraphPanel(wxWindow* parent, IUserActions& actions,
 {
     notebook_ = new wxNotebook(this, wxID_ANY);
 
-    canvases_[0] = buildTab("Tutti", -1);
+    canvases_[0] = buildTab(tr(StringId::GpTabAll), -1);
     for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
         const auto& label = calibrations_[static_cast<std::size_t>(ch)].label;
         const wxString title = label.empty() ? wxString::Format("A%d", ch) : wxString(label);
@@ -674,7 +675,7 @@ PlotCanvas* GraphPanel::buildTab(const wxString& title, int soloChannel)
         csvLed_ = new LedIndicator(page, wxColour(46, 204, 64), wxColour(200, 40, 40), 14);
         controls->Add(csvLed_, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
 
-        csvPathText_ = new wxStaticText(page, wxID_ANY, "CSV: nessuna registrazione");
+        csvPathText_ = new wxStaticText(page, wxID_ANY, tr(StringId::GpCsvNone));
         controls->Add(csvPathText_, 0, wxALIGN_CENTER_VERTICAL);
 
         controls->AddStretchSpacer(1);
@@ -686,7 +687,7 @@ PlotCanvas* GraphPanel::buildTab(const wxString& title, int soloChannel)
         controls->AddStretchSpacer(1);
     }
 
-    auto* autoYCheck = new wxCheckBox(page, wxID_ANY, "Auto Y");
+    auto* autoYCheck = new wxCheckBox(page, wxID_ANY, tr(StringId::GpAutoYCheck));
     autoYCheck->SetValue(canvas->continuousAutoscaleY());
     autoYCheck->Bind(wxEVT_CHECKBOX, [canvas](wxCommandEvent& e) {
         canvas->setContinuousAutoscaleY(e.IsChecked());
@@ -694,21 +695,21 @@ PlotCanvas* GraphPanel::buildTab(const wxString& title, int soloChannel)
     autoYChecks_[static_cast<std::size_t>(soloChannel + 1)] = autoYCheck;
     controls->Add(autoYCheck, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
 
-    auto* autoscaleBtn = new wxButton(page, wxID_ANY, "Autoscala",
+    auto* autoscaleBtn = new wxButton(page, wxID_ANY, tr(StringId::GpBtnAutoscale),
                                       wxDefaultPosition, wxDefaultSize,
                                       wxBU_EXACTFIT);
     autoscaleBtn->Bind(wxEVT_BUTTON,
                        [canvas](wxCommandEvent&) { canvas->autoscaleYOnce(); });
     controls->Add(autoscaleBtn, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 4);
 
-    auto* followBtn = new wxButton(page, wxID_ANY, "Segui",
+    auto* followBtn = new wxButton(page, wxID_ANY, tr(StringId::GpBtnFollow),
                                    wxDefaultPosition, wxDefaultSize,
                                    wxBU_EXACTFIT);
     followBtn->Bind(wxEVT_BUTTON,
                     [canvas](wxCommandEvent&) { canvas->followNow(); });
     controls->Add(followBtn, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 4);
 
-    auto* resetBtn = new wxButton(page, wxID_ANY, "Reset",
+    auto* resetBtn = new wxButton(page, wxID_ANY, tr(StringId::GpBtnReset),
                                   wxDefaultPosition, wxDefaultSize,
                                   wxBU_EXACTFIT);
     resetBtn->Bind(wxEVT_BUTTON,
@@ -801,7 +802,7 @@ void GraphPanel::setChannelTabTitle(int channel, const wxString& label)
 void GraphPanel::setCsvPath(const wxString& path)
 {
     csvLed_->setOn(true);  // verde: il consumatore sta scrivendo
-    csvPathText_->SetLabel("CSV: " + path);
+    csvPathText_->SetLabel(tr(StringId::GpCsvPrefix) + path);
     csvPathText_->SetToolTip(path);
     Layout();
 }
@@ -809,7 +810,7 @@ void GraphPanel::setCsvPath(const wxString& path)
 void GraphPanel::clearCsvPath()
 {
     csvLed_->setOn(false);  // rosso: nessuna registrazione in corso
-    csvPathText_->SetLabel("CSV: nessuna registrazione");
+    csvPathText_->SetLabel(tr(StringId::GpCsvNone));
     csvPathText_->UnsetToolTip();
     Layout();
 }

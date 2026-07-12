@@ -13,6 +13,7 @@
 #include <wx/stattext.h>
 
 #include "Version.h"
+#include "i18n/Strings.h"
 
 namespace am {
 
@@ -23,14 +24,14 @@ AcquisitionPanel::AcquisitionPanel(wxWindow* parent, IUserActions& actions)
 {
     Bind(wxEVT_TIMER, &AcquisitionPanel::onDebounceTimer, this);
 
-    auto* box = new wxStaticBoxSizer(wxVERTICAL, this, "Acquisizione");
+    auto* box = new wxStaticBoxSizer(wxVERTICAL, this, tr(StringId::AqBoxTitle));
     wxWindow* boxWin = box->GetStaticBox();
 
     // --- Pulsanti Start / Pause / Stop --------------------------------------
     auto* buttons = new wxBoxSizer(wxHORIZONTAL);
-    startButton_ = new wxButton(boxWin, wxID_ANY, "Start");
-    pauseButton_ = new wxButton(boxWin, wxID_ANY, "Pause");
-    stopButton_  = new wxButton(boxWin, wxID_ANY, "Stop");
+    startButton_ = new wxButton(boxWin, wxID_ANY, tr(StringId::AqStart));
+    pauseButton_ = new wxButton(boxWin, wxID_ANY, tr(StringId::AqPause));
+    stopButton_  = new wxButton(boxWin, wxID_ANY, tr(StringId::AqStop));
     startButton_->Bind(wxEVT_BUTTON,
                        [this](wxCommandEvent&) { actions_.onAcquisitionStart(); });
     pauseButton_->Bind(wxEVT_BUTTON,
@@ -43,16 +44,14 @@ AcquisitionPanel::AcquisitionPanel(wxWindow* parent, IUserActions& actions)
     box->Add(buttons, 0, wxEXPAND | wxALL, 8);
 
     // --- Checkbox di attivazione della registrazione CSV -----------------------
-    csvLogCheck_ = new wxCheckBox(boxWin, wxID_ANY, "Registra CSV");
+    csvLogCheck_ = new wxCheckBox(boxWin, wxID_ANY, tr(StringId::AqCsvCheck));
     csvLogCheck_->SetValue(true);  // default: comportamento invariato (chiede il file)
-    csvLogCheck_->SetToolTip(
-        "Se spuntata, Start chiede dove salvare la registrazione CSV. "
-        "Se smarcata, Start avvia l'acquisizione senza chiedere né scrivere alcun file.");
+    csvLogCheck_->SetToolTip(tr(StringId::AqCsvTooltip));
     box->Add(csvLogCheck_, 0, wxLEFT | wxRIGHT | wxBOTTOM, 8);
 
     // --- Frequenza: SpinCtrl + Slider sincronizzati ---------------------------
     auto* freqRow = new wxBoxSizer(wxHORIZONTAL);
-    freqRow->Add(new wxStaticText(boxWin, wxID_ANY, "Frequenza [Hz]:"), 0,
+    freqRow->Add(new wxStaticText(boxWin, wxID_ANY, tr(StringId::AqFreqLabel)), 0,
                  wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
     rateSpin_ = new wxSpinCtrl(boxWin, wxID_ANY, wxString(), wxDefaultPosition,
                                wxSize(80, -1), wxSP_ARROW_KEYS,
@@ -73,9 +72,9 @@ AcquisitionPanel::AcquisitionPanel(wxWindow* parent, IUserActions& actions)
     });
 
     // --- Etichette informative -------------------------------------------------
-    setRateText_ = new wxStaticText(boxWin, wxID_ANY, "Impostata: - Hz");
-    measuredRateText_ = new wxStaticText(boxWin, wxID_ANY, "Misurata: - Hz");
-    samplePeriodText_ = new wxStaticText(boxWin, wxID_ANY, "Campionamento: - ms");
+    setRateText_ = new wxStaticText(boxWin, wxID_ANY, wxString());
+    measuredRateText_ = new wxStaticText(boxWin, wxID_ANY, tr(StringId::AqMeasuredRateNone));
+    samplePeriodText_ = new wxStaticText(boxWin, wxID_ANY, tr(StringId::AqSamplePeriodNone));
     box->Add(setRateText_, 0, wxLEFT | wxRIGHT | wxBOTTOM, 8);
     box->Add(measuredRateText_, 0, wxLEFT | wxRIGHT | wxBOTTOM, 8);
     box->Add(samplePeriodText_, 0, wxLEFT | wxRIGHT | wxBOTTOM, 8);
@@ -118,7 +117,7 @@ void AcquisitionPanel::updateFrom(const BoardState::Snapshot& snapshot)
     csvLogCheck_->Enable(snapshot.acquisition == AcquisitionState::Stopped);
 
     setRateText_->SetLabel(
-        wxString::Format("Impostata: %d Hz (conferma FW: %s)",
+        wxString::Format(tr(StringId::AqSetRateFmt),
                          snapshot.requestedRateHz,
                          snapshot.confirmedRateHz > 0
                              ? wxString::Format("%d Hz", snapshot.confirmedRateHz)
@@ -126,14 +125,14 @@ void AcquisitionPanel::updateFrom(const BoardState::Snapshot& snapshot)
 
     measuredRateText_->SetLabel(
         snapshot.measuredRateHz > 0.0
-            ? wxString::Format("Misurata: %.1f Hz", snapshot.measuredRateHz)
-            : wxString("Misurata: - Hz"));
+            ? wxString::Format(tr(StringId::AqMeasuredRateFmt), snapshot.measuredRateHz)
+            : tr(StringId::AqMeasuredRateNone));
 
     const int rate = snapshot.confirmedRateHz > 0 ? snapshot.confirmedRateHz
                                                   : snapshot.requestedRateHz;
     samplePeriodText_->SetLabel(
-        rate > 0 ? wxString::Format("Campionamento: %.2f ms", 1000.0 / rate)
-                 : wxString("Campionamento: - ms"));
+        rate > 0 ? wxString::Format(tr(StringId::AqSamplePeriodFmt), 1000.0 / rate)
+                 : tr(StringId::AqSamplePeriodNone));
 }
 
 } // namespace am

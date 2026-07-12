@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 3.21)
 cmake_policy(SET CMP0091 NEW)
 
 project(AliveMonitor
-    VERSION 1.0.0
+    VERSION 1.1.0
     DESCRIPTION "Acquisizione dati analogici e controllo uscite digitali di Arduino Uno via porta seriale"
     LANGUAGES CXX)
 
@@ -102,10 +102,13 @@ set(AM_COMMON_SOURCES
     src/CpuMonitor.cpp
 
     model/AnalogDataBuffer.cpp
+    model/AppSettings.cpp
     model/BoardState.cpp
     model/CommunicationProtocol.cpp
     model/DigitalOutputState.cpp
     model/SerialModel.cpp
+
+    i18n/Strings.cpp
 
     controller/CommandController.cpp
     controller/CsvLoggerController.cpp
@@ -117,6 +120,7 @@ set(AM_COMMON_SOURCES
     view/CalibrationPanel.cpp
     view/DigitalOutputPanel.cpp
     view/GraphPanel.cpp
+    view/LanguageSelectDialog.cpp
     view/LedIndicator.cpp
     view/MainFrame.cpp
     view/SettingsDialog.cpp

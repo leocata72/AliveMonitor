@@ -9,6 +9,7 @@
 #include <wx/stattext.h>
 #include <wx/tglbtn.h>
 
+#include "i18n/Strings.h"
 #include "model/DigitalOutputState.h"
 #include "view/LedIndicator.h"
 
@@ -18,7 +19,7 @@ DigitalOutputPanel::DigitalOutputPanel(wxWindow* parent, IUserActions& actions)
     : wxPanel(parent)
     , actions_(actions)
 {
-    auto* box = new wxStaticBoxSizer(wxVERTICAL, this, "Uscite digitali");
+    auto* box = new wxStaticBoxSizer(wxVERTICAL, this, tr(StringId::DoBoxTitle));
     auto* grid = new wxFlexGridSizer(3 /*colonne*/, 4 /*vgap*/, 8 /*hgap*/);
     grid->AddGrowableCol(1, 1);
 
@@ -30,10 +31,10 @@ DigitalOutputPanel::DigitalOutputPanel(wxWindow* parent, IUserActions& actions)
                                        wxString::Format("D%d", pin));
         grid->Add(label, 0, wxALIGN_CENTER_VERTICAL);
 
-        auto* button = new wxToggleButton(box->GetStaticBox(), wxID_ANY, "OFF");
+        auto* button = new wxToggleButton(box->GetStaticBox(), wxID_ANY, tr(StringId::DoOff));
         button->Bind(wxEVT_TOGGLEBUTTON, [this, pin, button](wxCommandEvent& e) {
             const bool on = e.IsChecked();
-            button->SetLabel(on ? "ON" : "OFF");
+            button->SetLabel(on ? tr(StringId::DoOn) : tr(StringId::DoOff));
             actions_.onDigitalOutputToggled(pin, on);
         });
         rows_[idx].button = button;

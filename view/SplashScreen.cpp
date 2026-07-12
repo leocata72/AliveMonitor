@@ -8,6 +8,7 @@
 #include <wx/font.h>
 
 #include "Version.h"
+#include "i18n/Strings.h"
 
 namespace am {
 
@@ -39,7 +40,7 @@ wxBitmap buildSplashBitmap()
     // Sottotitolo.
     const wxFont subtitleFont(12, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
     dc.SetFont(subtitleFont);
-    const wxString subtitle = "Simple Control Software";
+    const wxString subtitle = tr(StringId::SpSubtitle);
     const wxSize subtitleExtent = dc.GetTextExtent(subtitle);
     dc.DrawText(subtitle, (size.x - subtitleExtent.x) / 2, 100);
 
@@ -52,11 +53,13 @@ wxBitmap buildSplashBitmap()
     dc.SetFont(footerFont);
     dc.SetTextForeground(wxColour(60, 60, 60));
 
-    const wxString versionLine = wxString::Format("Version %s", kAppVersion);
+    const wxString versionLine = wxString::Format(tr(StringId::SpVersionFmt), kAppVersion);
     const wxSize versionExtent = dc.GetTextExtent(versionLine);
     dc.DrawText(versionLine, (size.x - versionExtent.x) / 2, 180);
 
-    const wxString creditsLine = "by: Leonardo Catalano & Claude";
+    // I nomi non si traducono: solo il prefisso "by:" passa da tr().
+    const wxString creditsLine =
+        wxString::Format(tr(StringId::SpCreditsFmt), "Leonardo Catalano & Claude");
     const wxSize creditsExtent = dc.GetTextExtent(creditsLine);
     dc.DrawText(creditsLine, (size.x - creditsExtent.x) / 2, 202);
 

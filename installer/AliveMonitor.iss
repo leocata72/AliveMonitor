@@ -24,7 +24,7 @@
 ; setup.exe risultante. https://jrsoftware.org/isinfo.php
 
 #ifndef MyAppVersion
-  #define MyAppVersion "1.0.0"
+  #define MyAppVersion "1.1.0"
 #endif
 #ifndef SourceExe
   #define SourceExe "..\build-static\AliveMonitor.exe"
@@ -63,15 +63,42 @@ ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 
 [Languages]
-Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
+; Lingue del wizard di installazione stesso (testi "Avanti"/"Annulla" ecc.,
+; forniti da Inno Setup): allineate deliberatamente alle 5 lingue ora
+; supportate dall'interfaccia di AliveMonitor (vedi i18n/Strings.h), anche
+; se le due cose restano indipendenti — la lingua scelta qui non influenza
+; quella dell'app, selezionabile separatamente da Impostazioni al primo
+; avvio.
 Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
+Name: "french"; MessagesFile: "compiler:Languages\French.isl"
+Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: "german"; MessagesFile: "compiler:Languages\German.isl"
+
+[CustomMessages]
+; Nome della voce di menu per la cartella del firmware Arduino, tradotto
+; nelle stesse 5 lingue del wizard sopra (vedi [Languages]): senza questo
+; resterebbe fissa in italiano anche scegliendo un'altra lingua per il
+; wizard.
+english.ArduinoFirmwareFolder=Arduino firmware folder
+italian.ArduinoFirmwareFolder=Cartella firmware Arduino
+french.ArduinoFirmwareFolder=Dossier firmware Arduino
+spanish.ArduinoFirmwareFolder=Carpeta de firmware Arduino
+german.ArduinoFirmwareFolder=Arduino-Firmware-Ordner
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
 Source: "{#SourceExe}"; DestDir: "{app}"; DestName: "AliveMonitor.exe"; Flags: ignoreversion
+; README in tutte le 5 lingue supportate (README.md è la versione inglese
+; di riferimento; le altre sono readme_<lingua>.md, vedi la nota in cima a
+; ciascun file per lo switcher fra le versioni).
 Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\readme_it.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\readme_fr.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\readme_es.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\readme_de.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 ; Firmware Arduino: senza questo, chi installa solo il setup.exe (senza
 ; clonare il repository) non avrebbe modo di caricare lo sketch sulla
@@ -80,7 +107,7 @@ Source: "..\arduino\AliveMonitor\AliveMonitor.ino"; DestDir: "{app}\arduino\Aliv
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\AliveMonitor.exe"
-Name: "{group}\Cartella firmware Arduino"; Filename: "{app}\arduino\AliveMonitor"
+Name: "{group}\{cm:ArduinoFirmwareFolder}"; Filename: "{app}\arduino\AliveMonitor"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\AliveMonitor.exe"; Tasks: desktopicon
 

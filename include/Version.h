@@ -15,7 +15,7 @@ namespace am {
 inline constexpr const char* kAppName = "AliveMonitor";
 
 /// Versione dell'applicazione PC.
-inline constexpr const char* kAppVersion = "1.0.0";
+inline constexpr const char* kAppVersion = "1.1.0";
 
 /// Baud rate predefinito della comunicazione con Arduino Uno.
 inline constexpr unsigned kDefaultBaudRate = 115200U;

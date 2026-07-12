@@ -9,6 +9,8 @@
 #include <wx/sizer.h>
 #include <wx/statbox.h>
 
+#include "i18n/Strings.h"
+
 namespace am {
 namespace {
 
@@ -24,16 +26,17 @@ CalibrationPanel::CalibrationPanel(wxWindow* parent, IUserActions& actions,
     : wxPanel(parent)
     , actions_(actions)
 {
-    auto* box = new wxStaticBoxSizer(wxVERTICAL, this,
-                                     wxString::FromUTF8("Calibrazione (G = a·V + b)"));
+    auto* box = new wxStaticBoxSizer(wxVERTICAL, this, tr(StringId::CalBoxTitle));
     wxWindow* boxWin = box->GetStaticBox();
 
     grid_ = new wxGrid(boxWin, wxID_ANY, wxDefaultPosition, wxDefaultSize);
     grid_->CreateGrid(kNumAnalogChannels, 4);
+    // "a"/"b" sono lettere di variabile matematica (G = a·V + b), non testo
+    // da tradurre.
     grid_->SetColLabelValue(kColA, "a");
     grid_->SetColLabelValue(kColB, "b");
-    grid_->SetColLabelValue(kColUnit, wxString::FromUTF8("unità"));
-    grid_->SetColLabelValue(kColLabel, wxString::FromUTF8("descrizione"));
+    grid_->SetColLabelValue(kColUnit, tr(StringId::CalColUnit));
+    grid_->SetColLabelValue(kColLabel, tr(StringId::CalColDescription));
     grid_->SetRowLabelSize(34);
     grid_->SetColSize(kColA, 52);
     grid_->SetColSize(kColB, 52);

@@ -43,6 +43,13 @@ public:
     MainController(const MainController&) = delete;
     MainController& operator=(const MainController&) = delete;
 
+    /// Imposta la lingua dell'interfaccia: dal file se già scelta in
+    /// precedenza, altrimenti la chiede con LanguageSelectDialog. Va chiamata
+    /// da main.cpp PRIMA di creare la splash screen (non da initialize()):
+    /// la splash usa wxSTAY_ON_TOP, quindi un dialogo modale mostrato dopo
+    /// la sua creazione resterebbe coperto e invisibile.
+    void ensureLanguage();
+
     /// Crea la finestra principale, collega gli eventi e avvia thread e timer.
     /// @param splash Splash screen già mostrata da main.cpp (opzionale): resta
     ///        visibile finché non arriva la prima connessione riuscita al
