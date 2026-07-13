@@ -4,6 +4,7 @@
  */
 #include "controller/SerialController.h"
 
+#include <algorithm>
 #include <cmath>
 
 #include "AppEvents.h"
@@ -44,6 +45,66 @@ constexpr auto kServiceReadTimeout = std::chrono::milliseconds(20);
 /// Throttling degli eventi statistiche verso la GUI.
 constexpr auto kStatsPostInterval = std::chrono::milliseconds(250);
 
+// --- Correzione della deriva del contatore campioni --------------------------
+// Il timestamp t = t0 + n/confirmedRate segue l'oscillatore di Arduino
+// (risuonatore ceramico, tolleranza tipica ±0.5%), mentre l'asse "now" del
+// grafico segue l'orologio del PC: senza correzione, su una sessione lunga la
+// differenza si accumula (secondi dopo pochi minuti) e la curva si stacca dal
+// bordo destro della finestra in inseguimento. Anche una perdita reale di N
+// frame sposta indietro di N periodi tutti i timestamp successivi (n non
+// avanza per i frame mai arrivati). computeSampleTimestamp() confronta quindi
+// t con acquisitionElapsed() e corregge t0.
+
+/// Fascia morta: sotto questa differenza |t - wall| non si corregge nulla.
+/// Deve essere ben più ampia del ritardo di consegna USB (i frame arrivano a
+/// raffiche in ritardo di ~20-50 ms rispetto alla generazione) e dei normali
+/// "singhiozzi" di scheduling del thread, altrimenti si inseguirebbe il rumore.
+constexpr double kSampleClockDeadbandS = 0.25;
+
+/// Oltre questo ritardo (t molto indietro rispetto al PC: perdita massiccia,
+/// resume da sospensione...) si riaggancia di colpo invece di trascinare.
+/// Solo in avanti: un salto all'indietro violerebbe l'ordine cronologico dei
+/// timestamp su cui contano la ricerca binaria di copyWindow() e il CSV.
+/// La soglia (2 s) è scelta più ampia del massimo arretrato che la catena di
+/// consegna può accumulare SENZA perdite (buffer RX del driver: 16 KiB, vedi
+/// SetupComm in SerialPortWindows ~ 1.6 s di frame a 250 Hz): se t è più
+/// indietro di così, non è ritardo di consegna, è perdita vera.
+constexpr double kSampleClockHardResyncS = 2.0;
+
+/// Correzione dolce: frazione di periodo recuperata a ogni campione quando
+/// si è fuori dalla fascia morta. All'1% per campione la correzione vale
+/// l'1% del rate (es. 10 ms/s a qualunque frequenza): più che sufficiente a
+/// compensare il ±0.5% dell'oscillatore, e abbastanza piccola da mantenere i
+/// timestamp strettamente crescenti (l'incremento minimo resta 0.99 periodi).
+constexpr double kSampleClockSlewFraction = 0.01;
+
+// --- Stima dei pacchetti persi -----------------------------------------------
+/// Tolleranza sul numero di campioni attesi: l'1% assorbe la differenza di
+/// clock PC/Arduino (±0.5% + margine) e il jitter degli estremi della
+/// finestra di misura. Il rovescio della medaglia, documentato: perdite reali
+/// sotto l'1% del rate non vengono conteggiate — limite intrinseco di una
+/// stima temporale, eliminabile solo con un numero di sequenza nel protocollo.
+constexpr double kLossRateTolerance = 0.01;
+
+/// Credito massimo accumulabile quando arrivano PIÙ campioni degli attesi
+/// (clock Arduino veloce): senza questo limite il credito crescerebbe senza
+/// fine e maschererebbe indefinitamente le perdite reali future.
+constexpr double kMaxLossCredit = 2.0;
+
+/// Soglia di conteggio, in SECONDI di campioni (moltiplicata per il rate):
+/// il debito viene convertito in "persi" solo quando supera l'equivalente di
+/// 30 ms di flusso (minimo 3 campioni a basse frequenze). Sotto questa soglia
+/// non si può distinguere una perdita vera dal jitter di bordo finestra: la
+/// consegna USB a raffiche fa oscillare "ricevuti vs attesi" di ± una
+/// raffica (~20 ms di campioni), e il battimento fra il periodo di
+/// campionamento e quello delle raffiche può produrre SEQUENZE correlate di
+/// oscillazioni positive che un semplice pavimento a -kMaxLossCredit non
+/// assorbe (verificato in simulazione: a 250 Hz con clock -0.5% comparivano
+/// sporadici falsi "persi" anche partendo dal pavimento). Rovescio della
+/// medaglia, documentato: un burst di perdita più corto di ~30 ms non viene
+/// conteggiato — è il limite di risoluzione intrinseco di questa stima.
+constexpr double kLossCountThresholdS = 0.03;
+
 } // namespace
 
 SerialController::SerialController(BoardState& state,
@@ -83,7 +144,7 @@ void SerialController::stop()
     if (!running_.exchange(false)) {
         return;
     }
-    wakeCv_.notify_all();
+    wakeThread();
     if (thread_.joinable()) {
         thread_.join();
     }
@@ -96,14 +157,33 @@ void SerialController::enqueueCommand(std::string commandLine)
         const std::lock_guard lock(queueMutex_);
         commandQueue_.push_back(std::move(commandLine));
     }
-    wakeGeneration_.fetch_add(1, std::memory_order_relaxed);
-    wakeCv_.notify_all();
+    wakeThread();
 }
 
 void SerialController::setAutoConnect(bool enabled)
 {
     autoConnect_.store(enabled);
-    wakeGeneration_.fetch_add(1, std::memory_order_relaxed);
+    wakeThread();
+}
+
+void SerialController::wakeThread()
+{
+    // L'incremento avviene SOTTO wakeMutex_, non fuori come nella versione
+    // precedente: per la correttezza di una condition_variable, la modifica
+    // dello stato osservato dal predicato deve avvenire sotto lo stesso mutex
+    // della wait, altrimenti resta una finestra di lost-wakeup — se
+    // l'incremento+notify cadono fra la valutazione del predicato (falso) e il
+    // blocco atomico della wait_for, il risveglio va perso e l'attesa dura
+    // fino al timeout (fino a ~1.8 s nell'attesa bootloader). Tenendo il mutex
+    // qui, l'incremento non può cadere in quella finestra: o precede la
+    // valutazione del predicato (che allora lo vede), o attende che il waiter
+    // sia effettivamente bloccato (e il notify lo raggiunge). Il notify_all()
+    // resta fuori dal lock: notificare a mutex rilasciato è legale ed evita
+    // che il thread risvegliato si blocchi subito sul mutex ancora occupato.
+    {
+        const std::lock_guard lock(wakeMutex_);
+        wakeGeneration_.fetch_add(1, std::memory_order_relaxed);
+    }
     wakeCv_.notify_all();
 }
 
@@ -390,9 +470,38 @@ double SerialController::computeSampleTimestamp()
         resyncSampleClock();
     }
     const int rate = state_.confirmedRate();
-    const double t = (rate > 0)
-        ? sampleEpochT0_ + static_cast<double>(sampleIndex_) / static_cast<double>(rate)
-        : state_.acquisitionElapsed();  // fallback: rate non ancora confermato
+    if (rate <= 0) {
+        ++sampleIndex_;
+        return state_.acquisitionElapsed();  // fallback: rate non ancora confermato
+    }
+
+    double t = sampleEpochT0_
+        + static_cast<double>(sampleIndex_) / static_cast<double>(rate);
+
+    // Correzione della deriva rispetto all'orologio del PC (vedi le costanti
+    // kSampleClock* in testa al file per il perché serve). drift < 0: t è
+    // indietro (oscillatore Arduino lento, o frame realmente persi che non
+    // hanno fatto avanzare sampleIndex_); drift > 0: t è avanti (oscillatore
+    // veloce). Il ritardo di consegna USB rende il drift "a riposo"
+    // leggermente negativo: rientra nella fascia morta.
+    const double wall = state_.acquisitionElapsed();
+    const double drift = t - wall;
+    if (drift < -kSampleClockHardResyncS) {
+        // Molto indietro: riaggancio immediato IN AVANTI (monotono per
+        // costruzione). Il salto sull'asse dei tempi è il male minore
+        // rispetto a minuti di recupero al passo dell'1%.
+        sampleEpochT0_ = wall;
+        sampleIndex_ = 0;
+        t = wall;
+    } else if (std::abs(drift) > kSampleClockDeadbandS) {
+        // Correzione dolce: t0 scivola di una frazione di periodo per
+        // campione nella direzione che riduce |drift|. Mai un salto: i
+        // timestamp restano strettamente crescenti (incremento minimo
+        // (1 - kSampleClockSlewFraction) periodi per campione).
+        sampleEpochT0_ += std::copysign(
+            kSampleClockSlewFraction / static_cast<double>(rate), -drift);
+    }
+
     ++sampleIndex_;
     return t;
 }
@@ -403,6 +512,15 @@ void SerialController::resyncSampleClock()
     sampleIndex_ = 0;
     sampleClockSynced_ = true;
     samplesInWindow_ = 0;
+    // Il debito riparte dal PAVIMENTO di credito, non da zero: partendo da 0,
+    // nel transitorio iniziale (prima che lo sconto kLossRateTolerance abbia
+    // avuto il tempo di spingere il debito sul pavimento, dove il rumore non
+    // può più raggiungere la soglia) il jitter di bordo finestra può
+    // accumulare qualche falso "perso". Verificato in simulazione: partendo
+    // da 0 si contavano 1-2 falsi positivi nei primi istanti di streaming,
+    // partendo dal pavimento zero.
+    lossDebt_ = -kMaxLossCredit;
+    prevWindowLossDebt_ = -kMaxLossCredit;
     // Origine della finestra di misura ANCORA QUI, non al prossimo campione
     // (vedi updateRateWindow() per il perché questo evita un bias sistematico).
     rateWindowStart_ = Clock::now();
@@ -429,12 +547,49 @@ void SerialController::updateRateWindow()
         // batch successivi (dt ~ periodo firmware, per via del buffering
         // seriale) non genera più falsi positivi: qui si guarda solo il
         // totale su una finestra di ~250 ms, non l'intervallo istantaneo.
+        //
+        // Raffinamenti rispetto al semplice llround(expected) - received:
+        //  1) accumulatore frazionario (lossDebt_) che si trascina il resto
+        //     fra una finestra e l'altra: il rumore di arrotondamento ai
+        //     bordi (che una soglia per-finestra conterebbe solo quando è
+        //     positivo, gonfiando il totale) si compensa da solo;
+        //  2) attesi scontati di kLossRateTolerance: il clock di Arduino non
+        //     è quello del PC (vedi la costante);
+        //  3) conteggio solo oltre kLossCountThresholdS e solo se CONFERMATO
+        //     su due finestre consecutive (vedi sotto).
         const int rate = state_.confirmedRate();
         if (rate > 0) {
-            const auto expected =
-                static_cast<std::uint64_t>(std::llround(elapsedS * rate));
-            if (expected > samplesInWindow_) {
-                state_.addPacketsLost(expected - samplesInWindow_);
+            lossDebt_ += elapsedS * static_cast<double>(rate)
+                             * (1.0 - kLossRateTolerance)
+                       - static_cast<double>(samplesInWindow_);
+            if (lossDebt_ < -kMaxLossCredit) {
+                // Un clock Arduino veloce consegna PIÙ campioni degli attesi:
+                // senza pavimento, il credito crescerebbe indefinitamente e
+                // assorbirebbe qualunque perdita reale futura.
+                lossDebt_ = -kMaxLossCredit;
+            }
+            // Conteggio DIFFERITO di una finestra: si converte in "persi"
+            // solo il debito confermato da due finestre consecutive (il
+            // minimo fra la corrente e la precedente). Motivo: uno stallo di
+            // consegna (GUI/SO congelati per un attimo) fa chiudere una
+            // finestra lunga con pochissimi campioni (debito enorme), ma la
+            // raffica di recupero arriva nella finestra SUCCESSIVA: contare
+            // subito trasformerebbe lo stallo in centinaia di falsi "persi",
+            // perché il rimborso della raffica arriverebbe a conteggio già
+            // fatto (e finirebbe pure troncato dal pavimento di credito). Una
+            // perdita VERA, invece, lascia il debito alto anche nella
+            // finestra successiva (nessuna raffica lo rimborsa): il minimo su
+            // due finestre distingue esattamente i due casi, al prezzo di
+            // ~250 ms di ritardo nell'aggiornamento del contatore.
+            const double confirmed = std::min(lossDebt_, prevWindowLossDebt_);
+            prevWindowLossDebt_ = lossDebt_;
+            const double countThreshold = std::max(
+                3.0, static_cast<double>(rate) * kLossCountThresholdS);
+            if (confirmed >= countThreshold) {
+                const auto lost = static_cast<std::uint64_t>(confirmed);
+                state_.addPacketsLost(lost);
+                lossDebt_ -= static_cast<double>(lost);
+                prevWindowLossDebt_ = lossDebt_;
             }
         }
     }
@@ -497,9 +652,13 @@ void SerialController::interruptibleSleep(std::chrono::milliseconds ms)
     // (wait_for() reinterpreta un "risveglio spurio" tornando ad aspettare),
     // rendendo l'attesa NON interrompibile come documentato: es. "Disconnetti"
     // durante i ~1.8 s di attesa bootloader restava senza effetto fino alla
-    // scadenza del timeout. wakeGeneration_ (incrementato ad ogni notify)
-    // rende il predicato vero anche per un risveglio "di comando", non solo
-    // per lo stop.
+    // scadenza del timeout. wakeGeneration_ (incrementato da wakeThread(),
+    // SOTTO wakeMutex_: vedi lì per la finestra di lost-wakeup che questo
+    // chiude) rende il predicato vero anche per un risveglio "di comando",
+    // non solo per lo stop. Lo snapshot è preso PRIMA di acquisire il lock:
+    // così anche un wake arrivato fra lo snapshot e l'ingresso in wait_for
+    // viene onorato (predicato subito vero), mentre i wake precedenti allo
+    // snapshot sono deliberatamente ignorati (stato già visto dal chiamante).
     const std::uint64_t generationAtStart =
         wakeGeneration_.load(std::memory_order_relaxed);
     std::unique_lock lock(wakeMutex_);

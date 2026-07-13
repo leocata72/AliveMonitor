@@ -99,6 +99,10 @@ private:
     void clearCommandQueue();
     /// Attesa interrompibile da stop() e dall'arrivo di comandi.
     void interruptibleSleep(std::chrono::milliseconds ms);
+    /// Risveglia interruptibleSleep(): incrementa wakeGeneration_ sotto
+    /// wakeMutex_ (obbligatorio per non perdere il risveglio, vedi il .cpp)
+    /// e notifica. Chiamata da stop()/enqueueCommand()/setAutoConnect().
+    void wakeThread();
     void postEvent(const wxEventTypeTag<wxThreadEvent>& type,
                    int intPayload = 0, long longPayload = 0,
                    const wxString& strPayload = wxString());
@@ -125,9 +129,11 @@ private:
     // --- Sveglia del thread -------------------------------------------------------
     std::mutex wakeMutex_;
     std::condition_variable wakeCv_;
-    /// Incrementato ad ogni notify_all() da enqueueCommand()/setAutoConnect():
-    /// permette a interruptibleSleep() di distinguere un risveglio "vero" da
-    /// uno spurio, dato che il predicato originale (solo !running_) ignorava
+    /// Incrementato da wakeThread() (sempre sotto wakeMutex_, mai fuori:
+    /// vedi wakeThread() nel .cpp per il perché) ad ogni richiesta di
+    /// risveglio da stop()/enqueueCommand()/setAutoConnect(): permette a
+    /// interruptibleSleep() di distinguere un risveglio "vero" da uno
+    /// spurio, dato che il predicato originale (solo !running_) ignorava
     /// questi notify (vedi interruptibleSleep()).
     std::atomic<std::uint64_t> wakeGeneration_{ 0 };
 
@@ -142,7 +148,9 @@ private:
     // batch con dt di pochi microsecondi, poi un salto di alcuni ms): usare
     // l'istante di parsing come timestamp produce un asse dei tempi (e una
     // colonna tempo_s nel CSV) non uniforme. Il timestamp è invece derivato
-    // da t0 + n/confirmedRate, risincronizzato su OK RATE/OK STREAM.
+    // da t0 + n/confirmedRate, risincronizzato su OK RATE/OK STREAM e
+    // corretto in modo dolce contro la deriva clock Arduino/PC (vedi
+    // computeSampleTimestamp() e le costanti kSampleClock* nel .cpp).
     std::uint64_t sampleIndex_ = 0;   ///< Campioni emessi dall'ultimo resync.
     double sampleEpochT0_ = 0.0;      ///< acquisitionElapsed() al resync.
     bool sampleClockSynced_ = false;  ///< false finché non c'è stato un resync.
@@ -154,6 +162,16 @@ private:
     // col numero di campioni atteso a confirmedRate.
     Clock::time_point rateWindowStart_{};
     std::uint64_t samplesInWindow_ = 0;
+    /// Accumulatore frazionario "attesi - ricevuti" trascinato fra le
+    /// finestre di misura: le perdite vengono contate solo quando il debito,
+    /// CONFERMATO su due finestre consecutive (vedi prevWindowLossDebt_),
+    /// supera la soglia; il resto resta qui (vedi updateRateWindow()).
+    double lossDebt_ = 0.0;
+    /// Debito alla chiusura della finestra precedente: il conteggio usa
+    /// min(corrente, precedente) per non scambiare uno stallo di consegna
+    /// (debito alto per UNA finestra, rimborsato dalla raffica di recupero
+    /// nella successiva) per una perdita reale (debito alto persistente).
+    double prevWindowLossDebt_ = 0.0;
 };
 
 } // namespace am
