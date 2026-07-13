@@ -96,12 +96,14 @@ void SerialController::enqueueCommand(std::string commandLine)
         const std::lock_guard lock(queueMutex_);
         commandQueue_.push_back(std::move(commandLine));
     }
+    wakeGeneration_.fetch_add(1, std::memory_order_relaxed);
     wakeCv_.notify_all();
 }
 
 void SerialController::setAutoConnect(bool enabled)
 {
     autoConnect_.store(enabled);
+    wakeGeneration_.fetch_add(1, std::memory_order_relaxed);
     wakeCv_.notify_all();
 }
 
@@ -215,25 +217,36 @@ void SerialController::onConnectionEstablished()
 
     state_.setConnected(portName, serialModel_.baudRate());
     state_.resetStatistics();
-    lastSampleT_ = -1.0;
-    rateEma_ = 0.0;
+    resyncSampleClock();
     lastRxTime_ = Clock::now();
     lastPingTime_ = lastRxTime_;
 
     postEvent(events::EVT_CONNECTION_CHANGED, 1, 0, wxString(portName));
 
-    // Sequenza di sincronizzazione post-connessione:
+    // Sequenza di sincronizzazione post-connessione: si interrompe al primo
+    // errore di scrittura (sendLine() ritorna false e ha già chiamato
+    // handleDisconnection(), che chiude la porta) invece di continuare a
+    // scrivere sulla porta ormai chiusa. Senza questo controllo, ogni
+    // sendLine() successivo falliva a sua volta, ripetendo inutilmente
+    // handleDisconnection()/l'evento EVT_CONNECTION_CHANGED e incrementando
+    // più volte serialErrors per un solo guasto reale.
     // 1) versione firmware;
-    sendLine(CommunicationProtocol::buildVersionRequest());
+    if (!sendLine(CommunicationProtocol::buildVersionRequest())) {
+        return;
+    }
     // 2) ri-applicazione dello stato desiderato delle uscite digitali
     //    (fondamentale dopo una riconnessione: la scheda si è resettata);
     const auto desired = outputs_.desiredAll();
     for (int i = 0; i < kNumDigitalOutputs; ++i) {
-        sendLine(CommunicationProtocol::buildSetOutput(
-            kFirstDigitalPin + i, desired[static_cast<std::size_t>(i)]));
+        if (!sendLine(CommunicationProtocol::buildSetOutput(
+                kFirstDigitalPin + i, desired[static_cast<std::size_t>(i)]))) {
+            return;
+        }
     }
     // 3) frequenza di campionamento corrente;
-    sendLine(CommunicationProtocol::buildRate(state_.requestedRate()));
+    if (!sendLine(CommunicationProtocol::buildRate(state_.requestedRate()))) {
+        return;
+    }
     // 4) se l'acquisizione era attiva, riprende automaticamente lo streaming.
     if (state_.acquisition() == AcquisitionState::Running) {
         sendLine(CommunicationProtocol::buildStream(true));
@@ -317,11 +330,11 @@ void SerialController::processLine(const std::string& line)
 
     switch (parsed->type) {
     case ResponseType::Adc: {
-        const double t = state_.acquisitionElapsed();
         if (state_.acquisition() == AcquisitionState::Running) {
+            const double t = computeSampleTimestamp();
             buffer_.push(t, parsed->adcValues);
             csvLogger_.push(t, parsed->adcValues);  // no-op se non si sta registrando
-            updateSampleTiming(t);
+            updateRateWindow();
         }
         state_.incPacketsReceived();
         break;
@@ -343,12 +356,12 @@ void SerialController::processLine(const std::string& line)
 
     case ResponseType::OkRate:
         state_.setConfirmedRate(parsed->rateHz);
-        lastSampleT_ = -1.0;  // evita falsi "pacchetti persi" al cambio rate
+        resyncSampleClock();  // evita falsi "pacchetti persi" al cambio rate
         postEvent(events::EVT_RATE_CONFIRMED, parsed->rateHz);
         break;
 
     case ResponseType::OkStream:
-        lastSampleT_ = -1.0;  // riparte la misura degli intervalli
+        resyncSampleClock();  // riparte il contatore campioni
         break;
 
     case ResponseType::Error:
@@ -367,32 +380,78 @@ void SerialController::processLine(const std::string& line)
     }
 }
 
-void SerialController::updateSampleTiming(double t)
+double SerialController::computeSampleTimestamp()
 {
-    if (lastSampleT_ >= 0.0) {
-        const double dt = t - lastSampleT_;
-        if (dt > 0.0) {
-            // Frequenza misurata: media mobile esponenziale (reattiva ma stabile).
-            const double inst = 1.0 / dt;
-            rateEma_ = (rateEma_ <= 0.0) ? inst : (0.95 * rateEma_ + 0.05 * inst);
-            state_.setMeasuredRate(rateEma_);
+    if (!sampleClockSynced_) {
+        // Difesa contro un frame ADC ricevuto prima di qualunque resync (non
+        // dovrebbe succedere: lo streaming parte sempre dopo OK RATE/OK
+        // STREAM, vedi onConnectionEstablished/processLine): avvia comunque
+        // il contatore da qui invece di propagare un timestamp negativo/nullo.
+        resyncSampleClock();
+    }
+    const int rate = state_.confirmedRate();
+    const double t = (rate > 0)
+        ? sampleEpochT0_ + static_cast<double>(sampleIndex_) / static_cast<double>(rate)
+        : state_.acquisitionElapsed();  // fallback: rate non ancora confermato
+    ++sampleIndex_;
+    return t;
+}
 
-            // Stima dei pacchetti persi dai "buchi" temporali: se l'intervallo
-            // supera nettamente il periodo nominale, dei frame sono andati persi.
-            const int rate = state_.confirmedRate();
-            if (rate > 0) {
-                const double period = 1.0 / rate;
-                if (dt > 1.75 * period) {
-                    const auto missed =
-                        static_cast<std::uint64_t>(std::llround(dt / period)) - 1U;
-                    if (missed > 0) {
-                        state_.addPacketsLost(missed);
-                    }
-                }
+void SerialController::resyncSampleClock()
+{
+    sampleEpochT0_ = state_.acquisitionElapsed();
+    sampleIndex_ = 0;
+    sampleClockSynced_ = true;
+    samplesInWindow_ = 0;
+    // Origine della finestra di misura ANCORA QUI, non al prossimo campione
+    // (vedi updateRateWindow() per il perché questo evita un bias sistematico).
+    rateWindowStart_ = Clock::now();
+}
+
+void SerialController::updateRateWindow()
+{
+    ++samplesInWindow_;
+
+    const auto now = Clock::now();
+    const auto elapsed = now - rateWindowStart_;
+    if (elapsed < kStatsPostInterval) {
+        return;  // finestra non ancora chiusa: aggregazione prosegue
+    }
+
+    const double elapsedS = std::chrono::duration<double>(elapsed).count();
+    if (elapsedS > 0.0) {
+        state_.setMeasuredRate(static_cast<double>(samplesInWindow_) / elapsedS);
+
+        // Stima dei pacchetti persi: confronto fra i campioni attesi a
+        // confirmedRate nella finestra e quelli effettivamente ricevuti.
+        // A differenza della vecchia EMA per-riga, il salto temporale fra due
+        // frame dello stesso batch USB (dt ~ pochi microsecondi) o fra due
+        // batch successivi (dt ~ periodo firmware, per via del buffering
+        // seriale) non genera più falsi positivi: qui si guarda solo il
+        // totale su una finestra di ~250 ms, non l'intervallo istantaneo.
+        const int rate = state_.confirmedRate();
+        if (rate > 0) {
+            const auto expected =
+                static_cast<std::uint64_t>(std::llround(elapsedS * rate));
+            if (expected > samplesInWindow_) {
+                state_.addPacketsLost(expected - samplesInWindow_);
             }
         }
     }
-    lastSampleT_ = t;
+
+    samplesInWindow_ = 0;
+    // La finestra successiva riparte da QUESTO istante (l'arrivo del
+    // campione che ha appena chiuso la finestra corrente), non da quello del
+    // prossimo campione: se l'anchor fosse invece impostata al PRIMO
+    // campione della nuova finestra (come nella versione precedente), N
+    // campioni contati coprirebbero solo N-1 intervalli di tempo reali (il
+    // primo campione della finestra non ha un intervallo "prima di sé"
+    // all'interno della finestra), facendo sistematicamente misurare una
+    // frequenza più alta di quella vera per un fattore N/(N-1) — piccolo ma
+    // non trascurabile a basse frequenze (es. +4% a 100 Hz con finestre da
+    // 250 ms). Ancorando qui invece, ogni finestra copre esattamente il
+    // numero di campioni attesi nel suo intervallo di tempo, senza bias.
+    rateWindowStart_ = now;
 }
 
 // ---------------------------------------------------------------------------
@@ -432,8 +491,22 @@ void SerialController::clearCommandQueue()
 
 void SerialController::interruptibleSleep(std::chrono::milliseconds ms)
 {
+    // Il predicato originale controllava solo !running_: i notify_all() di
+    // enqueueCommand()/setAutoConnect() risvegliavano wait_for(), ma con la
+    // condizione ancora falsa il predicato la faceva riaddormentare subito
+    // (wait_for() reinterpreta un "risveglio spurio" tornando ad aspettare),
+    // rendendo l'attesa NON interrompibile come documentato: es. "Disconnetti"
+    // durante i ~1.8 s di attesa bootloader restava senza effetto fino alla
+    // scadenza del timeout. wakeGeneration_ (incrementato ad ogni notify)
+    // rende il predicato vero anche per un risveglio "di comando", non solo
+    // per lo stop.
+    const std::uint64_t generationAtStart =
+        wakeGeneration_.load(std::memory_order_relaxed);
     std::unique_lock lock(wakeMutex_);
-    wakeCv_.wait_for(lock, ms, [this] { return !running_.load(); });
+    wakeCv_.wait_for(lock, ms, [this, generationAtStart] {
+        return !running_.load()
+            || wakeGeneration_.load(std::memory_order_relaxed) != generationAtStart;
+    });
 }
 
 void SerialController::postEvent(const wxEventTypeTag<wxThreadEvent>& type,

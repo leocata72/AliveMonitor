@@ -227,3 +227,39 @@ endif()
 
 # --- Installazione (opzionale) ----------------------------------------------------
 install(TARGETS AliveMonitor RUNTIME DESTINATION bin)
+
+# --- Unit test (opzionali) ---------------------------------------------------------
+# Copre SOLO i componenti Model senza dipendenza da wxWidgets (RingBuffer,
+# CommunicationProtocol, ChannelCalibration, BoardState): non serve wx per
+# compilarli, quindi il target è disponibile anche prima di aver installato
+# wxWidgets (utile per iterare rapidamente sulla logica pura). I componenti
+# accoppiati a wx (SerialController, CsvLoggerController, le view) non sono
+# coperti da questa suite: testarli richiederebbe mock di ISerialPort/wx e
+# non è ancora stato affrontato.
+# Micro-framework header-only in tests/TestFramework.h, coerente con la
+# filosofia "zero dipendenze esterne" del progetto (niente Catch2/GoogleTest).
+option(AM_BUILD_TESTS
+    "Compila la suite di unit test (tests/: solo componenti Model senza dipendenza da wxWidgets)" OFF)
+if(AM_BUILD_TESTS)
+    enable_testing()
+    add_executable(AliveMonitorTests
+        tests/main.cpp
+        tests/test_ring_buffer.cpp
+        tests/test_communication_protocol.cpp
+        tests/test_channel_calibration.cpp
+        tests/test_board_state.cpp
+        model/CommunicationProtocol.cpp
+        model/BoardState.cpp
+    )
+    target_include_directories(AliveMonitorTests PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/include)
+    target_link_libraries(AliveMonitorTests PRIVATE Threads::Threads)
+    if(MSVC)
+        target_compile_options(AliveMonitorTests PRIVATE /W4 /permissive- /utf-8)
+    else()
+        target_compile_options(AliveMonitorTests PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+    add_test(NAME AliveMonitorTests COMMAND AliveMonitorTests)
+    message(STATUS "AM_BUILD_TESTS: target AliveMonitorTests abilitato (ctest o eseguibile diretto)")
+endif()

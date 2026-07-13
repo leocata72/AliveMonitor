@@ -40,6 +40,12 @@ SettingsDialog::SettingsDialog(wxWindow* parent,
                                  5, 120,
                                  static_cast<int>(timeWindowSeconds));
     grid->Add(windowSpin_, 0);
+    // Letto DOPO la costruzione (non ricalcolato da timeWindowSeconds): è
+    // wxSpinCtrl stesso a clampare il valore iniziale nel range 5..120,
+    // quindi questo è il valore "di riferimento" corretto con cui confrontare
+    // GetValue() in timeWindowChanged(), qualunque sia stato il valore
+    // (anche frazionario o fuori range) passato al costruttore.
+    initialWindowValue_ = windowSpin_->GetValue();
 
     grid->Add(new wxStaticText(this, wxID_ANY, tr(StringId::SdAutoYLabel)), 0,
               wxALIGN_CENTER_VERTICAL);
@@ -94,6 +100,11 @@ int SettingsDialog::renderFps() const
 double SettingsDialog::timeWindowSeconds() const
 {
     return static_cast<double>(windowSpin_->GetValue());
+}
+
+bool SettingsDialog::timeWindowChanged() const
+{
+    return windowSpin_->GetValue() != initialWindowValue_;
 }
 
 bool SettingsDialog::continuousAutoscaleY() const

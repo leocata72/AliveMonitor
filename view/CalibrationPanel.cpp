@@ -79,11 +79,19 @@ void CalibrationPanel::notifyChannel(int channel)
     }
     double a = 1.0;
     double b = 0.0;
-    // ToDouble lascia a/b invariati (default sopra) se la cella è vuota o
-    // non numerica: la griglia non può mai produrre una calibrazione a
-    // metà scritta che manda in errore chi la legge.
-    grid_->GetCellValue(channel, kColA).ToDouble(&a);
-    grid_->GetCellValue(channel, kColB).ToDouble(&b);
+    // ToCDouble (non ToDouble) perché la stringa è sempre nel formato "C"
+    // (punto decimale, es. "0.5"): sia wxString::FromDouble() nel costruttore
+    // sia wxGridCellFloatEditor scrivono/accettano il punto indipendentemente
+    // dalla locale del sistema. ToDouble() invece è locale-dipendente: con
+    // una locale italiana si aspetta la virgola ("0,5") e fallisce
+    // silenziosamente su "0.5", lasciando a/b al valore di default senza che
+    // l'utente se ne accorga. ToCDouble ignora la locale e parsa sempre col
+    // punto, coerente con come il valore è stato scritto. Lascia comunque
+    // a/b invariati (default sopra) se la cella è vuota o non numerica: la
+    // griglia non può mai produrre una calibrazione a metà scritta che manda
+    // in errore chi la legge.
+    grid_->GetCellValue(channel, kColA).ToCDouble(&a);
+    grid_->GetCellValue(channel, kColB).ToCDouble(&b);
     wxString unit = grid_->GetCellValue(channel, kColUnit);
     if (unit.IsEmpty()) {
         unit = "V";

@@ -232,7 +232,16 @@ void MainController::onSettingsRequested()
         return;
     }
     graph_.setRenderFps(dialog.renderFps());
-    frame_->graphPanel()->setTimeWindowSeconds(dialog.timeWindowSeconds());
+    // Applicata SOLO se l'utente ha davvero cambiato lo spinner: il valore
+    // passato al costruttore del dialogo può essere frazionario (es. 0.35 s
+    // dopo uno zoom sulla scheda combinata) e lo spinner lo arrotonda/clampa
+    // a un intero 5..120 solo per la VISUALIZZAZIONE. Applicare comunque quel
+    // valore arrotondato ad ogni OK — anche premuto senza toccare nulla —
+    // azzererebbe silenziosamente lo zoom per-tab attivo su tutte le 7 schede
+    // del grafico (vedi GraphPanel::setTimeWindowSeconds()).
+    if (dialog.timeWindowChanged()) {
+        frame_->graphPanel()->setTimeWindowSeconds(dialog.timeWindowSeconds());
+    }
     frame_->graphPanel()->setContinuousAutoscaleY(dialog.continuousAutoscaleY());
 
     // Lingua: solo persistita su file, NON applicata a caldo (setLanguage()
@@ -256,8 +265,22 @@ void MainController::onShutdown()
 
 void MainController::onConnectionChanged(wxThreadEvent& event)
 {
-    lastMessage_ = event.GetString();
     const bool connected = (event.GetInt() == 1);
+    // event.GetString() è il nome porta quando connected==true (vedi
+    // onConnectionEstablished) oppure un motivo di scollegamento/ricerca
+    // quando connected==false (vedi handleDisconnection/scanAndConnect).
+    // lastMessage_ alimenta il campo messaggi di ToolbarPanel, colorato in
+    // arancione e pensato per errori/avvisi: mostrarci il nome porta a una
+    // connessione RIUSCITA è fuorviante (sembra un avviso) ed è comunque
+    // ridondante, dato che la porta è già visibile nel campo dedicato
+    // (portText_). Solo il caso "non connesso" aggiorna il messaggio; il
+    // caso "connesso" lo ripulisce (un eventuale errore precedente non ha
+    // più senso una volta riconnessi).
+    if (connected) {
+        lastMessage_.clear();
+    } else {
+        lastMessage_ = event.GetString();
+    }
     if (frame_ != nullptr) {
         frame_->digitalPanel()->setControlsEnabled(connected);
         if (!connected) {

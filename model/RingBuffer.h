@@ -13,6 +13,7 @@
  */
 #pragma once
 
+#include <cassert>
 #include <cstddef>
 #include <vector>
 
@@ -22,10 +23,16 @@ template <typename T>
 class RingBuffer {
 public:
     /// Alloca subito tutta la capacità richiesta (nessuna allocazione futura).
+    /// @param capacity deve essere > 0: con capacity 0 physicalIndex() farebbe
+    ///        un modulo per zero (UB). In debug lo segnala con un assert; in
+    ///        ogni build (anche release, dove assert è compilato via NDEBUG)
+    ///        la capacità viene comunque clampata a 1, così l'UB non può mai
+    ///        verificarsi anche se il chiamante ignora l'assert.
     explicit RingBuffer(std::size_t capacity)
-        : storage_(capacity)
-        , capacity_(capacity)
+        : storage_(capacity > 0 ? capacity : 1)
+        , capacity_(capacity > 0 ? capacity : 1)
     {
+        assert(capacity > 0 && "RingBuffer richiede capacity > 0");
     }
 
     /// Inserisce un elemento; se pieno sovrascrive il più vecchio. O(1).

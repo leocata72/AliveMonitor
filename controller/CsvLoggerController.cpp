@@ -61,15 +61,13 @@ void CsvLoggerController::stop()
     file_.close();
     currentPath_.clear();
 
-    // Scarta eventuali campioni accodati in race con questo stop(): push() legge
-    // active_ fuori dal lock per restare non bloccante, quindi in teoria un
-    // push() concorrente può accodare una riga DOPO che il consumatore è già
-    // uscito (join() sopra già completato). Senza questa pulizia quella riga
-    // "fantasma" (timestamp della sessione appena chiusa) resterebbe in coda e
-    // diventerebbe la prima riga scritta dalla PROSSIMA registrazione, con un
-    // tempo_s incoerente. Il campione perso qui è al più uno, esattamente nella
-    // finestra di poche istruzioni tra la chiusura e questo punto: accettabile,
-    // il contrario (farlo sopravvivere alla sessione successiva) non lo è.
+    // Pulizia difensiva: con il controllo active_/stopping_ ora spostato
+    // DENTRO queueMutex_ in push() (vedi sotto), il consumatore drena sempre
+    // la coda per intero prima di uscire da writerMain() (l'ultima
+    // iterazione vede stopping_==true E queue_ vuoto, altrimenti continua),
+    // quindi a questo punto queue_ dovrebbe già essere vuota. Lasciato come
+    // rete di sicurezza a costo pressoché nullo: uno svuotamento di una coda
+    // già vuota è un'operazione a costo nullo.
     const std::lock_guard lock(queueMutex_);
     queue_.clear();
 }
@@ -77,13 +75,25 @@ void CsvLoggerController::stop()
 void CsvLoggerController::push(double t,
                                const std::array<std::uint16_t, kNumAnalogChannels>& values)
 {
-    if (!active_.load(std::memory_order_relaxed)) {
-        return;  // nessuna registrazione in corso: niente da fare
+    // NB: il controllo di active_/stopping_ deve avvenire SOTTO lo stesso
+    // lock che protegge la push_back, non prima di acquisire il lock come
+    // nella versione precedente (che leggeva active_ fuori dal mutex). Con
+    // quel pattern "check poi lock" un push() poteva essere sospeso fra il
+    // controllo e l'acquisizione del lock abbastanza a lungo da far
+    // completare per intero uno stop() concorrente (drenaggio della coda,
+    // join del consumatore, pulizia finale): al risveglio il push() accodava
+    // comunque la riga, ma ormai nessuno restava a consumarla ("riga
+    // fantasma"), che sarebbe finita come prima riga della sessione CSV
+    // SUCCESSIVA con un tempo_s incoerente. Controllando active_/stopping_ e
+    // scrivendo in coda sotto lo stesso lock, le due cose sono atomiche
+    // rispetto a stop(): se stopping_ è già true (o active_ già false) qui
+    // dentro, il campione viene scartato invece di essere accodato a un
+    // consumatore che potrebbe già essere uscito.
+    const std::lock_guard lock(queueMutex_);
+    if (stopping_ || !active_.load(std::memory_order_relaxed)) {
+        return;  // nessuna registrazione in corso o in chiusura: niente da fare
     }
-    {
-        const std::lock_guard lock(queueMutex_);
-        queue_.push_back(Row{ t, values });
-    }
+    queue_.push_back(Row{ t, values });
     queueCv_.notify_one();
 }
 

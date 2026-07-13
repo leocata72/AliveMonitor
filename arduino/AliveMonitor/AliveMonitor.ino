@@ -52,6 +52,7 @@ static const uint8_t RX_BUFFER_SIZE = 32;
 // ---------------------------------------------------------------------------
 static char rxBuffer[RX_BUFFER_SIZE];  // riga in costruzione
 static uint8_t rxLength = 0;           // caratteri accumulati
+static bool rxDiscarding = false;      // overflow in corso: scarta fino al prossimo '\n'
 
 static bool streaming = false;             // STREAM 1 attivo?
 static uint32_t samplePeriodUs = 10000UL;  // periodo campione (default 100 Hz)
@@ -105,17 +106,30 @@ static void pollSerial()
         const char c = (char)Serial.read();
 
         if (c == '\n') {
-            rxBuffer[rxLength] = '\0';
-            if (rxLength > 0) {
-                handleCommand(rxBuffer);
+            if (!rxDiscarding) {
+                rxBuffer[rxLength] = '\0';
+                if (rxLength > 0) {
+                    handleCommand(rxBuffer);
+                }
             }
+            // Fine riga: sia in caso normale sia a valle di uno scarto per
+            // overflow, si riparte puliti dalla riga successiva.
             rxLength = 0;
+            rxDiscarding = false;
         } else if (c != '\r') {
-            if (rxLength < RX_BUFFER_SIZE - 1) {
+            if (rxDiscarding) {
+                // Overflow già in corso: i caratteri della riga troppo lunga
+                // vengono ignorati fino al prossimo '\n' (vedi sotto), invece
+                // di essere accumulati come se fossero un nuovo comando.
+            } else if (rxLength < RX_BUFFER_SIZE - 1) {
                 rxBuffer[rxLength++] = c;
             } else {
-                // Riga troppo lunga: scartata (protezione da rumore).
-                rxLength = 0;
+                // Riga troppo lunga: PRIMA la vecchia versione azzerava solo
+                // rxLength, ma continuava ad accumulare i caratteri restanti
+                // della stessa riga come se fossero un comando nuovo,
+                // producendo un ERR UNKNOWN spurio (contato come errore lato
+                // PC). Ora si scarta l'intera riga fino al prossimo '\n'.
+                rxDiscarding = true;
             }
         }
     }

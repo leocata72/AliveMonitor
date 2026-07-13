@@ -18,6 +18,7 @@
 #include <atomic>
 #include <chrono>
 #include <condition_variable>
+#include <cstdint>
 #include <deque>
 #include <memory>
 #include <mutex>
@@ -80,7 +81,17 @@ private:
     // --- Parsing e Model ------------------------------------------------------
     void extractLines();
     void processLine(const std::string& line);
-    void updateSampleTiming(double t);
+    /// Timestamp del campione ADC corrente, derivato dal contatore di
+    /// campioni (non dall'istante di arrivo/parsing: vedi sampleIndex_).
+    double computeSampleTimestamp();
+    /// Rifissa l'origine del contatore di campioni sull'istante corrente.
+    /// Chiamata su OK RATE / OK STREAM (che sul firmware sono esattamente
+    /// gli istanti in cui nextSampleAtUs viene riallineato, vedi
+    /// AliveMonitor.ino) e alla connessione.
+    void resyncSampleClock();
+    /// Aggiorna la finestra di misura frequenza/perdite (~250 ms) con un
+    /// nuovo campione ricevuto.
+    void updateRateWindow();
 
     // --- Utilità ----------------------------------------------------------------
     bool sendLine(const std::string& command);
@@ -114,14 +125,35 @@ private:
     // --- Sveglia del thread -------------------------------------------------------
     std::mutex wakeMutex_;
     std::condition_variable wakeCv_;
+    /// Incrementato ad ogni notify_all() da enqueueCommand()/setAutoConnect():
+    /// permette a interruptibleSleep() di distinguere un risveglio "vero" da
+    /// uno spurio, dato che il predicato originale (solo !running_) ignorava
+    /// questi notify (vedi interruptibleSleep()).
+    std::atomic<std::uint64_t> wakeGeneration_{ 0 };
 
     // --- Stato interno del thread (acceduto SOLO dal thread seriale) ----------------
     std::string rxAccumulator_;      ///< Byte ricevuti in attesa di '\n'.
     Clock::time_point lastRxTime_{};
     Clock::time_point lastPingTime_{};
     Clock::time_point lastStatsPost_{};
-    double lastSampleT_ = -1.0;      ///< Timestamp ultimo campione (per stima perdite).
-    double rateEma_ = 0.0;           ///< Media mobile esponenziale della frequenza.
+
+    // --- Temporizzazione campioni: contatore, non istante di arrivo USB -------------
+    // La seriale/USB consegna i frame a raffiche (più frame nello stesso
+    // batch con dt di pochi microsecondi, poi un salto di alcuni ms): usare
+    // l'istante di parsing come timestamp produce un asse dei tempi (e una
+    // colonna tempo_s nel CSV) non uniforme. Il timestamp è invece derivato
+    // da t0 + n/confirmedRate, risincronizzato su OK RATE/OK STREAM.
+    std::uint64_t sampleIndex_ = 0;   ///< Campioni emessi dall'ultimo resync.
+    double sampleEpochT0_ = 0.0;      ///< acquisitionElapsed() al resync.
+    bool sampleClockSynced_ = false;  ///< false finché non c'è stato un resync.
+
+    // --- Misura frequenza/perdite: finestra a tempo reale (~250 ms) -----------------
+    // Non una EMA per-riga (che erediterebbe lo stesso problema dei "burst":
+    // frequenze istantanee fittizie e falsi "pacchetti persi" sul gap fra
+    // batch), ma un conteggio aggregato su finestre temporali confrontato
+    // col numero di campioni atteso a confirmedRate.
+    Clock::time_point rateWindowStart_{};
+    std::uint64_t samplesInWindow_ = 0;
 };
 
 } // namespace am
