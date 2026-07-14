@@ -72,6 +72,15 @@ public:
     void setContinuousAutoscaleY(bool enabled);
     [[nodiscard]] bool continuousAutoscaleY() const { return autoY_; }
 
+    /// Scala Y manuale: applica subito [yMin, yMax] e disattiva l'autoscale
+    /// continuo (che la sovrascriverebbe al frame successivo). Ignorata se
+    /// yMin >= yMax. (v1.2)
+    void setManualYScale(double yMin, double yMax);
+
+    /// Passo delle tacche principali dell'asse Y; <= 0 ripristina il passo
+    /// automatico "gradevole" (niceStep). Applicato in tempo reale. (v1.2)
+    void setYTickStep(double step);
+
     /// Adatta una sola volta l'asse Y ai dati visibili.
     void autoscaleYOnce();
 
@@ -102,6 +111,10 @@ private:
     /// Passo "gradevole" (1-2-5 * 10^k) per circa targetTicks divisioni.
     [[nodiscard]] static double niceStep(double range, int targetTicks);
 
+    /// Disegna un marker centrato in pt. Presuppone pen/brush già impostati
+    /// dal chiamante (colore del canale; brush trasparente per CircleOpen).
+    static void drawMarker(wxDC& dc, const wxPoint& pt, MarkerStyle style);
+
     /// Valore da tracciare/scalare per il campione s del canale ch: il Volt
     /// grezzo in modalità combinata, il valore convertito in modalità
     /// canale singolo (soloChannel_ == ch, l'unico caso possibile qui).
@@ -127,13 +140,15 @@ private:
     double yMax_ = kAdcReferenceVolt;
     bool follow_ = true;   ///< Finestra agganciata al tempo corrente.
     bool autoY_ = false;   ///< Autoscale Y continuo a ogni refresh.
+    double yTickStep_ = 0.0;  ///< Passo manuale delle tacche Y; 0 = automatico.
 
     // --- Interazione ---------------------------------------------------------------
     bool dragging_ = false;
     wxPoint lastDragPos_;
 
-    // Vettore di punti riusato a ogni frame (nessuna allocazione a regime).
+    // Vettori riusati a ogni frame (nessuna allocazione a regime).
     mutable std::vector<wxPoint> scratchPoints_;
+    mutable std::vector<wxPoint> markerPoints_;  ///< Punti campione per i marker.
 };
 
 /**

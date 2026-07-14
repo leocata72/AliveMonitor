@@ -23,6 +23,7 @@
 #include "controller/CsvLoggerController.h"
 #include "controller/GraphController.h"
 #include "controller/SerialController.h"
+#include "controller/TimedOutputController.h"
 #include "model/AnalogDataBuffer.h"
 #include "model/BoardState.h"
 #include "model/ChannelCalibration.h"
@@ -63,12 +64,19 @@ public:
     void onConnectRequested() override;
     void onDisconnectRequested() override;
     void onDigitalOutputToggled(int pin, bool on) override;
+    void onTimedOutputStarted(int pin, double onSeconds,
+                              double periodSeconds, bool oneShot) override;
+    void onTimedOutputStopped(int pin) override;
+    void onSimultaneousTimersChanged(bool enabled) override;
     void onAcquisitionStart() override;
     void onAcquisitionStop() override;
     void onAcquisitionPause() override;
     void onSampleRateChanged(int rateHz) override;
     void onCalibrationChanged(int channel, double a, double b,
                               const wxString& unit, const wxString& label) override;
+    void onChannelMarkerChanged(int channel, int markerIndex) override;
+    void onChannelConfigSaveRequested() override;
+    void onChannelConfigLoadRequested() override;
     void onExportPngRequested() override;
     void onSettingsRequested() override;
     void onShutdown() override;
@@ -108,6 +116,7 @@ private:
     SerialController serial_;
     CommandController commands_;
     GraphController graph_;
+    TimedOutputController timedOutputs_;  ///< Cicli ON/OFF delle uscite (v1.2).
 
     // --- Servizi ------------------------------------------------------------------
     CpuMonitor cpuMonitor_;

@@ -3,8 +3,9 @@
 [Italiano](readme_it.md) · [English](README.md) · **Français** · [Español](readme_es.md) · [Deutsch](readme_de.md)
 
 Application de bureau (C++20, wxWidgets 3.2+, CMake, architecture MVC) pour l'acquisition en temps réel des tensions analogiques A0–A5 et le contrôle des sorties numériques D2–D9 d'une carte **Arduino Uno** connectée en USB, avec un firmware dédié inclus.
-AVIS : CHARGEZ D'ABORD LE FIRMWARE SUR L'ARDUINO !!
+AVIS : CHARGEZ D'ABORD LE FIRMWARE SUR L'ARDUINO !! Il se trouve dans le dossier d'installation ..\AliveMonitor\arduino\AliveMonitor
 Fonctionnalités principales : détection automatique du port série (négociation `HELLO`/`ARDUINO_UNO`) avec reconnexion automatique ; graphique en temps réel organisé en 7 onglets — un onglet combiné à six courbes (zoom, déplacement, auto-échelle, légende, grille) plus un onglet par canal avec un axe Y dédié dans la grandeur physique convertie, voir plus bas — avec export PNG ; étalonnage linéaire par canal (V → grandeur physique, voir plus bas) ; enregistrement CSV continu au démarrage (producteur/consommateur, voir plus bas) ; fréquence d'acquisition réglable de 1 à 250 Hz même en cours d'acquisition ; tampon circulaire thread-safe de 60 secondes par canal (déjà dimensionné pour 500 Hz) ; rendu découplé de l'acquisition (10–60 FPS configurables) ; barre d'état avec FPS, paquets reçus/perdus, erreurs CRC/série, temps de connexion et CPU ; interface disponible en 5 langues (Italiano, English, Français, Español, Deutsch), sélectionnable depuis les Paramètres (redémarrage requis).
+J'en profite pour remercier Vincenzo Gentile pour ses suggestions et ses conseils. N'hésitez pas à en envoyer d'autres.
 
 ## Structure du projet
 

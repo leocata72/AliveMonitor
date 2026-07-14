@@ -4,6 +4,7 @@
  */
 #include "view/CalibrationPanel.h"
 
+#include <wx/button.h>
 #include <wx/generic/gridctrl.h>
 #include <wx/grid.h>
 #include <wx/sizer.h>
@@ -18,8 +19,27 @@ constexpr int kColA = 0;
 constexpr int kColB = 1;
 constexpr int kColUnit = 2;
 constexpr int kColLabel = 3;
+constexpr int kColMarker = 4;
 
 } // namespace
+
+wxString CalibrationPanel::markerName(int idx)
+{
+    // L'ordine DEVE combaciare con l'enum MarkerStyle (vedi
+    // ChannelCalibration.h): l'indice della tendina È il valore dell'enum.
+    switch (idx) {
+    case 0:  return tr(StringId::MkNone);
+    case 1:  return tr(StringId::MkCircleFull);
+    case 2:  return tr(StringId::MkCircleOpen);
+    case 3:  return tr(StringId::MkSquare);
+    case 4:  return tr(StringId::MkTriangle);
+    case 5:  return tr(StringId::MkDiamond);
+    case 6:  return tr(StringId::MkStar);
+    case 7:  return tr(StringId::MkCross);
+    case 8:  return tr(StringId::MkX);
+    default: return tr(StringId::MkNone);
+    }
+}
 
 CalibrationPanel::CalibrationPanel(wxWindow* parent, IUserActions& actions,
                                    const ChannelCalibrations& initial)
@@ -30,45 +50,104 @@ CalibrationPanel::CalibrationPanel(wxWindow* parent, IUserActions& actions,
     wxWindow* boxWin = box->GetStaticBox();
 
     grid_ = new wxGrid(boxWin, wxID_ANY, wxDefaultPosition, wxDefaultSize);
-    grid_->CreateGrid(kNumAnalogChannels, 4);
+    grid_->CreateGrid(kNumAnalogChannels, 5);
     // "a"/"b" sono lettere di variabile matematica (G = a·V + b), non testo
     // da tradurre.
     grid_->SetColLabelValue(kColA, "a");
     grid_->SetColLabelValue(kColB, "b");
     grid_->SetColLabelValue(kColUnit, tr(StringId::CalColUnit));
     grid_->SetColLabelValue(kColLabel, tr(StringId::CalColDescription));
+    grid_->SetColLabelValue(kColMarker, tr(StringId::CalColMarker));
     grid_->SetRowLabelSize(34);
     grid_->SetColSize(kColA, 52);
     grid_->SetColSize(kColB, 52);
     grid_->SetColSize(kColUnit, 52);
     grid_->SetColSize(kColLabel, 100);
+    grid_->SetColSize(kColMarker, 110);
     grid_->EnableDragRowSize(false);
     grid_->EnableDragColSize(false);
     grid_->SetDefaultCellAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
     grid_->DisableDragGridSize();
+
+    // Voci della tendina dei marker (ordine = enum MarkerStyle).
+    wxArrayString markerChoices;
+    for (int m = 0; m < kMarkerStyleCount; ++m) {
+        markerChoices.Add(markerName(m));
+    }
 
     for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
         const auto& c = initial[static_cast<std::size_t>(ch)];
         grid_->SetRowLabelValue(ch, wxString::Format("A%d", ch));
         grid_->SetCellEditor(ch, kColA, new wxGridCellFloatEditor());
         grid_->SetCellEditor(ch, kColB, new wxGridCellFloatEditor());
+        // allowOthers=false: nella cella marker si può solo scegliere
+        // dall'elenco, niente testo libero.
+        grid_->SetCellEditor(ch, kColMarker,
+                             new wxGridCellChoiceEditor(markerChoices, false));
         grid_->SetCellValue(ch, kColA, wxString::FromDouble(c.a));
         grid_->SetCellValue(ch, kColB, wxString::FromDouble(c.b));
         grid_->SetCellValue(ch, kColUnit, wxString(c.unit));
         grid_->SetCellValue(ch, kColLabel, wxString(c.label));
+        grid_->SetCellValue(ch, kColMarker,
+                            markerName(static_cast<int>(c.marker)));
     }
 
     grid_->Bind(wxEVT_GRID_CELL_CHANGED, &CalibrationPanel::onCellChanged, this);
 
     box->Add(grid_, 0, wxALL, 8);
 
+    // --- Salva/Carica configurazione canali su file di testo (v1.2) ----------
+    auto* buttons = new wxBoxSizer(wxHORIZONTAL);
+    auto* saveBtn = new wxButton(boxWin, wxID_ANY, tr(StringId::CalBtnSave),
+                                 wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
+    saveBtn->Bind(wxEVT_BUTTON, [this](wxCommandEvent&) {
+        actions_.onChannelConfigSaveRequested();
+    });
+    auto* loadBtn = new wxButton(boxWin, wxID_ANY, tr(StringId::CalBtnLoad),
+                                 wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
+    loadBtn->Bind(wxEVT_BUTTON, [this](wxCommandEvent&) {
+        actions_.onChannelConfigLoadRequested();
+    });
+    buttons->Add(saveBtn, 0, wxRIGHT, 6);
+    buttons->Add(loadBtn, 0);
+    box->Add(buttons, 0, wxLEFT | wxRIGHT | wxBOTTOM, 8);
+
     auto* outer = new wxBoxSizer(wxVERTICAL);
     outer->Add(box, 0, wxEXPAND | wxALL, 4);
     SetSizer(outer);
 }
 
+void CalibrationPanel::refreshFromCalibrations(const ChannelCalibrations& calibrations)
+{
+    for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
+        const auto& c = calibrations[static_cast<std::size_t>(ch)];
+        grid_->SetCellValue(ch, kColA, wxString::FromDouble(c.a));
+        grid_->SetCellValue(ch, kColB, wxString::FromDouble(c.b));
+        grid_->SetCellValue(ch, kColUnit, wxString(c.unit));
+        grid_->SetCellValue(ch, kColLabel, wxString(c.label));
+        grid_->SetCellValue(ch, kColMarker,
+                            markerName(static_cast<int>(c.marker)));
+    }
+}
+
 void CalibrationPanel::onCellChanged(wxGridEvent& event)
 {
+    if (event.GetCol() == kColMarker) {
+        const int channel = event.GetRow();
+        if (channel < 0 || channel >= kNumAnalogChannels) {
+            return;
+        }
+        // Dal testo scelto nella tendina all'indice dell'enum: confronto con
+        // i nomi localizzati (stessa fonte usata per popolare l'elenco).
+        const wxString value = grid_->GetCellValue(channel, kColMarker);
+        for (int m = 0; m < kMarkerStyleCount; ++m) {
+            if (value == markerName(m)) {
+                actions_.onChannelMarkerChanged(channel, m);
+                return;
+            }
+        }
+        return;  // testo non riconosciuto: non dovrebbe accadere (allowOthers=false)
+    }
     notifyChannel(event.GetRow());
 }
 

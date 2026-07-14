@@ -3,8 +3,9 @@
 [Italiano](readme_it.md) · [English](README.md) · [Français](readme_fr.md) · [Español](readme_es.md) · **Deutsch**
 
 Desktop-Anwendung (C++20, wxWidgets 3.2+, CMake, MVC-Architektur) zur Echtzeiterfassung der analogen Spannungen A0–A5 und zur Steuerung der digitalen Ausgänge D2–D9 eines über USB angeschlossenen **Arduino Uno**-Boards, mit enthaltenem, dediziertem Firmware-Sketch.
-HINWEIS: ZUERST DIE FIRMWARE AUF DEN ARDUINO LADEN!!
+HINWEIS: ZUERST DIE FIRMWARE AUF DEN ARDUINO LADEN!! Sie befindet sich im Installationsordner ..\AliveMonitor\arduino\AliveMonitor
 Hauptmerkmale: automatische Erkennung der seriellen Schnittstelle (`HELLO`/`ARDUINO_UNO`-Handshake) mit automatischer Wiederverbindung; Echtzeitdiagramm mit 7 Registerkarten — eine kombinierte mit sechs Kurven (Zoom, Verschieben, Autoskalierung, Legende, Raster) plus eine Registerkarte pro Kanal mit eigener Y-Achse in der umgerechneten physikalischen Größe, siehe unten — mit PNG-Export; lineare Kalibrierung pro Kanal (V → physikalische Größe, siehe unten); fortlaufende CSV-Aufzeichnung ab Start (Erzeuger/Verbraucher, siehe unten); Erfassungsfrequenz von 1 bis 250 Hz einstellbar, auch während der laufenden Erfassung; thread-sicherer 60-Sekunden-Ringpuffer pro Kanal (bereits für 500 Hz dimensioniert); vom Erfassen entkoppeltes Rendering (10–60 konfigurierbare FPS); Statusleiste mit FPS, empfangenen/verlorenen Paketen, CRC-/seriellen Fehlern, Verbindungszeit und CPU-Auslastung; Oberfläche in 5 Sprachen verfügbar (Italiano, English, Français, Español, Deutsch), auswählbar in den Einstellungen (erfordert einen Neustart).
+Bei dieser Gelegenheit danke ich Vincenzo Gentile für seine Anregungen und Ratschläge. Weitere sind jederzeit willkommen.
 
 ## Projektstruktur
 

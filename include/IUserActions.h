@@ -27,6 +27,20 @@ public:
     /// Toggle di un'uscita digitale (pin 2..9).
     virtual void onDigitalOutputToggled(int pin, bool on) = 0;
 
+    /// Avvio di un ciclo temporizzato sull'uscita (pulsante ON premuto con
+    /// "Temporizzato" attivo). @param oneShot true = un solo impulso ON di
+    /// onSeconds e poi OFF definitivo (campo Periodo = "inf" nella GUI).
+    virtual void onTimedOutputStarted(int pin, double onSeconds,
+                                      double periodSeconds, bool oneShot) = 0;
+    /// Interruzione manuale del ciclo temporizzato (pulsante su OFF o
+    /// checkbox "Temporizzato" tolto a ciclo in corso): spegne subito.
+    virtual void onTimedOutputStopped(int pin) = 0;
+
+    /// Opzione "Avvio contemporaneo temporizzatori" (riquadro Opzioni):
+    /// se attiva, il primo ON su un'uscita temporizzata avvia anche tutte
+    /// le altre uscite con "Temporizzato" spuntato e campi validi.
+    virtual void onSimultaneousTimersChanged(bool enabled) = 0;
+
     // --- Acquisizione ------------------------------------------------------
     /// Avvia (o riprende da Pausa) l'acquisizione. Se si tratta di una NUOVA
     /// sessione (da Stopped), il Controller chiede prima il file dove
@@ -48,6 +62,16 @@ public:
     virtual void onCalibrationChanged(int channel, double a, double b,
                                       const wxString& unit,
                                       const wxString& label) = 0;
+
+    /// L'utente ha scelto un marker per il canale nella griglia.
+    /// @param markerIndex indice nell'enum MarkerStyle (0 = nessuno).
+    virtual void onChannelMarkerChanged(int channel, int markerIndex) = 0;
+
+    /// Salvataggio/caricamento della configurazione dei canali (a, b, unità,
+    /// nome) su/da file di testo: il Controller mostra il dialogo file e
+    /// gestisce l'I/O (vedi ChannelConfigFile).
+    virtual void onChannelConfigSaveRequested() = 0;
+    virtual void onChannelConfigLoadRequested() = 0;
 
     // --- Esportazione / impostazioni ----------------------------------------
     virtual void onExportPngRequested() = 0;

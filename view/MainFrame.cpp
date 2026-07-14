@@ -4,15 +4,19 @@
  */
 #include "view/MainFrame.h"
 
+#include <algorithm>
 #include <cstring>
 
 #include <wx/aboutdlg.h>
 #include <wx/file.h>
 #include <wx/filename.h>
+#include <wx/gdicmn.h>
 #include <wx/icon.h>
 #include <wx/menu.h>
 #include <wx/msgdlg.h>
+#include <wx/panel.h>
 #include <wx/sizer.h>
+#include <wx/statbox.h>
 #include <wx/stdpaths.h>
 #include <wx/utils.h>
 
@@ -22,6 +26,7 @@
 #include "view/CalibrationPanel.h"
 #include "view/DigitalOutputPanel.h"
 #include "view/GraphPanel.h"
+#include "view/OptionsPanel.h"
 #include "view/StatusPanel.h"
 #include "view/ToolbarPanel.h"
 
@@ -62,38 +67,75 @@ MainFrame::MainFrame(IUserActions& actions,
     //  | Panel          |          GraphPanel             |
     //  | Acquisition    |                                 |
     //  | Panel          |                                 |
+    //  | Calibration    |                                 |
+    //  | [funz. future] |                                 |
     //  +----------------+---------------------------------+
-    //  | StatusPanel                                      |
+    //  | wxStatusBar nativa (v1.2)                        |
     //  +--------------------------------------------------+
+    //
+    // Pannello di SFONDO unico figlio del frame, con tutti i controlli come
+    // suoi figli: è il pattern canonico wxWidgets. Mettere i controlli
+    // direttamente sul wxFrame (com'era fino alla 1.1) ha due difetti
+    // concreti su Windows: lo sfondo del frame non ha il colore nativo dei
+    // dialoghi (grigio più scuro, si notava fra un pannello e l'altro) e la
+    // navigazione da tastiera con TAB fra i controlli non funziona (il
+    // giro-TAB è implementato da wxPanel, non dal frame).
+    auto* background = new wxPanel(this);
     auto* root = new wxBoxSizer(wxVERTICAL);
 
-    toolbar_ = new ToolbarPanel(this, actions_);
+    toolbar_ = new ToolbarPanel(background, actions_);
     root->Add(toolbar_, 0, wxEXPAND | wxALL, 4);
 
     auto* middle = new wxBoxSizer(wxHORIZONTAL);
 
     auto* left = new wxBoxSizer(wxVERTICAL);
-    digital_ = new DigitalOutputPanel(this, actions_);
-    acquisition_ = new AcquisitionPanel(this, actions_);
-    calibration_ = new CalibrationPanel(this, actions_, calibrations);
+    digital_ = new DigitalOutputPanel(background, actions_);
+    acquisition_ = new AcquisitionPanel(background, actions_);
+    calibration_ = new CalibrationPanel(background, actions_, calibrations);
     left->Add(digital_, 0, wxEXPAND);
     left->Add(acquisition_, 0, wxEXPAND);
     left->Add(calibration_, 0, wxEXPAND);
+
+    // Riquadro "Opzioni" (ex segnaposto "Funzionalità future"): opzioni di
+    // comportamento sotto i pulsanti Salva/Carica della calibrazione.
+    options_ = new OptionsPanel(background, actions_);
+    left->Add(options_, 0, wxEXPAND);
+
     left->AddStretchSpacer(1);
     middle->Add(left, 0, wxEXPAND | wxLEFT, 4);
 
-    graph_ = new GraphPanel(this, actions_, buffer, calibrations);
+    graph_ = new GraphPanel(background, actions_, buffer, calibrations);
     middle->Add(graph_, 1, wxEXPAND | wxLEFT | wxRIGHT, 4);
 
     root->Add(middle, 1, wxEXPAND);
+    background->SetSizer(root);
 
-    status_ = new StatusPanel(this);
-    root->Add(status_, 0, wxEXPAND | wxALL, 4);
+    // Il frame contiene SOLO il pannello di sfondo, che riempie l'area client.
+    auto* frameSizer = new wxBoxSizer(wxVERTICAL);
+    frameSizer->Add(background, 1, wxEXPAND);
+    SetSizer(frameSizer);
 
-    SetSizer(root);
+    // Status bar NATIVA (v1.2): gestita dal frame (fuori dal pannello di
+    // sfondo, come ogni wxStatusBar); StatusPanel è solo l'adapter che ne
+    // aggiorna i campi.
+    status_ = std::make_unique<StatusPanel>(CreateStatusBar(StatusPanel::kFieldCount));
+
+    // Dimensione iniziale: abbastanza alta da mostrare per intero la colonna
+    // sinistra — pulsanti Salva/Carica della calibrazione inclusi — senza
+    // però eccedere l'area utile dello schermo (su monitor piccoli si
+    // ripiega sul massimo disponibile: il resto resta raggiungibile
+    // ridimensionando). ComputeFittingWindowSize tiene già conto di menu,
+    // status bar e bordi; la dimensione minima del pannello di sfondo arriva
+    // dal suo sizer, quindi il calcolo sul sizer del frame la include.
+    const wxSize fit = frameSizer->ComputeFittingWindowSize(this);
+    const wxRect area = wxGetClientDisplayRect();
+    SetSize(wxSize(std::min(std::max(1200, fit.x), area.width),
+                   std::min(std::max(760, fit.y), area.height)));
 
     Bind(wxEVT_CLOSE_WINDOW, &MainFrame::onClose, this);
 }
+
+MainFrame::~MainFrame() = default;
 
 void MainFrame::buildMenuBar()
 {

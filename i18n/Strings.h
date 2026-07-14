@@ -47,6 +47,10 @@ enum class StringId {
     DoBoxTitle,
     DoOn,
     DoOff,
+    DoTimedCheck,    ///< "Temporizzato" (v1.2)
+    DoTimeOnLabel,   ///< "ON (s):"
+    DoPeriodLabel,   ///< "Periodo (s):"
+    DoTimedTooltip,  ///< spiega il ciclo e il valore speciale "inf"
 
     // --- AcquisitionPanel --------------------------------------------------------
     AqBoxTitle,
@@ -88,6 +92,20 @@ enum class StringId {
     CalBoxTitle,
     CalColUnit,
     CalColDescription,
+    CalColMarker,   ///< intestazione colonna marker (v1.2)
+    CalBtnSave,     ///< "Salva..." configurazione canali su file
+    CalBtnLoad,     ///< "Carica..." configurazione canali da file
+
+    // --- Marker dei campioni (ordine = enum MarkerStyle) --------------------------
+    MkNone,
+    MkCircleFull,
+    MkCircleOpen,
+    MkSquare,
+    MkTriangle,
+    MkDiamond,
+    MkStar,
+    MkCross,
+    MkX,
 
     // --- GraphPanel ----------------------------------------------------------------
     GpTabAll,
@@ -98,6 +116,9 @@ enum class StringId {
     GpBtnAutoscale,
     GpBtnFollow,
     GpBtnReset,
+    GpYMinLabel,    ///< "Y min" (v1.2)
+    GpYMaxLabel,    ///< "Y max"
+    GpYStepLabel,   ///< "Passo" delle tacche Y
 
     // --- MainFrame: menu -----------------------------------------------------------
     MfMenuFile,
@@ -113,6 +134,11 @@ enum class StringId {
     MfAboutDescription,
     MfAboutLicence,
 
+    // --- OptionsPanel (riquadro "Opzioni", v1.2) -----------------------------------
+    OpBoxTitle,
+    OpSimultaneousTimers,
+    OpSimultaneousTimersTooltip,
+
     // --- MainController ------------------------------------------------------------
     McSaveCsvDialogTitle,
     McCsvOpenError,
@@ -121,6 +147,11 @@ enum class StringId {
     McCsvFilter,
     McPngFilter,
     McErrPrefix,
+    McSaveChCfgTitle,   ///< dialogo salvataggio configurazione canali (v1.2)
+    McLoadChCfgTitle,   ///< dialogo caricamento configurazione canali
+    McChCfgFilter,      ///< filtro "File di testo (*.txt)"
+    McChCfgSaveError,
+    McChCfgLoadError,
 
     // --- SerialController (thread seriale: vedi nota thread-safety sopra) -----------
     ScDisconnectedByUser,

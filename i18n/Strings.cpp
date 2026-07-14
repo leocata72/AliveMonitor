@@ -94,6 +94,34 @@ wxString tr(StringId id)
     case StringId::DoOff:
         e = { "OFF", "OFF", "OFF", "OFF", "OFF" };
         break;
+    case StringId::DoTimedCheck:
+        e = { "Temporizzato", "Timed", "Temporisé", "Temporizado", "Zeitgesteuert" };
+        break;
+    case StringId::DoTimeOnLabel:
+        // "ON" è il nome dello stato del pin (non tradotto, come il pulsante).
+        e = { "ON (s):", "ON (s):", "ON (s) :", "ON (s):", "ON (s):" };
+        break;
+    case StringId::DoPeriodLabel:
+        e = { "Periodo (s):", "Period (s):", "Période (s) :", "Período (s):",
+              "Periode (s):" };
+        break;
+    case StringId::DoTimedTooltip:
+        e = { "Ciclo: ON per il tempo impostato, OFF fino alla fine del periodo, "
+              "poi da capo. Periodo = inf: un solo impulso (ON per il tempo "
+              "impostato, poi OFF definitivo).",
+              "Cycle: ON for the set time, OFF until the end of the period, "
+              "then again. Period = inf: a single pulse (ON for the set time, "
+              "then OFF for good).",
+              "Cycle : ON pendant la durée réglée, OFF jusqu'à la fin de la "
+              "période, puis recommence. Période = inf : une seule impulsion "
+              "(ON pendant la durée réglée, puis OFF définitif).",
+              "Ciclo: ON durante el tiempo establecido, OFF hasta el final del "
+              "período, y de nuevo. Período = inf: un solo pulso (ON durante el "
+              "tiempo establecido, luego OFF definitivo).",
+              "Zyklus: ON für die eingestellte Zeit, OFF bis zum Ende der "
+              "Periode, dann von vorn. Periode = inf: ein einzelner Impuls (ON "
+              "für die eingestellte Zeit, danach endgültig OFF)." };
+        break;
 
     // --- AcquisitionPanel --------------------------------------------------------
     case StringId::AqBoxTitle:
@@ -229,6 +257,47 @@ wxString tr(StringId id)
     case StringId::CalColDescription:
         e = { "descrizione", "description", "description", "descripción", "Beschreibung" };
         break;
+    case StringId::CalColMarker:
+        e = { "marker", "marker", "marqueur", "marcador", "Marker" };
+        break;
+    case StringId::CalBtnSave:
+        e = { "Salva...", "Save...", "Enregistrer...", "Guardar...", "Speichern..." };
+        break;
+    case StringId::CalBtnLoad:
+        e = { "Carica...", "Load...", "Charger...", "Cargar...", "Laden..." };
+        break;
+
+    // --- Marker dei campioni (ordine = enum MarkerStyle) --------------------------
+    case StringId::MkNone:
+        e = { "Nessuno", "None", "Aucun", "Ninguno", "Keiner" };
+        break;
+    case StringId::MkCircleFull:
+        e = { "Cerchio pieno", "Filled circle", "Cercle plein", "Círculo lleno",
+              "Gefüllter Kreis" };
+        break;
+    case StringId::MkCircleOpen:
+        e = { "Cerchio vuoto", "Open circle", "Cercle vide", "Círculo vacío",
+              "Leerer Kreis" };
+        break;
+    case StringId::MkSquare:
+        e = { "Quadrato", "Square", "Carré", "Cuadrado", "Quadrat" };
+        break;
+    case StringId::MkTriangle:
+        e = { "Triangolo", "Triangle", "Triangle", "Triángulo", "Dreieck" };
+        break;
+    case StringId::MkDiamond:
+        e = { "Rombo", "Diamond", "Losange", "Rombo", "Raute" };
+        break;
+    case StringId::MkStar:
+        e = { "Stella", "Star", "Étoile", "Estrella", "Stern" };
+        break;
+    case StringId::MkCross:
+        e = { "Croce", "Cross", "Croix", "Cruz", "Kreuz" };
+        break;
+    case StringId::MkX:
+        e = { "Croce diagonale (X)", "Diagonal cross (X)", "Croix diagonale (X)",
+              "Cruz diagonal (X)", "Diagonalkreuz (X)" };
+        break;
 
     // --- GraphPanel ----------------------------------------------------------------
     case StringId::GpTabAll:
@@ -255,6 +324,16 @@ wxString tr(StringId id)
         break;
     case StringId::GpBtnReset:
         e = { "Reset", "Reset", "Réinitialiser", "Restablecer", "Zurücksetzen" };
+        break;
+    case StringId::GpYMinLabel:
+        // "Y min"/"Y max": notazione matematica, identica in tutte le lingue.
+        e = { "Y min", "Y min", "Y min", "Y min", "Y min" };
+        break;
+    case StringId::GpYMaxLabel:
+        e = { "Y max", "Y max", "Y max", "Y max", "Y max" };
+        break;
+    case StringId::GpYStepLabel:
+        e = { "Passo", "Step", "Pas", "Paso", "Schritt" };
         break;
 
     // --- MainFrame: menu -----------------------------------------------------------
@@ -332,6 +411,35 @@ wxString tr(StringId id)
               "Autoren. Vollständiger Text in der Datei LICENSE." };
         break;
 
+    // --- OptionsPanel ----------------------------------------------------------------
+    case StringId::OpBoxTitle:
+        e = { "Opzioni", "Options", "Options", "Opciones", "Optionen" };
+        break;
+    case StringId::OpSimultaneousTimers:
+        e = { "Avvio contemporaneo temporizzatori",
+              "Start timed outputs together",
+              "Démarrage simultané des temporisations",
+              "Inicio simultáneo de temporizadores",
+              "Zeitsteuerungen gemeinsam starten" };
+        break;
+    case StringId::OpSimultaneousTimersTooltip:
+        e = { "Se spuntato, il primo ON su un'uscita temporizzata avvia anche "
+              "tutte le altre uscite con \"Temporizzato\" attivo e campi validi, "
+              "ognuna con i propri tempi.",
+              "If checked, the first ON on a timed output also starts every "
+              "other output with \"Timed\" enabled and valid fields, each with "
+              "its own timing.",
+              "Si cochée, le premier ON sur une sortie temporisée démarre aussi "
+              "toutes les autres sorties avec « Temporisé » actif et des champs "
+              "valides, chacune avec ses propres temps.",
+              "Si está marcada, el primer ON en una salida temporizada inicia "
+              "también todas las demás salidas con \"Temporizado\" activo y "
+              "campos válidos, cada una con sus propios tiempos.",
+              "Falls aktiviert, startet das erste ON an einem zeitgesteuerten "
+              "Ausgang auch alle anderen Ausgänge mit aktivem \"Zeitgesteuert\" "
+              "und gültigen Feldern, jeder mit eigenen Zeiten." };
+        break;
+
     // --- MainController ------------------------------------------------------------
     case StringId::McSaveCsvDialogTitle:
         e = { "Salva registrazione CSV", "Save CSV recording", "Enregistrer le fichier CSV",
@@ -365,6 +473,35 @@ wxString tr(StringId id)
         break;
     case StringId::McErrPrefix:
         e = { "ERR: ", "ERR: ", "ERR : ", "ERR: ", "FEHLER: " };
+        break;
+    case StringId::McSaveChCfgTitle:
+        e = { "Salva configurazione canali", "Save channel configuration",
+              "Enregistrer la configuration des voies",
+              "Guardar configuración de canales", "Kanalkonfiguration speichern" };
+        break;
+    case StringId::McLoadChCfgTitle:
+        e = { "Carica configurazione canali", "Load channel configuration",
+              "Charger la configuration des voies",
+              "Cargar configuración de canales", "Kanalkonfiguration laden" };
+        break;
+    case StringId::McChCfgFilter:
+        e = { "File di testo (*.txt)|*.txt", "Text files (*.txt)|*.txt",
+              "Fichiers texte (*.txt)|*.txt", "Archivos de texto (*.txt)|*.txt",
+              "Textdateien (*.txt)|*.txt" };
+        break;
+    case StringId::McChCfgSaveError:
+        e = { "Impossibile scrivere il file di configurazione dei canali.",
+              "Unable to write the channel configuration file.",
+              "Impossible d'écrire le fichier de configuration des voies.",
+              "No se pudo escribir el archivo de configuración de canales.",
+              "Die Kanalkonfigurationsdatei konnte nicht geschrieben werden." };
+        break;
+    case StringId::McChCfgLoadError:
+        e = { "File di configurazione dei canali non valido o illeggibile.",
+              "Invalid or unreadable channel configuration file.",
+              "Fichier de configuration des voies invalide ou illisible.",
+              "Archivo de configuración de canales no válido o ilegible.",
+              "Ungültige oder unlesbare Kanalkonfigurationsdatei." };
         break;
 
     // --- SerialController (thread seriale) ------------------------------------------

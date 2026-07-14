@@ -17,6 +17,7 @@
 #include <wx/notebook.h>
 #include <wx/sizer.h>
 #include <wx/stattext.h>
+#include <wx/textctrl.h>
 
 #include "i18n/Strings.h"
 #include "view/LedIndicator.h"
@@ -124,6 +125,25 @@ void PlotCanvas::setContinuousAutoscaleY(bool enabled)
     if (enabled) {
         autoscaleYOnce();
     }
+    Refresh(false);
+}
+
+void PlotCanvas::setManualYScale(double yMin, double yMax)
+{
+    if (!(yMin < yMax)) {
+        return;  // intervallo degenere o invertito: ignorato
+    }
+    // L'autoscale continuo sovrascriverebbe la scala manuale al frame
+    // successivo: la scelta esplicita dell'utente vince e lo disattiva.
+    autoY_ = false;
+    yMin_ = yMin;
+    yMax_ = yMax;
+    Refresh(false);
+}
+
+void PlotCanvas::setYTickStep(double step)
+{
+    yTickStep_ = (step > 0.0) ? step : 0.0;
     Refresh(false);
 }
 
@@ -387,8 +407,16 @@ void PlotCanvas::drawGrid(wxDC& dc, const wxRect& plot) const
     //     schede a canale singolo) ------------------------------------------
     const wxString unit = yAxisUnit();
     const double spanY = yMax_ - yMin_;
-    const double stepY = niceStep(spanY, 6);
-    const int decimalsY = stepY < 0.1 ? 2 : (stepY < 1.0 ? 1 : 0);
+    // Passo manuale dell'utente se impostato e sensato per la vista corrente
+    // (un passo minuscolo dopo uno zoom-out produrrebbe migliaia di linee:
+    // oltre 400 tacche si ripiega sul passo automatico invece di congelare
+    // il rendering); altrimenti passo automatico "gradevole".
+    const double stepY = (yTickStep_ > 0.0 && spanY / yTickStep_ <= 400.0)
+        ? yTickStep_
+        : niceStep(spanY, 6);
+    // Decimali adeguati anche a passi manuali non "tondi" (es. 0.25 -> 2).
+    const int decimalsY = stepY < 0.01 ? 3
+        : (stepY < 0.1 ? 2 : (stepY < 1.0 ? (stepY * 10.0 == std::floor(stepY * 10.0) ? 1 : 2) : 0));
     for (double v = std::ceil(yMin_ / stepY) * stepY; v <= yMax_ + 1e-9;
          v += stepY) {
         const int y = plot.y + plot.height
@@ -442,6 +470,8 @@ void PlotCanvas::drawCurves(wxDC& dc, const wxRect& plot) const
 
         dc.SetPen(wxPen(colours_[chIdx], 1));
         scratchPoints_.clear();
+        markerPoints_.clear();
+        const MarkerStyle marker = calibrations_[chIdx].marker;
 
         // Stato per il rilevamento dei "buchi" temporali (Pausa, o più
         // raramente qualche pacchetto perso): la stima del periodo tipico
@@ -534,11 +564,97 @@ void PlotCanvas::drawCurves(wxDC& dc, const wxRect& plot) const
                 if (isGap(s.t)) {
                     flushSegment();
                 }
-                scratchPoints_.emplace_back(toX(s.t), toY(plottedValue(ch, s)));
+                const wxPoint pt(toX(s.t), toY(plottedValue(ch, s)));
+                scratchPoints_.push_back(pt);
+                if (marker != MarkerStyle::None) {
+                    markerPoints_.push_back(pt);
+                }
             }
         }
 
         flushSegment();
+
+        // ----- Marker dei campioni (v1.2) ---------------------------------
+        // Solo nel ramo a polilinea diretta: in decimazione ogni colonna di
+        // pixel condensa decine di campioni e i marker degenererebbero in una
+        // fascia illeggibile (oltre a costare migliaia di draw per frame).
+        // È esattamente il caso d'uso della specifica: "pochi punti o
+        // acquisizioni discontinue". Tetto difensivo sul numero di marker
+        // per non degradare il framerate ai limiti del ramo diretto.
+        constexpr std::size_t kMaxMarkersPerChannel = 800;
+        if (!markerPoints_.empty()
+            && markerPoints_.size() <= kMaxMarkersPerChannel) {
+            dc.SetPen(wxPen(colours_[chIdx], 1));
+            // Cerchio vuoto: solo contorno; tutti gli altri stili pieni
+            // usano il colore del canale anche come riempimento.
+            dc.SetBrush(marker == MarkerStyle::CircleOpen
+                            ? *wxTRANSPARENT_BRUSH
+                            : wxBrush(colours_[chIdx]));
+            for (const wxPoint& pt : markerPoints_) {
+                drawMarker(dc, pt, marker);
+            }
+        }
+    }
+}
+
+void PlotCanvas::drawMarker(wxDC& dc, const wxPoint& pt, MarkerStyle style)
+{
+    // Raggio nominale del marker in pixel: abbastanza grande da distinguere
+    // le forme, abbastanza piccolo da non impastare campioni ravvicinati.
+    constexpr int r = 3;
+    const int x = pt.x;
+    const int y = pt.y;
+
+    switch (style) {
+    case MarkerStyle::CircleFull:
+    case MarkerStyle::CircleOpen:
+        // Pieno/vuoto deciso dal brush impostato dal chiamante.
+        dc.DrawCircle(x, y, r);
+        break;
+
+    case MarkerStyle::Square:
+        dc.DrawRectangle(x - r, y - r, 2 * r + 1, 2 * r + 1);
+        break;
+
+    case MarkerStyle::Triangle: {
+        const wxPoint pts[3] = { { x, y - r - 1 },
+                                 { x - r - 1, y + r },
+                                 { x + r + 1, y + r } };
+        dc.DrawPolygon(3, pts);
+        break;
+    }
+
+    case MarkerStyle::Diamond: {
+        const wxPoint pts[4] = { { x, y - r - 1 },
+                                 { x + r + 1, y },
+                                 { x, y + r + 1 },
+                                 { x - r - 1, y } };
+        dc.DrawPolygon(4, pts);
+        break;
+    }
+
+    case MarkerStyle::Star:
+        // Asterisco a 8 punte: croce + croce diagonale. Leggibile a queste
+        // dimensioni, dove una stella a 5 punte "piena" diventerebbe un blob.
+        dc.DrawLine(x - r, y, x + r + 1, y);
+        dc.DrawLine(x, y - r, x, y + r + 1);
+        dc.DrawLine(x - r, y - r, x + r + 1, y + r + 1);
+        dc.DrawLine(x - r, y + r, x + r + 1, y - r - 1);
+        break;
+
+    case MarkerStyle::Cross:
+        dc.DrawLine(x - r, y, x + r + 1, y);
+        dc.DrawLine(x, y - r, x, y + r + 1);
+        break;
+
+    case MarkerStyle::XCross:
+        dc.DrawLine(x - r, y - r, x + r + 1, y + r + 1);
+        dc.DrawLine(x - r, y + r, x + r + 1, y - r - 1);
+        break;
+
+    case MarkerStyle::None:
+    default:
+        break;
     }
 }
 
@@ -693,6 +809,55 @@ PlotCanvas* GraphPanel::buildTab(const wxString& title, int soloChannel)
         canvas->setContinuousAutoscaleY(e.IsChecked());
     });
     autoYChecks_[static_cast<std::size_t>(soloChannel + 1)] = autoYCheck;
+
+    // --- Scala Y manuale (v1.2): min, max e passo delle tacche ---------------
+    // Applicata in tempo reale mentre si digita (wxEVT_TEXT): appena min e
+    // max sono entrambi numeri validi con min < max, la scala viene imposta
+    // e l'Auto Y si spegne (la scelta esplicita dell'utente vince). Campi
+    // vuoti o parziali semplicemente non applicano nulla: mai un dialogo di
+    // errore mentre si sta ancora scrivendo.
+    controls->Add(new wxStaticText(page, wxID_ANY, tr(StringId::GpYMinLabel)),
+                  0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 2);
+    auto* yMinField = new wxTextCtrl(page, wxID_ANY, wxString(),
+                                     wxDefaultPosition, wxSize(52, -1));
+    controls->Add(yMinField, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
+
+    controls->Add(new wxStaticText(page, wxID_ANY, tr(StringId::GpYMaxLabel)),
+                  0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 2);
+    auto* yMaxField = new wxTextCtrl(page, wxID_ANY, wxString(),
+                                     wxDefaultPosition, wxSize(52, -1));
+    controls->Add(yMaxField, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
+
+    controls->Add(new wxStaticText(page, wxID_ANY, tr(StringId::GpYStepLabel)),
+                  0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 2);
+    auto* yStepField = new wxTextCtrl(page, wxID_ANY, wxString(),
+                                      wxDefaultPosition, wxSize(48, -1));
+    controls->Add(yStepField, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
+
+    const auto applyManualScale = [canvas, autoYCheck, yMinField, yMaxField]() {
+        double lo = 0.0;
+        double hi = 0.0;
+        // ToCDouble: punto decimale indipendente dalla locale (vedi
+        // CalibrationPanel per il razionale).
+        if (yMinField->GetValue().ToCDouble(&lo)
+            && yMaxField->GetValue().ToCDouble(&hi) && lo < hi) {
+            canvas->setManualYScale(lo, hi);
+            autoYCheck->SetValue(false);  // setManualYScale ha spento autoY_
+        }
+    };
+    yMinField->Bind(wxEVT_TEXT,
+                    [applyManualScale](wxCommandEvent&) { applyManualScale(); });
+    yMaxField->Bind(wxEVT_TEXT,
+                    [applyManualScale](wxCommandEvent&) { applyManualScale(); });
+    yStepField->Bind(wxEVT_TEXT, [canvas, yStepField](wxCommandEvent&) {
+        double step = 0.0;
+        if (yStepField->GetValue().ToCDouble(&step) && step > 0.0) {
+            canvas->setYTickStep(step);
+        } else {
+            canvas->setYTickStep(0.0);  // vuoto/non valido: passo automatico
+        }
+    });
+
     controls->Add(autoYCheck, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
 
     auto* autoscaleBtn = new wxButton(page, wxID_ANY, tr(StringId::GpBtnAutoscale),

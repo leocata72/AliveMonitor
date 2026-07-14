@@ -3,8 +3,9 @@
 [Italiano](readme_it.md) · **English** · [Français](readme_fr.md) · [Español](readme_es.md) · [Deutsch](readme_de.md)
 
 Desktop application (C++20, wxWidgets 3.2+, CMake, MVC architecture) for real-time acquisition of the analog voltages A0–A5 and control of the digital outputs D2–D9 of an **Arduino Uno** board connected via USB, with a dedicated firmware sketch included.
-NOTICE: FLASH THE FIRMWARE ONTO THE ARDUINO FIRST!!
+NOTICE: FLASH THE FIRMWARE ONTO THE ARDUINO FIRST!! It is located inside the installation folder ..\AliveMonitor\arduino\AliveMonitor
 Main features: automatic serial port detection (`HELLO`/`ARDUINO_UNO` handshake) with automatic reconnection; real-time graph organized into 7 tabs — one combined tab with six curves (zoom, pan, autoscale, legend, grid) plus one tab per channel with a dedicated Y axis in the converted physical quantity, see below — with PNG export; per-channel linear calibration (V → physical quantity, see below); continuous CSV recording on Start (producer/consumer, see below); acquisition rate adjustable from 1 to 250 Hz even while running; thread-safe 60-second ring buffer per channel (already sized for 500 Hz); rendering decoupled from acquisition (10–60 configurable FPS); status bar with FPS, received/lost packets, CRC/serial errors, connection time and CPU usage; interface available in 5 languages (Italiano, English, Français, Español, Deutsch), selectable from Settings (requires a restart).
+I would also like to take this opportunity to thank Vincenzo Gentile for his suggestions and advice. Feel free to send more.
 
 ## Project structure
 

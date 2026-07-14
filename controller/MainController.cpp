@@ -13,7 +13,9 @@
 #include "Version.h"
 #include "i18n/Strings.h"
 #include "model/AppSettings.h"
+#include "model/ChannelConfigFile.h"
 #include "view/AcquisitionPanel.h"
+#include "view/CalibrationPanel.h"
 #include "view/DigitalOutputPanel.h"
 #include "view/GraphPanel.h"
 #include "view/LanguageSelectDialog.h"
@@ -77,6 +79,18 @@ void MainController::initialize(wxSplashScreen* splash)
     // 2) Collegamento Controller <-> View.
     graph_.attachPanel(frame_->graphPanel());
 
+    // 2b) Uscite temporizzate (v1.2): i cicli inviano i comandi attraverso
+    //     CommandController (stessa strada dei toggle manuali: stato
+    //     desiderato aggiornato + comando accodato); al termine di un
+    //     one-shot il pulsante della riga torna visivamente su OFF.
+    timedOutputs_.setCallbacks(
+        [this](int pin, bool on) { commands_.setDigitalOutput(pin, on); },
+        [this](int pin) {
+            if (frame_ != nullptr) {
+                frame_->digitalPanel()->setButtonState(pin, false);
+            }
+        });
+
     // 3) Eventi dal thread seriale verso questo handler (main thread).
     serial_.setEventSink(this);
     Bind(events::EVT_CONNECTION_CHANGED, &MainController::onConnectionChanged, this);
@@ -103,6 +117,7 @@ void MainController::shutdown()
     shutdownDone_ = true;
 
     uiTimer_.Stop();
+    timedOutputs_.stopAll();  // spegne le uscite con cicli in corso
     graph_.stopRendering();
     serial_.stop();     // join del thread seriale: nessun altro push dopo questo punto
     csvLogger_.stop();  // drena la coda e attende che il consumatore finisca di scrivere
@@ -126,7 +141,30 @@ void MainController::onDisconnectRequested()
 
 void MainController::onDigitalOutputToggled(int pin, bool on)
 {
+    // Un toggle manuale su un pin con ciclo temporizzato attivo lo
+    // interrompe: il comando esplicito dell'utente vince sempre sul ciclo.
+    timedOutputs_.stopCycle(pin);
     commands_.setDigitalOutput(pin, on);
+}
+
+void MainController::onTimedOutputStarted(int pin, double onSeconds,
+                                          double periodSeconds, bool oneShot)
+{
+    timedOutputs_.startCycle(pin, onSeconds, periodSeconds, oneShot);
+}
+
+void MainController::onTimedOutputStopped(int pin)
+{
+    timedOutputs_.stopCycle(pin);
+}
+
+void MainController::onSimultaneousTimersChanged(bool enabled)
+{
+    // L'opzione vive nella View delle uscite (è lei a conoscere righe e campi
+    // configurati): qui si fa solo da tramite fra i due pannelli.
+    if (frame_ != nullptr) {
+        frame_->digitalPanel()->setSimultaneousTimedStart(enabled);
+    }
 }
 
 void MainController::onAcquisitionStart()
@@ -190,8 +228,15 @@ void MainController::onCalibrationChanged(int channel, double a, double b,
     if (channel < 0 || channel >= kNumAnalogChannels) {
         return;
     }
-    calibrations_[static_cast<std::size_t>(channel)] =
-        ChannelCalibration{ a, b, unit.ToStdString(), label.ToStdString() };
+    // Aggiornamento campo per campo, NON per assegnazione di un aggregato
+    // nuovo: un ChannelCalibration{...} costruito qui azzererebbe anche il
+    // marker (che questa azione non riguarda: viaggia su
+    // onChannelMarkerChanged) riportandolo silenziosamente a "Nessuno".
+    auto& cal = calibrations_[static_cast<std::size_t>(channel)];
+    cal.a = a;
+    cal.b = b;
+    cal.unit = unit.ToStdString();
+    cal.label = label.ToStdString();
     // Nessun refreshStatusViews(): la legenda del grafico legge calibrations_
     // direttamente (const&) ad ogni frame di rendering, già in corso a
     // 10..60 FPS indipendentemente da questa modifica. Il titolo della
@@ -199,6 +244,63 @@ void MainController::onCalibrationChanged(int channel, double a, double b,
     // testo statico del wxNotebook): va aggiornato esplicitamente qui.
     if (frame_ != nullptr) {
         frame_->graphPanel()->setChannelTabTitle(channel, label);
+    }
+}
+
+void MainController::onChannelMarkerChanged(int channel, int markerIndex)
+{
+    if (channel < 0 || channel >= kNumAnalogChannels
+        || markerIndex < 0 || markerIndex >= kMarkerStyleCount) {
+        return;
+    }
+    // Effetto immediato: PlotCanvas legge calibrations_ (const&) a ogni
+    // frame di rendering, nessuna notifica esplicita necessaria.
+    calibrations_[static_cast<std::size_t>(channel)].marker =
+        static_cast<MarkerStyle>(markerIndex);
+}
+
+void MainController::onChannelConfigSaveRequested()
+{
+    if (frame_ == nullptr) {
+        return;
+    }
+    wxFileDialog dialog(frame_, tr(StringId::McSaveChCfgTitle), wxString(),
+                        "canali.txt", tr(StringId::McChCfgFilter),
+                        wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+    if (dialog.ShowModal() != wxID_OK) {
+        return;
+    }
+    if (!ChannelConfigFile::save(
+            std::string(dialog.GetPath().utf8_string()), calibrations_)) {
+        wxMessageBox(tr(StringId::McChCfgSaveError),
+                     kAppName, wxICON_ERROR | wxOK, frame_);
+    }
+}
+
+void MainController::onChannelConfigLoadRequested()
+{
+    if (frame_ == nullptr) {
+        return;
+    }
+    wxFileDialog dialog(frame_, tr(StringId::McLoadChCfgTitle), wxString(),
+                        wxString(), tr(StringId::McChCfgFilter),
+                        wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+    if (dialog.ShowModal() != wxID_OK) {
+        return;
+    }
+    if (!ChannelConfigFile::load(
+            std::string(dialog.GetPath().utf8_string()), calibrations_)) {
+        wxMessageBox(tr(StringId::McChCfgLoadError),
+                     kAppName, wxICON_ERROR | wxOK, frame_);
+        return;
+    }
+    // La fonte di verità è cambiata fuori dalla griglia: riallinea la griglia
+    // (senza scatenare notifiche) e i titoli delle schede per canale. Legenda
+    // e assi del grafico leggono calibrations_ live: nessun'altra azione.
+    frame_->calibrationPanel()->refreshFromCalibrations(calibrations_);
+    for (int ch = 0; ch < kNumAnalogChannels; ++ch) {
+        frame_->graphPanel()->setChannelTabTitle(
+            ch, wxString(calibrations_[static_cast<std::size_t>(ch)].label));
     }
 }
 
