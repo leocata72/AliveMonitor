@@ -30,6 +30,21 @@ void CommandController::setDigitalOutput(int pin, bool on)
     serial_.enqueueCommand(CommunicationProtocol::buildSetOutput(pin, on));
 }
 
+void CommandController::setDigitalDirection(int pin, bool input)
+{
+    if (!DigitalOutputState::isValidPin(pin)) {
+        return;
+    }
+    outputs_.setDesiredDirection(pin, input);
+    serial_.enqueueCommand(CommunicationProtocol::buildSetDirection(pin, input));
+    if (!input) {
+        // Tornando in uscita il firmware parte da LOW (stato sicuro): si
+        // riapplica subito lo stato desiderato che l'utente aveva impostato.
+        serial_.enqueueCommand(CommunicationProtocol::buildSetOutput(
+            pin, outputs_.desired(pin).value_or(false)));
+    }
+}
+
 void CommandController::setSampleRate(int rateHz)
 {
     const int clamped = std::clamp(rateHz, kMinSampleRateHz, kMaxSampleRateHz);

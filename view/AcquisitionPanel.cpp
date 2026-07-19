@@ -49,7 +49,9 @@ AcquisitionPanel::AcquisitionPanel(wxWindow* parent, IUserActions& actions)
     csvLogCheck_->SetToolTip(tr(StringId::AqCsvTooltip));
     box->Add(csvLogCheck_, 0, wxLEFT | wxRIGHT | wxBOTTOM, 8);
 
-    // --- Frequenza: SpinCtrl + Slider sincronizzati ---------------------------
+    // --- Frequenza: da qui a "Campionamento" su TRE righe, non cinque -----------
+    // Riga 1: etichetta + spin + slider in linea (lo slider prende lo spazio
+    // residuo invece di occupare una riga propria).
     auto* freqRow = new wxBoxSizer(wxHORIZONTAL);
     freqRow->Add(new wxStaticText(boxWin, wxID_ANY, tr(StringId::AqFreqLabel)), 0,
                  wxALIGN_CENTER_VERTICAL | wxRIGHT, 6);
@@ -58,11 +60,10 @@ AcquisitionPanel::AcquisitionPanel(wxWindow* parent, IUserActions& actions)
                                kMinSampleRateHz, kMaxSampleRateHz,
                                kDefaultSampleRateHz);
     freqRow->Add(rateSpin_, 0, wxALIGN_CENTER_VERTICAL);
-    box->Add(freqRow, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
-
     rateSlider_ = new wxSlider(boxWin, wxID_ANY, kDefaultSampleRateHz,
                                kMinSampleRateHz, kMaxSampleRateHz);
-    box->Add(rateSlider_, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
+    freqRow->Add(rateSlider_, 1, wxALIGN_CENTER_VERTICAL | wxLEFT, 6);
+    box->Add(freqRow, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 8);
 
     rateSpin_->Bind(wxEVT_SPINCTRL, [this](wxSpinEvent& e) {
         if (!syncing_) { onRateEdited(e.GetValue()); }
@@ -71,13 +72,16 @@ AcquisitionPanel::AcquisitionPanel(wxWindow* parent, IUserActions& actions)
         if (!syncing_) { onRateEdited(e.GetInt()); }
     });
 
-    // --- Etichette informative -------------------------------------------------
+    // Riga 2: frequenza impostata/confermata. Riga 3: misurata e periodo di
+    // campionamento affiancati (erano due righe separate).
     setRateText_ = new wxStaticText(boxWin, wxID_ANY, wxString());
     measuredRateText_ = new wxStaticText(boxWin, wxID_ANY, tr(StringId::AqMeasuredRateNone));
     samplePeriodText_ = new wxStaticText(boxWin, wxID_ANY, tr(StringId::AqSamplePeriodNone));
     box->Add(setRateText_, 0, wxLEFT | wxRIGHT | wxBOTTOM, 8);
-    box->Add(measuredRateText_, 0, wxLEFT | wxRIGHT | wxBOTTOM, 8);
-    box->Add(samplePeriodText_, 0, wxLEFT | wxRIGHT | wxBOTTOM, 8);
+    auto* measRow = new wxBoxSizer(wxHORIZONTAL);
+    measRow->Add(measuredRateText_, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 12);
+    measRow->Add(samplePeriodText_, 0, wxALIGN_CENTER_VERTICAL);
+    box->Add(measRow, 0, wxLEFT | wxRIGHT | wxBOTTOM, 8);
 
     auto* outer = new wxBoxSizer(wxVERTICAL);
     outer->Add(box, 0, wxEXPAND | wxALL, 4);

@@ -49,6 +49,15 @@ public:
     [[nodiscard]] PinArray desiredAll() const;
     [[nodiscard]] PinArray actualAll() const;
 
+    // --- Direzione dei pin (v1.2): false = uscita (default), true = ingresso.
+    /// Direzione desiderata dall'utente (wxChoice IN/OUT); riapplicata a
+    /// ogni (ri)connessione come lo stato delle uscite.
+    void setDesiredDirection(int pin, bool input);
+    /// Direzione confermata dal firmware ("OK DIR Dx=...").
+    void setActualDirection(int pin, bool input);
+    [[nodiscard]] std::optional<bool> desiredDirection(int pin) const;
+    [[nodiscard]] PinArray desiredDirectionsAll() const;
+
 private:
     [[nodiscard]] static constexpr std::size_t index(int pin) noexcept
     {
@@ -56,8 +65,10 @@ private:
     }
 
     mutable std::mutex mutex_;
-    PinArray desired_{};  ///< Tutte false all'avvio.
+    PinArray desired_{};        ///< Tutte false all'avvio.
     PinArray actual_{};
+    PinArray desiredInput_{};   ///< false = OUT (default), true = IN. (v1.2)
+    PinArray actualInput_{};    ///< Direzione confermata dal firmware.
 };
 
 } // namespace am

@@ -60,4 +60,37 @@ DigitalOutputState::PinArray DigitalOutputState::actualAll() const
     return actual_;
 }
 
+void DigitalOutputState::setDesiredDirection(int pin, bool input)
+{
+    if (!isValidPin(pin)) {
+        return;
+    }
+    const std::lock_guard lock(mutex_);
+    desiredInput_[index(pin)] = input;
+}
+
+void DigitalOutputState::setActualDirection(int pin, bool input)
+{
+    if (!isValidPin(pin)) {
+        return;
+    }
+    const std::lock_guard lock(mutex_);
+    actualInput_[index(pin)] = input;
+}
+
+std::optional<bool> DigitalOutputState::desiredDirection(int pin) const
+{
+    if (!isValidPin(pin)) {
+        return std::nullopt;
+    }
+    const std::lock_guard lock(mutex_);
+    return desiredInput_[index(pin)];
+}
+
+DigitalOutputState::PinArray DigitalOutputState::desiredDirectionsAll() const
+{
+    const std::lock_guard lock(mutex_);
+    return desiredInput_;
+}
+
 } // namespace am

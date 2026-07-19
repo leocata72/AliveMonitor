@@ -64,6 +64,7 @@ public:
     void onConnectRequested() override;
     void onDisconnectRequested() override;
     void onDigitalOutputToggled(int pin, bool on) override;
+    void onDigitalDirectionChanged(int pin, bool input) override;
     void onTimedOutputStarted(int pin, double onSeconds,
                               double periodSeconds, bool oneShot) override;
     void onTimedOutputStopped(int pin) override;

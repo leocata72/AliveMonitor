@@ -9,9 +9,15 @@
  * toccare il resto dell'applicazione.
  *
  * Sintassi (righe ASCII terminate da '\n'):
- *   PC -> Arduino:  HELLO | VER | GET | SET D<pin> <0|1> | RATE <hz> | STREAM <0|1>
+ *   PC -> Arduino:  HELLO | VER | GET | SET D<pin> <0|1> | DIR D<pin> <I|O> |
+ *                   RATE <hz> | STREAM <0|1>
  *   Arduino -> PC:  ARDUINO_UNO | VERSION <x.y.z> | ADC,v0,...,v5*CS |
- *                   OK D<pin>=<0|1> | OK RATE=<hz> | OK STREAM=<0|1> | ERR <msg>
+ *                   OK D<pin>=<0|1> | OK DIR D<pin>=<I|O> | IN D<pin>=<0|1> |
+ *                   OK RATE=<hz> | OK STREAM=<0|1> | ERR <msg>
+ *
+ * "IN D<pin>=<0|1>" è una notifica SPONTANEA del firmware: livello corrente
+ * di un pin configurato come ingresso, inviata a ogni cambio (debounce) e
+ * subito dopo l'OK di un "DIR ... I".
  *
  * Le righe ADC portano un checksum stile NMEA: '*' seguito da due cifre
  * esadecimali = XOR di tutti i caratteri precedenti l'asterisco.
@@ -33,6 +39,8 @@ enum class ResponseType {
     Handshake,      ///< "ARDUINO_UNO"
     Adc,            ///< "ADC,..." con checksum valido
     OkOutput,       ///< "OK Dx=v"
+    OkDirection,    ///< "OK DIR Dx=I/O" (v1.2)
+    InputState,     ///< "IN Dx=v": livello di un pin in ingresso (v1.2)
     OkRate,         ///< "OK RATE=n"
     OkStream,       ///< "OK STREAM=v"
     Version,        ///< "VERSION x.y.z"
@@ -45,8 +53,9 @@ enum class ResponseType {
 struct ParsedResponse {
     ResponseType type = ResponseType::Unknown;
     std::array<std::uint16_t, kNumAnalogChannels> adcValues{};  ///< se Adc
-    int pin = 0;              ///< se OkOutput
-    bool pinState = false;    ///< se OkOutput
+    int pin = 0;              ///< se OkOutput / OkDirection / InputState
+    bool pinState = false;    ///< se OkOutput / InputState
+    bool isInput = false;     ///< se OkDirection (true = ingresso)
     int rateHz = 0;           ///< se OkRate
     bool streaming = false;   ///< se OkStream
     std::string version;      ///< se Version
@@ -66,6 +75,8 @@ public:
     [[nodiscard]] static std::string buildVersionRequest();
     [[nodiscard]] static std::string buildGet();
     [[nodiscard]] static std::string buildSetOutput(int pin, bool on);
+    /// "DIR D<pin> I" (ingresso) oppure "DIR D<pin> O" (uscita). (v1.2)
+    [[nodiscard]] static std::string buildSetDirection(int pin, bool input);
     [[nodiscard]] static std::string buildRate(int rateHz);
     [[nodiscard]] static std::string buildStream(bool on);
 

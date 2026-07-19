@@ -23,9 +23,13 @@ public:
     /// L'utente ha premuto "Disconnetti": chiude e sospende la ricerca.
     virtual void onDisconnectRequested() = 0;
 
-    // --- Uscite digitali ---------------------------------------------------
+    // --- I/O digitali ------------------------------------------------------
     /// Toggle di un'uscita digitale (pin 2..9).
     virtual void onDigitalOutputToggled(int pin, bool on) = 0;
+
+    /// Cambio di direzione del pin dalla wxChoice IN/OUT (v1.2):
+    /// true = ingresso (il LED mostrerà il livello letto dal firmware).
+    virtual void onDigitalDirectionChanged(int pin, bool input) = 0;
 
     /// Avvio di un ciclo temporizzato sull'uscita (pulsante ON premuto con
     /// "Temporizzato" attivo). @param oneShot true = un solo impulso ON di

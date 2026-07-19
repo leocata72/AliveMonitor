@@ -50,6 +50,22 @@ public:
     /// Timestamp del campione più recente (nullopt se vuoto).
     [[nodiscard]] std::optional<double> latestTime() const;
 
+    /// Statistiche di un canale sugli ULTIMI n campioni (v1.2).
+    struct ChannelStats {
+        double meanVolts = 0.0;    ///< Media aritmetica [V].
+        double stddevVolts = 0.0;  ///< Deviazione standard di popolazione [V].
+        double minVolts = 0.0;     ///< Minimo [V].
+        double maxVolts = 0.0;     ///< Massimo [V].
+        std::size_t count = 0;     ///< Campioni effettivamente usati (<= n).
+    };
+
+    /// Media, deviazione standard, minimo e massimo degli ultimi n campioni
+    /// di ogni canale, a ritroso dal più recente. Se i campioni disponibili
+    /// sono meno di n si usano quelli che ci sono (count lo riporta);
+    /// count==0 = buffer vuoto. Snapshot coerente fra i sei canali (unico lock).
+    [[nodiscard]] std::array<ChannelStats, kNumAnalogChannels>
+    lastStats(std::size_t n) const;
+
     /// Numero di campioni attualmente memorizzati per canale.
     [[nodiscard]] std::size_t sizePerChannel() const;
 

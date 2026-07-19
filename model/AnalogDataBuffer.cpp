@@ -4,6 +4,8 @@
  */
 #include "model/AnalogDataBuffer.h"
 
+#include <algorithm>
+#include <cmath>
 #include <iomanip>
 
 namespace am {
@@ -59,6 +61,52 @@ void AnalogDataBuffer::copyWindow(
             dst.push_back(src[i]);
         }
     }
+}
+
+std::array<AnalogDataBuffer::ChannelStats, kNumAnalogChannels>
+AnalogDataBuffer::lastStats(std::size_t n) const
+{
+    const std::lock_guard lock(mutex_);
+    std::array<ChannelStats, kNumAnalogChannels> out{};
+    if (n == 0) {
+        return out;
+    }
+    for (std::size_t ch = 0; ch < kNumAnalogChannels; ++ch) {
+        const auto& src = channels_[ch];
+        const std::size_t size = src.size();
+        const std::size_t count = (n < size) ? n : size;
+        if (count == 0) {
+            continue;
+        }
+        const std::size_t first = size - count;  // ultimi count campioni
+
+        // Due passate (media, poi scarti): numericamente più stabile della
+        // formula E[x^2]-E[x]^2, che con valori quasi costanti (il caso
+        // tipico: segnale fermo) cancella catastroficamente.
+        double sum = 0.0;
+        double lo = src[first].volts();
+        double hi = lo;
+        for (std::size_t i = first; i < size; ++i) {
+            const double v = src[i].volts();
+            sum += v;
+            lo = std::min(lo, v);
+            hi = std::max(hi, v);
+        }
+        const double mean = sum / static_cast<double>(count);
+
+        double sumSq = 0.0;
+        for (std::size_t i = first; i < size; ++i) {
+            const double d = src[i].volts() - mean;
+            sumSq += d * d;
+        }
+        auto& s = out[ch];
+        s.meanVolts = mean;
+        s.stddevVolts = std::sqrt(sumSq / static_cast<double>(count));
+        s.minVolts = lo;
+        s.maxVolts = hi;
+        s.count = count;
+    }
+    return out;
 }
 
 std::optional<double> AnalogDataBuffer::latestTime() const

@@ -98,7 +98,7 @@ MainFrame::MainFrame(IUserActions& actions,
 
     // Riquadro "Opzioni" (ex segnaposto "Funzionalità future"): opzioni di
     // comportamento sotto i pulsanti Salva/Carica della calibrazione.
-    options_ = new OptionsPanel(background, actions_);
+    options_ = new OptionsPanel(background, actions_, buffer, calibrations);
     left->Add(options_, 0, wxEXPAND);
 
     left->AddStretchSpacer(1);

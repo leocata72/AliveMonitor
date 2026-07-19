@@ -19,6 +19,7 @@
 #include "view/DigitalOutputPanel.h"
 #include "view/GraphPanel.h"
 #include "view/LanguageSelectDialog.h"
+#include "view/OptionsPanel.h"
 #include "view/MainFrame.h"
 #include "view/SettingsDialog.h"
 #include "view/StatusPanel.h"
@@ -145,6 +146,15 @@ void MainController::onDigitalOutputToggled(int pin, bool on)
     // interrompe: il comando esplicito dell'utente vince sempre sul ciclo.
     timedOutputs_.stopCycle(pin);
     commands_.setDigitalOutput(pin, on);
+}
+
+void MainController::onDigitalDirectionChanged(int pin, bool input)
+{
+    if (input) {
+        // Un pin che diventa ingresso non può avere un ciclo in corso.
+        timedOutputs_.stopCycle(pin);
+    }
+    commands_.setDigitalDirection(pin, input);
 }
 
 void MainController::onTimedOutputStarted(int pin, double onSeconds,
@@ -453,6 +463,9 @@ void MainController::refreshStatusViews()
     frame_->acquisitionPanel()->updateFrom(snap);
     frame_->statusPanel()->update(snap, graph_.measuredFps(),
                                   cpuMonitor_.sample());
+    // Statistiche media/σ per canale nel riquadro Opzioni (v1.2): stesso
+    // ritmo delle altre etichette di stato (2 Hz), costo trascurabile.
+    frame_->optionsPanel()->updateStats();
 }
 
 } // namespace am

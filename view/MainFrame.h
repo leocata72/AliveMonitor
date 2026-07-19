@@ -47,6 +47,7 @@ public:
     [[nodiscard]] AcquisitionPanel* acquisitionPanel() const { return acquisition_; }
     [[nodiscard]] GraphPanel* graphPanel() const { return graph_; }
     [[nodiscard]] CalibrationPanel* calibrationPanel() const { return calibration_; }
+    [[nodiscard]] OptionsPanel* optionsPanel() const { return options_; }
     /// Adapter sulla wxStatusBar nativa del frame (v1.2): non è una finestra,
     /// è posseduto dal frame stesso (unique_ptr), la barra dal framework.
     [[nodiscard]] StatusPanel* statusPanel() const { return status_.get(); }

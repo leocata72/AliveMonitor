@@ -34,6 +34,13 @@ public:
     /// invia "SET Dx v"; il LED della GUI cambierà solo all'"OK Dx=v".
     void setDigitalOutput(int pin, bool on);
 
+    /// Cambia la direzione del pin D2..D9 (v1.2): true = ingresso ("DIR Dx I",
+    /// il firmware notificherà il livello con "IN Dx=v"), false = uscita
+    /// ("DIR Dx O" seguito dal SET dello stato desiderato, perché il
+    /// firmware riparte da LOW). Aggiorna la direzione desiderata, che viene
+    /// riapplicata a ogni riconnessione.
+    void setDigitalDirection(int pin, bool input);
+
     /// Cambia la frequenza di campionamento [Hz], anche durante
     /// l'acquisizione. Il valore viene limitato a [1..250].
     void setSampleRate(int rateHz);

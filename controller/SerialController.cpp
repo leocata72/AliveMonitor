@@ -314,12 +314,20 @@ void SerialController::onConnectionEstablished()
     if (!sendLine(CommunicationProtocol::buildVersionRequest())) {
         return;
     }
-    // 2) ri-applicazione dello stato desiderato delle uscite digitali
-    //    (fondamentale dopo una riconnessione: la scheda si è resettata);
+    // 2) ri-applicazione della configurazione desiderata dei pin digitali
+    //    (fondamentale dopo una riconnessione: la scheda si è resettata e
+    //    al boot torna con tutti i pin OUTPUT/LOW). Pin in ingresso: DIR I
+    //    (il firmware risponde con l'OK e il livello corrente); pin in
+    //    uscita: SET dello stato desiderato (DIR O è superfluo al boot).
     const auto desired = outputs_.desiredAll();
+    const auto inputs = outputs_.desiredDirectionsAll();
     for (int i = 0; i < kNumDigitalOutputs; ++i) {
-        if (!sendLine(CommunicationProtocol::buildSetOutput(
-                kFirstDigitalPin + i, desired[static_cast<std::size_t>(i)]))) {
+        const int pin = kFirstDigitalPin + i;
+        const auto idx = static_cast<std::size_t>(i);
+        const bool ok = inputs[idx]
+            ? sendLine(CommunicationProtocol::buildSetDirection(pin, true))
+            : sendLine(CommunicationProtocol::buildSetOutput(pin, desired[idx]));
+        if (!ok) {
             return;
         }
     }
@@ -430,6 +438,18 @@ void SerialController::processLine(const std::string& line)
 
     case ResponseType::OkOutput:
         outputs_.setActual(parsed->pin, parsed->pinState);
+        postEvent(events::EVT_OUTPUT_STATE_CHANGED,
+                  parsed->pin, parsed->pinState ? 1 : 0);
+        break;
+
+    case ResponseType::OkDirection:
+        outputs_.setActualDirection(parsed->pin, parsed->isInput);
+        break;
+
+    case ResponseType::InputState:
+        // Livello di un pin in ingresso: stesso canale eventi dello stato
+        // delle uscite — per la GUI è comunque "accendi/spegni il LED del
+        // pin", qualunque sia la direzione.
         postEvent(events::EVT_OUTPUT_STATE_CHANGED,
                   parsed->pin, parsed->pinState ? 1 : 0);
         break;

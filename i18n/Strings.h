@@ -47,6 +47,7 @@ enum class StringId {
     DoBoxTitle,
     DoOn,
     DoOff,
+    DoDirTooltip,    ///< tooltip della wxChoice IN/OUT (v1.2)
     DoTimedCheck,    ///< "Temporizzato" (v1.2)
     DoTimeOnLabel,   ///< "ON (s):"
     DoPeriodLabel,   ///< "Periodo (s):"
@@ -138,6 +139,11 @@ enum class StringId {
     OpBoxTitle,
     OpSimultaneousTimers,
     OpSimultaneousTimersTooltip,
+    OpStatsSamplesLabel,    ///< "Campioni statistiche:" (spin N campioni)
+    OpStatsSamplesTooltip,
+    OpStatsColMean,         ///< intestazione colonna "media" della griglia
+                            ///< statistiche (σ/max/min sono notazione
+                            ///< universale, non tradotti)
 
     // --- MainController ------------------------------------------------------------
     McSaveCsvDialogTitle,

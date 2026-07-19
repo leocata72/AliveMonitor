@@ -85,8 +85,25 @@ wxString tr(StringId id)
 
     // --- DigitalOutputPanel ----------------------------------------------------
     case StringId::DoBoxTitle:
-        e = { "Uscite digitali", "Digital outputs", "Sorties numériques",
-              "Salidas digitales", "Digitale Ausgänge" };
+        e = { "I/O digitali", "Digital I/O", "E/S numériques",
+              "E/S digitales", "Digitale E/A" };
+        break;
+    case StringId::DoDirTooltip:
+        e = { "Direzione della porta: OUT = uscita comandata dal pulsante; "
+              "IN = ingresso, il LED mostra il livello letto dalla scheda e "
+              "gli altri controlli della riga si disattivano.",
+              "Pin direction: OUT = output driven by the button; IN = input, "
+              "the LED shows the level read from the board and the other "
+              "controls in the row are disabled.",
+              "Direction de la broche : OUT = sortie commandée par le bouton ; "
+              "IN = entrée, la LED montre le niveau lu par la carte et les "
+              "autres contrôles de la ligne sont désactivés.",
+              "Dirección del pin: OUT = salida controlada por el botón; IN = "
+              "entrada, el LED muestra el nivel leído por la placa y los demás "
+              "controles de la fila se desactivan.",
+              "Pin-Richtung: OUT = vom Knopf gesteuerter Ausgang; IN = Eingang, "
+              "die LED zeigt den vom Board gelesenen Pegel und die übrigen "
+              "Bedienelemente der Zeile werden deaktiviert." };
         break;
     case StringId::DoOn:
         e = { "ON", "ON", "ON", "ON", "ON" };
@@ -438,6 +455,26 @@ wxString tr(StringId id)
               "Falls aktiviert, startet das erste ON an einem zeitgesteuerten "
               "Ausgang auch alle anderen Ausgänge mit aktivem \"Zeitgesteuert\" "
               "und gültigen Feldern, jeder mit eigenen Zeiten." };
+        break;
+    case StringId::OpStatsSamplesLabel:
+        e = { "Campioni statistiche:", "Statistics samples:",
+              "Échantillons statistiques :", "Muestras estadísticas:",
+              "Statistik-Stichprobe:" };
+        break;
+    case StringId::OpStatsSamplesTooltip:
+        e = { "Numero di campioni, a ritroso dall'ultimo letto, su cui "
+              "calcolare media e deviazione standard di ogni canale.",
+              "Number of samples, counting back from the last one read, used "
+              "to compute each channel's mean and standard deviation.",
+              "Nombre d'échantillons, en remontant depuis le dernier lu, "
+              "utilisés pour calculer la moyenne et l'écart type de chaque voie.",
+              "Número de muestras, contando hacia atrás desde la última leída, "
+              "usadas para calcular la media y la desviación estándar de cada canal.",
+              "Anzahl der Abtastwerte, rückwärts ab dem zuletzt gelesenen, für "
+              "Mittelwert und Standardabweichung jedes Kanals." };
+        break;
+    case StringId::OpStatsColMean:
+        e = { "media", "mean", "moyenne", "media", "Mittel" };
         break;
 
     // --- MainController ------------------------------------------------------------

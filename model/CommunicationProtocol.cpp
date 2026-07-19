@@ -74,6 +74,11 @@ std::string CommunicationProtocol::buildSetOutput(int pin, bool on)
     return "SET D" + std::to_string(pin) + (on ? " 1" : " 0");
 }
 
+std::string CommunicationProtocol::buildSetDirection(int pin, bool input)
+{
+    return "DIR D" + std::to_string(pin) + (input ? " I" : " O");
+}
+
 std::string CommunicationProtocol::buildRate(int rateHz)
 {
     return "RATE " + std::to_string(rateHz);
@@ -119,6 +124,22 @@ std::optional<ParsedResponse> CommunicationProtocol::parseLine(std::string_view 
     }
     if (line.rfind("OK ", 0) == 0) {
         return parseOk(line.substr(3));
+    }
+    if (line.rfind("IN D", 0) == 0) {
+        // Notifica spontanea del livello di un pin in ingresso: "IN D<pin>=<0|1>".
+        const auto eq = line.find('=');
+        if (eq != std::string_view::npos && eq > 4) {
+            const auto pin = toInt(trim(line.substr(4, eq - 4)));
+            const auto v = toInt(trim(line.substr(eq + 1)));
+            if (pin && v && (*v == 0 || *v == 1)) {
+                r.type = ResponseType::InputState;
+                r.pin = *pin;
+                r.pinState = (*v == 1);
+                return r;
+            }
+        }
+        r.type = ResponseType::Unknown;
+        return r;
     }
     if (line.rfind("VERSION ", 0) == 0) {
         r.type = ResponseType::Version;
@@ -198,6 +219,18 @@ ParsedResponse CommunicationProtocol::parseOk(std::string_view body)
     }
     const std::string_view key = trim(body.substr(0, eq));
     const std::string_view value = trim(body.substr(eq + 1));
+
+    // "OK DIR D<pin>=<I|O>": conferma di direzione (v1.2). Va controllata
+    // PRIMA del ramo "D<pin>" (la chiave inizia per 'D' solo dopo "DIR ").
+    if (key.rfind("DIR D", 0) == 0) {
+        const auto pin = toInt(key.substr(5));
+        if (pin && (value == "I" || value == "O")) {
+            r.type = ResponseType::OkDirection;
+            r.pin = *pin;
+            r.isInput = (value == "I");
+        }
+        return r;
+    }
 
     if (key.size() >= 2 && key[0] == 'D') {
         const auto pin = toInt(key.substr(1));
