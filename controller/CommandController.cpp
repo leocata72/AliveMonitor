@@ -36,6 +36,13 @@ void CommandController::setDigitalDirection(int pin, bool input)
         return;
     }
     outputs_.setDesiredDirection(pin, input);
+    if (input) {
+        // Diventando ingresso, lo stato desiderato dell'uscita si azzera:
+        // la GUI riporta il pulsante su OFF, e senza questo azzeramento un
+        // successivo ritorno a OUT riapplicherebbe il vecchio ON "a
+        // sorpresa", con pulsante e uscita reale in disaccordo.
+        outputs_.setDesired(pin, false);
+    }
     serial_.enqueueCommand(CommunicationProtocol::buildSetDirection(pin, input));
     if (!input) {
         // Tornando in uscita il firmware parte da LOW (stato sicuro): si
